@@ -7,9 +7,7 @@ using MediatR;
 
 namespace Catalog.Application.Queries;
 
-public class GetAllBrandsQuery : IRequest<IEnumerable<BrandResponse>>
-{
-}
+public class GetAllBrandsQuery : IRequest<IEnumerable<BrandResponse>>;
 
 public class GetAllBrandsQueryHandler(IBrandRepository brandRepository, IMapper mapper)
     : IRequestHandler<GetAllBrandsQuery, IEnumerable<BrandResponse>>
