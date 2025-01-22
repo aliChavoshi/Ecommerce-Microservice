@@ -13,5 +13,6 @@ public class ProfileMapper : Profile
         CreateMap<Product, ProductResponse>().ReverseMap();
         CreateMap<TypeResponse, ProductType>().ReverseMap();
         CreateMap<Product, CreateProductCommand>().ReverseMap();
+        CreateMap<UpdateProductCommand, Product>().ReverseMap();
     }
 }
