@@ -5,11 +5,15 @@ services:
     ports:
      - "27017:27017"
     volumes:
+    # mongo_data is the name of the volume that will be created
+    # /data/db is the path where the data will be stored in the mongo container
      - "mongo_data:/data/db" 
 
   catalog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      # __ instead of : because of the way the environment variables are parsed in the .NET Core configuration system
+      # DatabaseSettings__ConnectionString means DatabaseSettings:ConnectionString in the appsettings.json file
       - "DatabaseSettings__ConnectionString=mongodb://catalogdb:27017"
       - "DatabaseSettings__DatabaseName=CatalogDb"
       - "DatabaseSettings__CollectionName=Products"
@@ -18,7 +22,10 @@ services:
     depends_on:
       - catalogdb
     ports:
-      - "8000:80" # 8000 is port from launchSetting.json and # 80 is port from Dockerfile
+        #Now, any traffic sent to port 8000 on your host machine will be forwarded to port 80 within the container. 
+        #HOST_PORT:CONTAINER_PORT
+        # 8000 is port from launchSetting.json and # 80 is port from Dockerfile
+      - "8000:80" 
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

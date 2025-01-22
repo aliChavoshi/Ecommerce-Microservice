@@ -10,5 +10,7 @@ services:
       context: .
       dockerfile: Services/Catalog/Catalog.API/Dockerfile
 
+# this volumes for mongo_data is the name of the volume that will be created
+# /data/db is the path where the data will be stored in the mongo container
 volumes:
  mongo_data:
