@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Catalog.Application.Mappers;
 using Catalog.Application.Responses;
 using Catalog.Core.Entities;
 using Catalog.Core.Repositories;
@@ -16,6 +17,6 @@ public class GetAllBrandsQueryHandler(IBrandRepository brandRepository, IMapper 
     public async Task<IEnumerable<BrandResponse>> Handle(GetAllBrandsQuery request, CancellationToken cancellationToken)
     {
         var result = await brandRepository.GetBrands();
-        return mapper.Map<IEnumerable<BrandResponse>>(result);
+        return LazyMapper.Mapper.Map<IEnumerable<BrandResponse>>(result);
     }
 }
