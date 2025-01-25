@@ -1,5 +1,6 @@
 ﻿using Catalog.Core.Entities;
 using Catalog.Core.Repositories;
+using Catalog.Core.Specs;
 using Catalog.Infrastructure.Data;
 using MongoDB.Driver;
 
@@ -10,6 +11,60 @@ public class ProductRepository(ICatalogContext context) : IProductRepository, IB
     public async Task<IEnumerable<Product>> GetProducts()
     {
         return await context.Products.Find(x => true).ToListAsync();
+    }
+
+    public async Task<Pagination<Product>> GetProducts(CatalogSpecParams specParams)
+    {
+        var builder = Builders<Product>.Filter;
+        var filter = builder.Empty;
+        if (!string.IsNullOrEmpty(specParams.Search))
+        {
+            filter &= builder.Where(x => x.Name.ToLower().Contains(specParams.Search));
+        }
+
+        if (!string.IsNullOrEmpty(specParams.BrandId))
+        {
+            var brandFiler = builder.Eq(x => x.Brands.Id, specParams.BrandId);
+            filter &= brandFiler;
+        }
+
+        if (!string.IsNullOrEmpty(specParams.TypeId))
+        {
+            var typeFilter = builder.Eq(x => x.Types.Id, specParams.TypeId);
+            filter &= typeFilter;
+        }
+
+        var totalItems = await context.Products.CountDocumentsAsync(filter);
+        var data = await FilterData(specParams, filter);
+        return new Pagination<Product>(specParams.PageIndex, specParams.PageSize, (int)totalItems, data);
+    }
+
+    private async Task<List<Product>> FilterData(CatalogSpecParams specParams, FilterDefinition<Product> filter)
+    {
+        var sort = Builders<Product>.Sort.Ascending(x => x.Name); // default sort
+        if (!string.IsNullOrEmpty(specParams.Sort))
+        {
+            switch (specParams.Sort)
+            {
+                case "priceAsc":
+                    sort = Builders<Product>.Sort.Ascending(x => x.Price);
+                    break;
+                case "priceDesc":
+                    sort = Builders<Product>.Sort.Descending(x => x.Price);
+                    break;
+                default:
+                    sort = Builders<Product>.Sort.Ascending(x => x.Name);
+                    break;
+            }
+        }
+
+        var data = await context.Products
+            .Find(filter)
+            .Sort(sort)
+            .Skip(specParams.PageSize * (specParams.PageIndex - 1))
+            .Limit(specParams.PageSize)
+            .ToListAsync();
+        return data;
     }
 
     public async Task<Product> GetProduct(string id)

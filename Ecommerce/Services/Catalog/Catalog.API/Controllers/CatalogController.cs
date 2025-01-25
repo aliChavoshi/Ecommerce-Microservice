@@ -22,21 +22,21 @@ public class CatalogController(IMediator mediator) : ApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductResponse>>> GetAllProducts()
+    public async Task<ActionResult<IEnumerable<ProductResponse>>> GetAllProducts([FromQuery] GetAllProductsQuery request)
     {
-        return Ok(await mediator.Send(new GetAllProductsQuery()));
+        return Ok(await mediator.Send(request));
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<BrandResponse>>> GetAllBrands()
     {
-        return Ok(await mediator.Send(new GetAllProductsQuery()));
+        return Ok(await mediator.Send(new GetAllBrandsQuery()));
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TypeResponse>>> GetAllTypes()
     {
-        return Ok(await mediator.Send(new GetAllProductsQuery()));
+        return Ok(await mediator.Send(new GetAllTypesQuery()));
     }
 
     [HttpGet("{brand}")]

@@ -1,16 +1,22 @@
 ﻿using Catalog.Application.Mappers;
 using Catalog.Application.Responses;
 using Catalog.Core.Repositories;
+using Catalog.Core.Specs;
 using MediatR;
 
 namespace Catalog.Application.Queries;
 
-public class GetAllProductsQuery : IRequest<IEnumerable<ProductResponse>>;
-public class GetAllProductsQueryHandler(IProductRepository productRepository) : IRequestHandler<GetAllProductsQuery, IEnumerable<ProductResponse>>
+public class GetAllProductsQuery : CatalogSpecParams, IRequest<Pagination<ProductResponse>>
 {
-    public async Task<IEnumerable<ProductResponse>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
+};
+
+public class GetAllProductsQueryHandler(IProductRepository productRepository)
+    : IRequestHandler<GetAllProductsQuery, Pagination<ProductResponse>>
+{
+    public async Task<Pagination<ProductResponse>> Handle(GetAllProductsQuery request,
+        CancellationToken cancellationToken)
     {
-        var products = await productRepository.GetProducts();
-        return LazyMapper.Mapper.Map<IEnumerable<ProductResponse>>(products);
+        var products = await productRepository.GetProducts(request);
+        return LazyMapper.Mapper.Map<Pagination<ProductResponse>>(products);
     }
 }
