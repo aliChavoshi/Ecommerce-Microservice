@@ -9,7 +9,7 @@ public static class ProductSeedData
     public static void SeedData(IMongoCollection<Product> productCollection)
     {
         var exist = productCollection.Find(x => true).Any();
-        var pathJson = Path.Combine("Data", "SeedData", "products.json");
+        var pathJson = Path.Combine(AppContext.BaseDirectory, "Data", "SeedData", "products.json");
         if (exist) return;
         // Read the json file
         var stringData = File.ReadAllText(pathJson);

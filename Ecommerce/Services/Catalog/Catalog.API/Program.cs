@@ -28,8 +28,14 @@ builder.Services.AddSwaggerGen(c =>
 });
 // Register Mapper
 builder.Services.AddAutoMapper(typeof(Program));
-// Register MediatR
-builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+//Register Mediatr
+var assemblies = new Assembly[]
+{
+    Assembly.GetExecutingAssembly(),
+    typeof(GetAllBrandsQueryHandler).Assembly
+};
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
+
 // Register Repositories
 builder.Services.AddScoped<ICatalogContext, CatalogContext>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();

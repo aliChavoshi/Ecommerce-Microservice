@@ -1,9 +1,12 @@
 version: '3.4'
 
 services:
+    # Create mongodb with an image from Docker Hub
   catalogdb:
+    # image from Docker Hub
     image: mongo
-
+    
+    # Create Catalog.API with a Dockerfile
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:

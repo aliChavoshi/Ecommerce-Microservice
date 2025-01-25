@@ -9,7 +9,7 @@ public static class TypeSeedData
     public static void SeedData(IMongoCollection<ProductType> typeCollection)
     {
         var checkTypes = typeCollection.Find(x => true).Any();
-        var pathJson = Path.Combine("Data", "SeedData", "types.json");
+        var pathJson = Path.Combine(AppContext.BaseDirectory, "Data", "SeedData", "types.json");
         if (checkTypes) return;
         // Read the json file
         var typesData = File.ReadAllText(pathJson);

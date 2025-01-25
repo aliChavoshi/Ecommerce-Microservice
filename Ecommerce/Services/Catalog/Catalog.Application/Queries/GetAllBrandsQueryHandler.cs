@@ -9,7 +9,7 @@ namespace Catalog.Application.Queries;
 
 public class GetAllBrandsQuery : IRequest<IEnumerable<BrandResponse>>;
 
-public class GetAllBrandsQueryHandler(IBrandRepository brandRepository, IMapper mapper)
+public class GetAllBrandsQueryHandler(IBrandRepository brandRepository)
     : IRequestHandler<GetAllBrandsQuery, IEnumerable<BrandResponse>>
 {
     public async Task<IEnumerable<BrandResponse>> Handle(GetAllBrandsQuery request, CancellationToken cancellationToken)
