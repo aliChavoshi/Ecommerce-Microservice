@@ -44,18 +44,12 @@ public class ProductRepository(ICatalogContext context) : IProductRepository, IB
         var sort = Builders<Product>.Sort.Ascending(x => x.Name); // default sort
         if (!string.IsNullOrEmpty(specParams.Sort))
         {
-            switch (specParams.Sort)
+            sort = specParams.Sort switch
             {
-                case "priceAsc":
-                    sort = Builders<Product>.Sort.Ascending(x => x.Price);
-                    break;
-                case "priceDesc":
-                    sort = Builders<Product>.Sort.Descending(x => x.Price);
-                    break;
-                default:
-                    sort = Builders<Product>.Sort.Ascending(x => x.Name);
-                    break;
-            }
+                "priceAsc" => Builders<Product>.Sort.Ascending(x => x.Price),
+                "priceDesc" => Builders<Product>.Sort.Descending(x => x.Price),
+                _ => Builders<Product>.Sort.Ascending(x => x.Name)
+            };
         }
 
         var data = await context.Products
