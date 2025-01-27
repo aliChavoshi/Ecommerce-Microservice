@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Basket.Application.Commands;
 using Basket.Application.Responses;
 using Basket.Core.Entities;
 
@@ -10,5 +11,6 @@ public class BasketMappingProfile : Profile
     {
         CreateMap<ShoppingCartItem, ShoppingCartItemResponse>().ReverseMap();
         CreateMap<ShoppingCart, ShoppingCartResponse>().ReverseMap();
+        CreateMap<CreateShoppingCartCommand, ShoppingCart>().ReverseMap();
     }
 }
