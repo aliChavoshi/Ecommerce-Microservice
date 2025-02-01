@@ -5,7 +5,11 @@ services:
   catalogdb:
     # image from Docker Hub
     image: mongo
-    
+   
+    # Create redis with an image from Docker Hub
+  basketdb:
+    image: redis
+
     # Create Catalog.API with a Dockerfile
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
@@ -15,5 +19,12 @@ services:
 
 # this volumes for mongo_data is the name of the volume that will be created
 # /data/db is the path where the data will be stored in the mongo container
+  basket.api:
+    image: ${DOCKER_REGISTRY-}basketapi
+    build:
+      context: .
+      dockerfile: Services/Basket/Basket.API/Dockerfile
+
 volumes:
  mongo_data:
+

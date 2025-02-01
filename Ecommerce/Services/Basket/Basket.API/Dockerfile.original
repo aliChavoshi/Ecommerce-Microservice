@@ -4,7 +4,10 @@
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 USER $APP_UID
 WORKDIR /app
+# 8080 for http traffic
 EXPOSE 8080
+# 443 for https traffic
+EXPOSE 443
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
