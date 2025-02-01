@@ -1,6 +1,7 @@
 using System.Reflection;
 using Asp.Versioning;
 using Basket.Application.Commands;
+using Basket.Application.Mappers;
 using Basket.Core.Repositories;
 using Basket.Infrastructure.Services;
 
@@ -24,7 +25,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new() { Title = "Basket.API", Version = "v1", Description = "Basdket API" });
 });
 // Register Mapper
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(typeof(BasketMappingProfile));
 //Register Mediatr
 var assemblies = new[]
 {
