@@ -51,3 +51,13 @@ services:
     ports:
       - "8001:8080"
 
+  portainer:
+    container_name: portainer
+    restart: always
+    ports:
+      - "8080:8000"
+      # 9000 for the dashboard of portainer
+      - "9090:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
