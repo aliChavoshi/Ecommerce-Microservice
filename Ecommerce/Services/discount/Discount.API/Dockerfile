@@ -5,13 +5,16 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
-
+EXPOSE 443
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Services/discount/Discount.API/Discount.API.csproj", "Services/discount/Discount.API/"]
+COPY ["Services/discount/Discount.Application/Discount.Application.csproj", "Services/discount/Discount.Application/"]
+COPY ["Services/discount/Discount.Core/Discount.Core.csproj", "Services/discount/Discount.Core/"]
+COPY ["Services/discount/Discount.Infrastructure/Discount.Infrastructure.csproj", "Services/discount/Discount.Infrastructure/"]
 RUN dotnet restore "./Services/discount/Discount.API/Discount.API.csproj"
 COPY . .
 WORKDIR "/src/Services/discount/Discount.API"
