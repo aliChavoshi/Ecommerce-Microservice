@@ -2,7 +2,7 @@
 option csharp_namespace = "Discount.Application.Protos";
 
 // Service definition
-service DiscountService {
+service DiscountProtoService {
 	rpc CreateDiscount(CreateDiscountRequest) returns (CouponModel);
 	rpc GetDiscount(GetDiscountRequest) returns (CouponModel);
 	rpc UpdateDiscount(UpdateDiscountRequest) returns (CouponModel);

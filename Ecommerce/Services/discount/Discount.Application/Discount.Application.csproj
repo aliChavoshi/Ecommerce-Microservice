@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.67.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
