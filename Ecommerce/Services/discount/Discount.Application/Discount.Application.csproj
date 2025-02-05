@@ -7,20 +7,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Protos\dicount.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Discount.Core\Discount.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
     <Folder Include="Handlers\" />
-    <Folder Include="Mapper\" />
-    <Folder Include="Queries\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.67.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\dicount.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>
