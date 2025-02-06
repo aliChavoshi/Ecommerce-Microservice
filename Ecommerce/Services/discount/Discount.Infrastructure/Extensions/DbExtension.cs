@@ -18,7 +18,7 @@ public static class DbExtension
         {
             logger.LogInformation("Migrating database associated with context {DbContextName}",
                 typeof(TContext).Name);
-            ApplyMigration(configuration);
+            ApplyMigration(configuration, logger);
             logger.LogInformation("Migrated database associated with context {DbContextName}",
                 typeof(TContext).Name);
         }
@@ -31,13 +31,14 @@ public static class DbExtension
         return host;
     }
 
-    private static void ApplyMigration(IConfiguration config)
+    private static void ApplyMigration(IConfiguration config, ILogger logger)
     {
         var retry = 5;
         while (retry > 0)
         {
             try
             {
+                logger.LogInformation("ApplyMigration was started");
                 using var connection =
                     new NpgsqlConnection(config.GetValue<string>("DatabaseSettings:ConnectionString"));
                 connection.Open();

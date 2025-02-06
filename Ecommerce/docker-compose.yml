@@ -1,34 +1,53 @@
 version: '3.4'
 
 services:
-    # Create mongodb with an image from Docker Hub
+  #catalogdb
   catalogdb:
     # image from Docker Hub
     image: mongo
    
-    # Create redis with an image from Docker Hub
+  #basketdb
   basketdb:
     image: redis
 
-    # Create Catalog.API with a Dockerfile
+  #discountdb
+  discountdb:
+    image: postgres
+
+  #catalog.api
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
       context: .
       dockerfile: Services/Catalog/Catalog.API/Dockerfile
 
-# this volumes for mongo_data is the name of the volume that will be created
-# /data/db is the path where the data will be stored in the mongo container
+  # this volumes for mongo_data is the name of the volume that will be created
+  # /data/db is the path where the data will be stored in the mongo container
+  # basket.api
   basket.api:
     image: ${DOCKER_REGISTRY-}basketapi
     build:
       context: .
       dockerfile: Services/Basket/Basket.API/Dockerfile
   
+  #portainer
   portainer:
     image: portainer/portainer-ce
 
+  #postgressAdmin
+  pgadmin:
+    image: dpage/pgadmin4
+
+  #discount.api
+  discount.api:
+    image: ${DOCKER_REGISTRY-}discountapi
+    build:
+      context: .
+      dockerfile: Services/discount/Discount.API/Dockerfile
+
+#volumes
 volumes:
  mongo_data:
  portainer_data:
-
+ postgres_data:  
+ pgadmin_data:

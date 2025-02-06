@@ -1,12 +1,13 @@
 {
   "profiles": {
-    "http": {
+    "Discount.API": {
       "commandName": "Project",
+      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5102"
+      "applicationUrl": "http://localhost:8002"
     },
     "Container (Dockerfile)": {
       "commandName": "Docker",
