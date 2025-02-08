@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Protos\dicount.proto" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Discount.Core\Discount.Core.csproj" />
   </ItemGroup>
 
@@ -21,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\dicount.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\discount.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>

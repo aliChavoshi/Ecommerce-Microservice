@@ -1,24 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Basket.Core\Basket.Core.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Basket.Core\Basket.Core.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Handlers\" />
+		<Folder Include="Responses\" />
+		<Folder Include="Queries\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Handlers\" />
-    <Folder Include="Responses\" />
-    <Folder Include="Queries\" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.67.0" />
+		<PackageReference Include="MediatR" Version="12.4.1" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="MediatR" Version="12.4.1" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<Protobuf Include="..\..\Discount\Discount.Application\Protos\discount.proto" GrpcServices="Client">
+			<Link>Protos\discount.proto</Link>
+		</Protobuf>
+	</ItemGroup>
 </Project>
