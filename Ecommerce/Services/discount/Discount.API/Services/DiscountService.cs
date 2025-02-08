@@ -14,7 +14,7 @@ public class DiscountService(IMediator mediator) : DiscountProtoService.Discount
         var result = await mediator.Send(query);
         return result;
     }
-
+    
     public override async Task<CouponModel> UpdateDiscount(UpdateDiscountRequest request, ServerCallContext context)
     {
         var command = new UpdateDiscountCommand(request.Coupon);
