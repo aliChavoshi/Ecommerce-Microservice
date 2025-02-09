@@ -6,7 +6,7 @@ public class ShoppingCartResponse
 {
     public string UserName { get; set; }
     public List<ShoppingCartItemResponse> Items { get; set; } = new();
-
+    public decimal TotalPrice { get; set; }
     public ShoppingCartResponse()
     {
     }

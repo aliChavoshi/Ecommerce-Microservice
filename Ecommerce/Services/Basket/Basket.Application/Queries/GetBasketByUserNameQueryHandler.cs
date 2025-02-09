@@ -19,7 +19,9 @@ public class GetBasketByUserNameQueryHandler(IBasketRepository basketRepository,
         var basket = await basketRepository.GetBasket(request.UserName);
         if (basket != null)
         {
-            return mapper.Map<ShoppingCartResponse>(basket);
+            var response = mapper.Map<ShoppingCartResponse>(basket);
+            response.TotalPrice = response.CalculateOriginalPrice();
+            return response;
         }
 
         return new ShoppingCartResponse(request.UserName);
