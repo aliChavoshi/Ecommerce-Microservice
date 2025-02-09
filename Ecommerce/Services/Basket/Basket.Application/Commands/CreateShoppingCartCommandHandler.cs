@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Basket.Application.GrpcService;
 using Basket.Application.Responses;
 using Basket.Core.Entities;
 using Basket.Core.Repositories;
@@ -18,13 +19,21 @@ public class CreateShoppingCartCommand : IRequest<ShoppingCartResponse>
     }
 }
 
-public class CreateShoppingCartCommandHandler(IBasketRepository basketRepository, IMapper mapper)
+public class CreateShoppingCartCommandHandler(
+    IBasketRepository basketRepository,
+    IMapper mapper,
+    DiscountGrpcService discountGrpcService)
     : IRequestHandler<CreateShoppingCartCommand, ShoppingCartResponse>
 {
     public async Task<ShoppingCartResponse> Handle(CreateShoppingCartCommand request,
         CancellationToken cancellationToken)
     {
-        // TODO : will be integrating Discount service
+        foreach (var product in request.Items)
+        {
+            var coupon = await discountGrpcService.GetDiscount(product.ProductName);
+            product.Price -= coupon.Amount;
+        }
+
         var shoppingCart = mapper.Map<ShoppingCart>(request);
         await basketRepository.UpdateBasket(shoppingCart);
         return mapper.Map<ShoppingCartResponse>(shoppingCart);
