@@ -10,4 +10,10 @@
     <ProjectReference Include="..\Ordering.Application\Ordering.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>
