@@ -1,12 +1,16 @@
-﻿using Ordering.Core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Ordering.Core.Entities;
 using Ordering.Core.Repositories;
+using Ordering.Infrastructure.Data;
 
 namespace Ordering.Infrastructure.Repositories;
 
-public class OrderRepository : GenericRepository<Order>,IOrderRepository
+public class OrderRepository(OrderContext context) : GenericRepository<Order>(context), IOrderRepository
 {
-    public Task<IEnumerable<Order>> GetOrdersByUserName(string userName)
+    private readonly OrderContext _context = context;
+
+    public async Task<IEnumerable<Order>> GetOrdersByUserName(string userName)
     {
-        throw new NotImplementedException();
+        return await _context.Orders.Where(x => x.UserName == userName).ToListAsync();
     }
 }
