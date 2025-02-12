@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.1">
       <PrivateAssets>all</PrivateAssets>
@@ -16,6 +19,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ordering.Core\Ordering.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="Mappers\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Responses\" />
+    <Folder Include="Queries\" />
   </ItemGroup>
 
 </Project>
