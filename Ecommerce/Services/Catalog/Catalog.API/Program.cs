@@ -1,11 +1,9 @@
 using System.Reflection;
 using Asp.Versioning;
 using Catalog.Application.Queries;
-using Catalog.Application.Responses;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
 using Catalog.Infrastructure.Repositories;
-using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
