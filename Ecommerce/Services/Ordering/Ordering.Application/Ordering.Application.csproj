@@ -25,6 +25,7 @@
     <Folder Include="Commands\" />
     <Folder Include="Extensions\" />
     <Folder Include="Exceptions\" />
+    <Folder Include="Validators\" />
     <Folder Include="Responses\" />
   </ItemGroup>
 
