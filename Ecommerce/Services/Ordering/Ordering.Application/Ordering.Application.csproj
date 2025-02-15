@@ -24,7 +24,6 @@
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Behaviour\" />
     <Folder Include="Responses\" />
   </ItemGroup>
 
