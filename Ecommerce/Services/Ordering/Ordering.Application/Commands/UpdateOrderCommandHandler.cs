@@ -6,7 +6,7 @@ using Ordering.Core.Repositories;
 
 namespace Ordering.Application.Commands;
 
-public class UpdateOrderCommand : IRequest
+public class UpdateOrderCommand : IRequest<Unit>
 {
     public int Id { get; set; }
     public string? UserName { get; set; }
@@ -20,13 +20,14 @@ public class UpdateOrderCommand : IRequest
 }
 
 public class UpdateOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper)
-    : IRequestHandler<UpdateOrderCommand>
+    : IRequestHandler<UpdateOrderCommand, Unit>
 {
-    public async Task Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
     {
         var order = await orderRepository.GetByIdAsync(request.Id);
         if (order == null) throw new OrderNotFoundException(nameof(Order), request.Id);
         mapper.Map(request, order);
         await orderRepository.UpdateAsync(order);
+        return Unit.Value;
     }
 }

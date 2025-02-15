@@ -14,7 +14,7 @@ public static class InfrastructureServices
     {
         services.AddDbContext<OrderContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString"));//TODO
+            options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString"));
         });
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IOrderRepository, OrderRepository>();
