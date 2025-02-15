@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Ordering.Application.Exceptions;
 using Ordering.Core.Entities;
 using Ordering.Core.Repositories;
 
