@@ -7,7 +7,8 @@
         "catalog.api": "StartWithoutDebugging",
         "catalogdb": "StartWithoutDebugging",
         "basket.api": "StartDebugging",
-        "discount.api": "StartDebugging"
+        "discount.api": "StartDebugging",
+        "ordering.api": "StartDebugging"
       }
     }
   }

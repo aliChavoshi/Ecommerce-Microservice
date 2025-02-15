@@ -8,7 +8,7 @@ public class OrderContextFactory : IDesignTimeDbContextFactory<OrderContext>
     public OrderContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<OrderContext>();
-        optionsBuilder.UseSqlServer("Data Source=OrderDb"); //TODO
+        optionsBuilder.UseSqlServer("Data Source=OrderDb"); //TODO : ConnectionString
         return new OrderContext(optionsBuilder.Options);
     }
 }

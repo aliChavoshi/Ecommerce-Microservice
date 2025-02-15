@@ -44,6 +44,13 @@ services:
     build:
       context: .
       dockerfile: Services/discount/Discount.API/Dockerfile
+    
+  #ordering.api
+  ordering.api:
+    image: ${DOCKER_REGISTRY-}orderingapi
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.API/Dockerfile
 
 #volumes
 volumes:
