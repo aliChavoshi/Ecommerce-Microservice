@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using Microsoft.OpenApi.Models;
 using Ordering.API.Extensions;
 using Ordering.Application;
 using Ordering.Infrastructure;
@@ -17,7 +18,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new() { Title = "Ordering.API", Version = "v1", Description = "Ordering API" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ordering.API", Version = "v1", Description = "Ordering API" });
 });
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);

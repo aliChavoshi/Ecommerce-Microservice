@@ -7,9 +7,9 @@ using Ordering.Core.Repositories;
 
 namespace Ordering.Application.Queries;
 
-public class GetOrderListQuery(string userName) : IRequest<List<OrderResponse>>
+public class GetOrderListQuery : IRequest<List<OrderResponse>>
 {
-    public string UserName { get; set; } = userName;
+    public string? UserName { get; set; }
 }
 
 public class GetOrderListQueryHandler(IOrderRepository orderRepository,IMapper mapper)

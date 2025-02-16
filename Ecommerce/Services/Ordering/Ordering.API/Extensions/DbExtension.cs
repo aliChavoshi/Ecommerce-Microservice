@@ -20,10 +20,13 @@ public static class DbExtension
             //retry strategy
             var retry = Policy.Handle<SqlException>()
                 .WaitAndRetry(
-                    5,
-                    retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
-                    (exception, span, count) => { logger.LogError($"Retrying because of {exception} {span}"); });
-            retry.Execute(async () => await CallSeeder(seeder, context, services));
+                    retryCount: 5,
+                    sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+                    onRetry: (exception, span, count) =>
+                    {
+                        logger.LogError($"Retrying because of {exception} {span}");
+                    });
+            retry.Execute(() => CallSeeder(seeder, context, services));
             logger.LogInformation($"Migration Completed: {typeof(TContext).Name}");
         }
         catch (Exception ex)
@@ -34,13 +37,12 @@ public static class DbExtension
         return host;
     }
 
-    private static async Task CallSeeder<TContext>(Action<TContext, IServiceProvider> seeder, TContext? context,
-        IServiceProvider services) where TContext : DbContext
+    private static void CallSeeder<TContext>(Action<TContext, IServiceProvider> seeder, TContext? context, IServiceProvider services) where TContext : DbContext
     {
         if (context != null)
         {
-            await context.Database.MigrateAsync();
-            seeder(context, services); //setting of default values on empty db 
+            context.Database.Migrate();
+            seeder(context, services);
         }
     }
 }

@@ -12,7 +12,10 @@ public class OrderController(IMediator mediator) : ApiController
     public async Task<ActionResult<List<OrderResponse>>> GetOrdersByUserName(string userName,
         CancellationToken cancellationToken)
     {
-        var query = new GetOrderListQuery(userName);
+        var query = new GetOrderListQuery()
+        {
+            UserName = userName
+        };
         return Ok(await mediator.Send(query, cancellationToken));
     }
 
@@ -31,10 +34,10 @@ public class OrderController(IMediator mediator) : ApiController
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<IActionResult> DeleteOrder([FromBody] int id,
+    public async Task<IActionResult> DeleteOrder(int id,
         CancellationToken cancellationToken)
     {
-        await mediator.Send(new DeleteOrderCommand() { Id = id }, cancellationToken);
+        await mediator.Send(new DeleteOrderCommand { Id = id }, cancellationToken);
         return NoContent();
     }
 }

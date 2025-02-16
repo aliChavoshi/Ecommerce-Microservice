@@ -12,9 +12,10 @@ public static class InfrastructureServices
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddDbContextPool<OrderContext>(options =>
+        services.AddDbContext<OrderContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString"));
+            options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString"),
+                sqlServerOptions => sqlServerOptions.EnableRetryOnFailure());
         });
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IOrderRepository, OrderRepository>();
