@@ -57,6 +57,14 @@ services:
       timeout: 10s
       retries: 3
 
+  #RabbitMQ
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+    - "15672:15672"
+    - "5672:5672"
+
   #catalog.api 8000
   catalog.api:
     environment:
@@ -86,8 +94,10 @@ services:
       - "ConnectionStrings__Redis=basketdb:6379"
       - ASPNETCORE_HTTP_PORTS=8080
       - "GrpcSettings__DiscountUrl=http://discount.api:8080"
+      - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
     depends_on:
       - basketdb
+      - rabbitmq
     ports:
       - "8001:8080"
   
@@ -133,8 +143,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings__OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=Rahul1234567;TrustServerCertificate=True" 
+      - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
     depends_on:
-     - orderdb                    
+     - orderdb
+     - rabbitmq
     ports:
      - "8003:8080"       
 
