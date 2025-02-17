@@ -56,15 +56,7 @@ services:
       interval: 10s
       timeout: 10s
       retries: 3
-
-  #RabbitMQ
-  rabbitmq:
-    container_name: rabbitmq
-    restart: always
-    ports:
-    - "15672:15672"
-    - "5672:5672"
-
+ 
   #catalog.api 8000
   catalog.api:
     environment:
@@ -100,31 +92,7 @@ services:
       - rabbitmq
     ports:
       - "8001:8080"
-  
-  #portainer 9090
-  portainer:
-    container_name: portainer
-    restart: always
-    ports:
-      - "8080:8000"
-      # 9000 for the dashboard of portainer
-      - "9090:9000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
-
-  #postgresAdmin 5050
-  pgadmin:
-    container_name: pgadmin
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@eCommerce.net
-      - PGADMIN_DEFAULT_PASSWORD=Password@1
-    restart: always
-    ports:
-      - "5050:80"
-    volumes:
-      - pgadmin_data:/root/.pgadmin 
-
+ 
   #discount.api 8002
   discount.api:
     container_name: discount.api
@@ -149,4 +117,36 @@ services:
      - rabbitmq
     ports:
      - "8003:8080"       
+
+  #portainer 9090
+  portainer:
+    container_name: portainer
+    restart: always
+    ports:
+      - "8080:8000"
+      # 9000 for the dashboard of portainer
+      - "9090:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+  #RabbitMQ 15672 5672
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+    - "15672:15672"
+    - "5672:5672"
+
+  #postgresAdmin 5050
+  pgadmin:
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@eCommerce.net
+      - PGADMIN_DEFAULT_PASSWORD=Password@1
+    restart: always
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/root/.pgadmin 
 
