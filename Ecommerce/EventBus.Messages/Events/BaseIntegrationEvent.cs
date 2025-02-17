@@ -1,4 +1,4 @@
-﻿namespace EventBus.Messages.Common;
+﻿namespace EventBus.Messages.Events;
 
 public class BaseIntegrationEvent
 {
