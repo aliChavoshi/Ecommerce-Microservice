@@ -1,5 +1,8 @@
 using Asp.Versioning;
+using EventBus.Messages.Common;
+using MassTransit;
 using Microsoft.OpenApi.Models;
+using Ordering.API.EventBusConsumer;
 using Ordering.API.Extensions;
 using Ordering.Application;
 using Ordering.Infrastructure;
@@ -22,6 +25,20 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
+//Add RabbitMQ : Consumer
+builder.Services.AddScoped<BasketOrderingConsumer>();
+builder.Services.AddMassTransit(configuration =>
+{
+    configuration.AddConsumer<BasketOrderingConsumer>();
+    configuration.UsingRabbitMq((ctx, cfg) =>
+    {
+        cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
+        //Provide the QueueName with consumer settings
+        cfg.ReceiveEndpoint(EventBusConstant.BasketCheckoutQueue,
+            e => { e.ConfigureConsumer<BasketOrderingConsumer>(ctx); });
+    });
+});
+builder.Services.AddMassTransitHostedService();
 /**/
 var app = builder.Build();
 app.MigrateDatabase<OrderContext>((context, services) =>
