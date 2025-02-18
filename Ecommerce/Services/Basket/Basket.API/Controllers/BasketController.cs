@@ -1,15 +1,19 @@
-﻿using Basket.Application.Commands;
+﻿using AutoMapper;
+using Basket.Application.Commands;
 using Basket.Application.GrpcService;
 using Basket.Application.Queries;
 using Basket.Application.Responses;
+using Basket.Core.Entities;
 using Basket.Core.Repositories;
+using EventBus.Messages.Events;
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Basket.API.Controllers;
 
-public class BasketController(IMediator mediator) : ApiController
+public class BasketController(IMediator mediator, IMapper mapper, IPublishEndpoint publishEndpoint) : ApiController
 {
     [HttpPost]
     public async Task<ActionResult<ShoppingCartResponse>> CreateBasket([FromBody] CreateShoppingCartCommand command,
@@ -17,7 +21,7 @@ public class BasketController(IMediator mediator) : ApiController
     {
         return Ok(await mediator.Send(command, cancellationToken));
     }
-    
+
     [HttpGet("{username}")]
     public async Task<ActionResult<ShoppingCartResponse>> GetBasketByUserName(string username,
         CancellationToken cancellationToken)
@@ -29,5 +33,21 @@ public class BasketController(IMediator mediator) : ApiController
     public async Task<ActionResult<bool>> DeleteBasketByUserName(string username, CancellationToken cancellationToken)
     {
         return Ok(await mediator.Send(new DeleteBasketByUserNameCommand(username), cancellationToken));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Checkout([FromBody] BasketCheckout basketCheckout)
+    {
+        var query = new GetBasketByUserNameQuery(basketCheckout.UserName);
+        var basket = await mediator.Send(query);
+        //Create a basketCheckout event -- Set TotalPrice on basketCheckout eventMessage
+        var eventMsg = mapper.Map<BasketCheckoutEvent>(basketCheckout);
+        eventMsg.TotalPrice = basket.TotalPrice;
+        await publishEndpoint.Publish(eventMsg); // publish the event
+        //Remove the basket
+        var deleteCommand = new DeleteBasketByUserNameCommand(basket.UserName);
+        await mediator.Send(deleteCommand);
+        // 202 (Accepted) response
+        return Accepted();
     }
 }

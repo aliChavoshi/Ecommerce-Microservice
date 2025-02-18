@@ -20,7 +20,7 @@ public class GetBasketByUserNameQueryHandler(IBasketRepository basketRepository,
         if (basket != null)
         {
             var response = mapper.Map<ShoppingCartResponse>(basket);
-            response.TotalPrice = response.CalculateOriginalPrice();
+            response.TotalPrice = response.CalculateTotalPrice();
             return response;
         }
 
