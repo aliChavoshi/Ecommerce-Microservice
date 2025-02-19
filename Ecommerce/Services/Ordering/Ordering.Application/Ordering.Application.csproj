@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\EventBus.Messages\EventBus.Messages.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\EventBus.Messages\EventBus.Messages.csproj" />
     <ProjectReference Include="..\Ordering.Core\Ordering.Core.csproj" />
   </ItemGroup>
 

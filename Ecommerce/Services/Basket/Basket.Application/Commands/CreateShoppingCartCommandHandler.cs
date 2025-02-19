@@ -36,6 +36,8 @@ public class CreateShoppingCartCommandHandler(
 
         var shoppingCart = mapper.Map<ShoppingCart>(request);
         await basketRepository.UpdateBasket(shoppingCart);
-        return mapper.Map<ShoppingCartResponse>(shoppingCart);
+        var response = mapper.Map<ShoppingCartResponse>(shoppingCart);
+        response.TotalPrice = response.CalculateTotalPrice();
+        return response;
     }
 }
