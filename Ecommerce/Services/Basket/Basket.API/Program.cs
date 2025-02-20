@@ -5,13 +5,16 @@ using Basket.Application.GrpcService;
 using Basket.Application.Mappers;
 using Basket.Core.Repositories;
 using Basket.Infrastructure.Services;
+using Common.Logging;
 using Discount.Application.Protos;
 using MassTransit;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+//Add Service for Serilog
+builder.Host.UseSerilog(Logging.ConfigureLogger);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Add API Versioning
 builder.Services.AddApiVersioning(options =>
@@ -51,11 +54,8 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
 });
 //Add RabbitMQ
 builder.Services.AddMassTransit(configuration =>
-{ 
-    configuration.UsingRabbitMq((ctx, cfg) =>
-    {
-        cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
-    });
+{
+    configuration.UsingRabbitMq((ctx, cfg) => { cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]); });
 });
 builder.Services.AddMassTransitHostedService();
 //Build

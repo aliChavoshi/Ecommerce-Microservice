@@ -1,12 +1,16 @@
 using System.Reflection;
+using Common.Logging;
 using Discount.API.Services;
 using Discount.Application.Commands;
 using Discount.Application.Mapper;
 using Discount.Core.Interfaces;
 using Discount.Infrastructure.Extensions;
 using Discount.Infrastructure.Services;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+//Add Service for Serilog
+builder.Host.UseSerilog(Logging.ConfigureLogger);
 
 // Register Mapper
 builder.Services.AddAutoMapper(typeof(DiscountProfile));

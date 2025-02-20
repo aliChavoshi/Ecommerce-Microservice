@@ -4,11 +4,14 @@ using Catalog.Application.Queries;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
 using Catalog.Infrastructure.Repositories;
+using Common.Logging;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Add Service for Serilog
+builder.Host.UseSerilog(Logging.ConfigureLogger);
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Add API Versioning
 builder.Services.AddApiVersioning(options =>
