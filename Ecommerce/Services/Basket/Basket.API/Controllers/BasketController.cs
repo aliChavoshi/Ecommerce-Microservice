@@ -13,7 +13,11 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Basket.API.Controllers;
 
-public class BasketController(IMediator mediator, IMapper mapper, IPublishEndpoint publishEndpoint) : ApiController
+public class BasketController(
+    IMediator mediator,
+    IMapper mapper,
+    IPublishEndpoint publishEndpoint,
+    ILogger<BasketController> logger) : ApiController
 {
     [HttpPost]
     public async Task<ActionResult<ShoppingCartResponse>> CreateBasket([FromBody] CreateShoppingCartCommand command,
@@ -44,6 +48,8 @@ public class BasketController(IMediator mediator, IMapper mapper, IPublishEndpoi
         var eventMsg = mapper.Map<BasketCheckoutEvent>(basketCheckout);
         eventMsg.TotalPrice = basket.TotalPrice;
         await publishEndpoint.Publish(eventMsg); // publish the event
+        logger.LogInformation("BasketCheckoutEvent published successfully. EventId: {EventId} {DateTime} {UserName}",
+            eventMsg.CorrelationId, eventMsg.CreationDate, eventMsg.UserName);
         //Remove the basket
         var deleteCommand = new DeleteBasketByUserNameCommand(basket.UserName);
         await mediator.Send(deleteCommand);

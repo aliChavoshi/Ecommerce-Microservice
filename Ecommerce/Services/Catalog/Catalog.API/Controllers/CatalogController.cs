@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.API.Controllers;
 
-public class CatalogController(IMediator mediator) : ApiController
+public class CatalogController(IMediator mediator, ILogger<CatalogController> logger) : ApiController
 {
     [HttpGet("{id}")]
     public async Task<ActionResult<ProductResponse>> GetProductById(string id, CancellationToken cancellationToken)
@@ -18,11 +18,13 @@ public class CatalogController(IMediator mediator) : ApiController
     public async Task<ActionResult<IEnumerable<ProductResponse>>> GetProductsByName(string name,
         CancellationToken cancellationToken)
     {
+        logger.LogInformation("GetProductsByName called {ProductName}", name);
         return Ok(await mediator.Send(new GetProductsByNameQuery(name), cancellationToken));
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductResponse>>> GetAllProducts([FromQuery] GetAllProductsQuery request)
+    public async Task<ActionResult<IEnumerable<ProductResponse>>> GetAllProducts(
+        [FromQuery] GetAllProductsQuery request)
     {
         return Ok(await mediator.Send(request));
     }
