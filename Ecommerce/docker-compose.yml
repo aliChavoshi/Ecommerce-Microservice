@@ -29,6 +29,14 @@ services:
   rabbitmq:
     image: rabbitmq:3-management-alpine
 
+  #ElasticSearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
+    
+  #Kibana
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.14.3
+
   # this volumes for mongo_data is the name of the volume that will be created
   # /data/db is the path where the data will be stored in the mongo container
   # basket.api
@@ -67,3 +75,4 @@ volumes:
  postgres_data:  
  pgadmin_data:
  orderdb_data:
+ elasticsearch_data:
