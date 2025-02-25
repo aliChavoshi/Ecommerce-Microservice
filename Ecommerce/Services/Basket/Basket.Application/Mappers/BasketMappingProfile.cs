@@ -15,5 +15,6 @@ public class BasketMappingProfile : Profile
         CreateMap<CreateShoppingCartCommand, ShoppingCart>().ReverseMap();
         //Relations with Rabbit MQ
         CreateMap<BasketCheckout, BasketCheckoutEvent>().ReverseMap();
+        CreateMap<BasketCheckoutEventV2, BasketCheckoutV2>().ReverseMap();
     }
 }

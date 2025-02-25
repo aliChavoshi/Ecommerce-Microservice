@@ -1,18 +1,16 @@
 ﻿using AutoMapper;
 using Basket.Application.Commands;
-using Basket.Application.GrpcService;
 using Basket.Application.Queries;
 using Basket.Application.Responses;
 using Basket.Core.Entities;
-using Basket.Core.Repositories;
 using EventBus.Messages.Events;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Basket.API.Controllers;
 
+[ApiVersion("1")]
 public class BasketController(
     IMediator mediator,
     IMapper mapper,
@@ -23,6 +21,7 @@ public class BasketController(
     public async Task<ActionResult<ShoppingCartResponse>> CreateBasket([FromBody] CreateShoppingCartCommand command,
         CancellationToken cancellationToken)
     {
+        logger.LogInformation("CreateBasketCommand: {UserName} {Items}", command.UserName, command.Items);
         return Ok(await mediator.Send(command, cancellationToken));
     }
 
