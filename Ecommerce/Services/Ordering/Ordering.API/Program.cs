@@ -1,3 +1,4 @@
+using System.Reflection;
 using Asp.Versioning;
 using Common.Logging;
 using EventBus.Messages.Common;
@@ -32,19 +33,25 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 //Add RabbitMQ : Consumer
 builder.Services.AddScoped<BasketOrderingConsumer>();
+builder.Services.AddScoped<BasketOrderingConsumerV2>();
 builder.Services.AddMassTransit(configuration =>
 {
-    configuration.AddConsumer<BasketOrderingConsumer>();
+    // Add all consumers from the current assembly
+    // configuration.AddConsumer<BasketOrderingConsumer>();
+    // configuration.AddConsumer<BasketOrderingConsumerV2>();
+    configuration.AddConsumers(Assembly.GetExecutingAssembly());
     configuration.UsingRabbitMq((ctx, cfg) =>
     {
         cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
-        //Provide the QueueName with consumer settings
+        // Provide the QueueName with consumer settings
         cfg.ReceiveEndpoint(EventBusConstant.BasketCheckoutQueue,
-            e => { e.ConfigureConsumer<BasketOrderingConsumer>(ctx); });
+            e => e.ConfigureConsumer<BasketOrderingConsumer>(ctx));
+        // V2
+        cfg.ReceiveEndpoint(EventBusConstant.BasketCheckoutQueueV2,
+            e => e.ConfigureConsumer<BasketOrderingConsumerV2>(ctx));
     });
 });
 builder.Services.AddMassTransitHostedService();
-/**/
 var app = builder.Build();
 app.MigrateDatabase<OrderContext>((context, services) =>
 {
