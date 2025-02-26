@@ -59,7 +59,10 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
 //Add RabbitMQ
 builder.Services.AddMassTransit(configuration =>
 {
-    configuration.UsingRabbitMq((_, cfg) => { cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]); });
+    configuration.UsingRabbitMq((_, cfg) =>
+    {
+        cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
+    });
 });
 builder.Services.AddMassTransitHostedService();
 //Build
