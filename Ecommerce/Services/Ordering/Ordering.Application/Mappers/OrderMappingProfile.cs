@@ -15,5 +15,7 @@ public class OrderMappingProfile : Profile
         CreateMap<UpdateOrderCommand, Order>().ReverseMap();
         //Mapping From RabbitMQ
         CreateMap<CheckoutOrderCommand, BasketCheckoutEvent>().ReverseMap();
+        CreateMap<BasketCheckoutEventV2, CheckoutOrderCommandV2>().ReverseMap();
+        CreateMap<CheckoutOrderCommandV2, Order>().ReverseMap();
     }
 }
