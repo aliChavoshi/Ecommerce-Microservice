@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using Basket.Application.Commands;
 using Basket.Application.Queries;
 using Basket.Application.Responses;
@@ -10,14 +11,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Basket.API.Controllers;
 
-[ApiVersion("1")]
+[ApiVersion("1.0")]
 public class BasketController(
     IMediator mediator,
     IMapper mapper,
     IPublishEndpoint publishEndpoint,
-    ILogger<BasketController> logger) : ApiController
+    ILogger<BasketController> logger)
+    : ApiController
 {
     [HttpPost]
+    [MapToApiVersion("1.0")]
     public async Task<ActionResult<ShoppingCartResponse>> CreateBasket([FromBody] CreateShoppingCartCommand command,
         CancellationToken cancellationToken)
     {
@@ -26,6 +29,7 @@ public class BasketController(
     }
 
     [HttpGet("{username}")]
+    [MapToApiVersion("1.0")]
     public async Task<ActionResult<ShoppingCartResponse>> GetBasketByUserName(string username,
         CancellationToken cancellationToken)
     {
@@ -33,12 +37,14 @@ public class BasketController(
     }
 
     [HttpDelete("{username}")]
+    [MapToApiVersion("1.0")]
     public async Task<ActionResult<bool>> DeleteBasketByUserName(string username, CancellationToken cancellationToken)
     {
         return Ok(await mediator.Send(new DeleteBasketByUserNameCommand(username), cancellationToken));
     }
 
     [HttpPost]
+    [MapToApiVersion("1.0")]
     public async Task<IActionResult> Checkout([FromBody] BasketCheckout basketCheckout)
     {
         var query = new GetBasketByUserNameQuery(basketCheckout.UserName);
