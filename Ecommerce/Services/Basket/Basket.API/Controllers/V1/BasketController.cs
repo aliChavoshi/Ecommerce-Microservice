@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
+using Basket.API.Controllers.Common;
 using Basket.Application.Commands;
 using Basket.Application.Queries;
 using Basket.Application.Responses;
@@ -9,7 +10,7 @@ using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Basket.API.Controllers;
+namespace Basket.API.Controllers.V1;
 
 [ApiVersion("1.0")]
 public class BasketController(
