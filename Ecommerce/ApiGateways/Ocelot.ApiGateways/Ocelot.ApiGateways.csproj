@@ -1,21 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="ocelot.Local.json" />
-    <Compile Include="ocelot.Development.json" />
-    <Compile Include="appsetting.Development.json" />
-    <Compile Include="appsetting.json" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Include="ocelot.Local.json" />
+		<Compile Include="ocelot.Development.json" />
+		<Compile Include="appsetting.Development.json" />
+		<Compile Include="appsetting.json" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Ocelot" Version="23.4.3" />
-    <PackageReference Include="Ocelot.Cache.CacheManager" Version="23.4.3" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+		<PackageReference Include="Ocelot" Version="23.4.3" />
+		<PackageReference Include="Ocelot.Cache.CacheManager" Version="23.4.3" />
+	</ItemGroup>
 
 </Project>
