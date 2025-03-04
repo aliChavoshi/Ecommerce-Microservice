@@ -174,4 +174,16 @@ services:
     depends_on:
       - elasticsearch
     ports:
-      - "5601:5601" 
+      - "5601:5601"
+      
+  #ocelot 9010
+  ocelot.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development        
+    depends_on:
+      - catalog.api
+      - basket.api
+      - discount.api
+      - ordering.api
+    ports:
+      - "9010:80"
