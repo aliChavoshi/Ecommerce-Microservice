@@ -186,4 +186,4 @@ services:
       - discount.api
       - ordering.api
     ports:
-      - "9010:80"
+      - "9010:8080"
