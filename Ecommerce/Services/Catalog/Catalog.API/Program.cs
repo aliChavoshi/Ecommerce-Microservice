@@ -1,5 +1,6 @@
 using System.Reflection;
 using Asp.Versioning;
+using Catalog.Application.Mappers;
 using Catalog.Application.Queries;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
@@ -28,7 +29,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new() { Title = "Catalog.API", Version = "v1", Description = "Catalog API" });
 });
 // Register Mapper
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(typeof(ProfileMapper));
 //Register Mediatr
 var assemblies = new Assembly[]
 {

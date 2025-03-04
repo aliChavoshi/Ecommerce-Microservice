@@ -1,8 +1,8 @@
 ﻿{
   "Routes": [
-    //Catalog API
+    //GetAllProducts
     {
-      "DownstreamPathTemplate": "/api/v1/Catalog",
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetAllProducts",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -14,6 +14,7 @@
       "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
       "FileCacheOptions": { "TtlSeconds": 30 }
     },
+    //GetProductById
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetProductById/{id}",
       "DownstreamScheme": "http",
@@ -26,6 +27,7 @@
       "UpstreamPathTemplate": "/Catalog/GetProductById/{id}",
       "UpstreamHttpMethod": [ "GET", "DELETE" ]
     },
+    //GetAllProducts
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetAllProducts",
       "DownstreamScheme": "http",
@@ -38,6 +40,7 @@
       "UpstreamPathTemplate": "/Catalog/GetAllProducts",
       "UpstreamHttpMethod": [ "GET", "DELETE" ]
     },
+    //GetAllBrands
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetAllBrands",
       "DownstreamScheme": "http",

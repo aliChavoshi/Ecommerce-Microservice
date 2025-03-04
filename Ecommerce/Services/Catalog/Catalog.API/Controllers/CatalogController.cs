@@ -30,7 +30,7 @@ public class CatalogController(IMediator mediator, ILogger<CatalogController> lo
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<BrandResponse>>> GetAllBrands()
+    public async Task<ActionResult<List<BrandResponse>>> GetAllBrands()
     {
         return Ok(await mediator.Send(new GetAllBrandsQuery()));
     }
