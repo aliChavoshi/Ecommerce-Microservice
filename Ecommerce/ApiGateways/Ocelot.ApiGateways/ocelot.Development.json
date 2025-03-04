@@ -7,7 +7,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
-          "Port": 8000
+          "Port": "8000"
         }
       ],
       "UpstreamPathTemplate": "/Catalog",
@@ -189,6 +189,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:8010"
+    "BaseUrl": "http://localhost:9010"
   }
 }

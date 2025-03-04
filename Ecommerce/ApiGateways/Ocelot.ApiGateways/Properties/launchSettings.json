@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Ocelot.ApiGateways": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:9010"
+    }
+  }
+}
