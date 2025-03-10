@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace IdentityServerAspNetIdentity.Pages.Login;
+namespace IdentityServerAspNetIdentity.Pages.Account.Login;
 
 [SecurityHeaders]
 [AllowAnonymous]

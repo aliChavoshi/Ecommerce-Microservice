@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace IdentityServerAspNetIdentity.Pages.Logout;
+namespace IdentityServerAspNetIdentity.Pages.Account.Logout;
 
 [SecurityHeaders]
 [AllowAnonymous]
