@@ -58,7 +58,7 @@ builder.Services.AddControllers(config =>
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
         {
-            options.Authority = "https://localhost:9009";
+            options.Authority = "https://localhost:9009"; // Identity Server URL
             options.Audience = "Catalog";
         }
     );

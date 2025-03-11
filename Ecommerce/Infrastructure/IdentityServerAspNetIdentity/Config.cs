@@ -12,16 +12,15 @@ public static class Config
 
     public static IEnumerable<ApiScope> ApiScopes =>
     [
-        new ApiScope("scope1"),
-        new ApiScope("scope2")
+        new ApiScope("catalogapi","Catalog Scope")
     ];
 
     public static IEnumerable<ApiResource> ApiResources =>
     [
         //List of Microservices can be added here
-        new ApiResource("Catalog")
+        new ApiResource("Catalog", "Catalog.API")
         {
-            Scopes = { "scope1" }
+            Scopes = { "catalogapi" }
         }
     ];
 
@@ -30,13 +29,13 @@ public static class Config
         // m2m client credentials flow client
         new Client
         {
-            ClientId = "m2m.client",
-            ClientName = "Client Credentials Client",
+            ClientId = "CatalogApiClient",
+            ClientName = "Catalog API Client",
 
             AllowedGrantTypes = GrantTypes.ClientCredentials,
             ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
 
-            AllowedScopes = { "scope1" }
+            AllowedScopes = { "catalogapi" }
         },
 
         // interactive client using code flow + pkce
