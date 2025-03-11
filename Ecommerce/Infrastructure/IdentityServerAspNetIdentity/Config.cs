@@ -19,7 +19,7 @@ public static class Config
     public static IEnumerable<ApiResource> ApiResources =>
     [
         //List of Microservices can be added here
-        new ApiResource("resource1")
+        new ApiResource("Catalog")
         {
             Scopes = { "scope1" }
         }
