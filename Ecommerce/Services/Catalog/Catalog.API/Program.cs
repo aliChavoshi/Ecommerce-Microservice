@@ -48,20 +48,22 @@ builder.Services.AddScoped<ITypeRepository, ProductRepository>();
 builder.Services.AddScoped<IBrandRepository, ProductRepository>();
 
 //Identity Server
-var userPolicy = new AuthorizationPolicyBuilder()
-    .RequireAuthenticatedUser()
-    .Build();
-builder.Services.AddControllers(config =>
-{
-    config.Filters.Add(new AuthorizeFilter(userPolicy));
-});
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
+    {
+        options.Authority = "https://localhost:9009"; // Identity Server URL
+        options.Audience = "Catalog";
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
         {
-            options.Authority = "https://localhost:9009"; // Identity Server URL
-            options.Audience = "Catalog";
-        }
-    );
+            ValidateIssuer = true,
+            ValidIssuer = "https://localhost:9009", // Ensure this matches the issuer in the token
+            ValidateAudience = true,
+            ValidAudience = "Catalog",
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+        };
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

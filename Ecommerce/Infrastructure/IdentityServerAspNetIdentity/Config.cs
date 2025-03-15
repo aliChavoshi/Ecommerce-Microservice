@@ -12,15 +12,21 @@ public static class Config
 
     public static IEnumerable<ApiScope> ApiScopes =>
     [
-        new ApiScope("catalogapi","Catalog Scope")
+        new ApiScope("catalogapi","Catalog Scope"),
+        new ApiScope("basketapi","Basket Scope"),
     ];
 
     public static IEnumerable<ApiResource> ApiResources =>
     [
         //List of Microservices can be added here
+        // Catalog == Audience in the program.cs of the Catalog.API
         new ApiResource("Catalog", "Catalog.API")
         {
             Scopes = { "catalogapi" }
+        },
+        new ApiResource("Basket", "Basket.API")
+        {
+            Scopes = { "basketapi" }
         }
     ];
 
@@ -32,26 +38,21 @@ public static class Config
             ClientId = "CatalogApiClient",
             ClientName = "Catalog API Client",
 
-            AllowedGrantTypes = GrantTypes.ClientCredentials,
+            AllowedGrantTypes = GrantTypes.ClientCredentials, // this type for machine to machine communication
             ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
 
             AllowedScopes = { "catalogapi" }
         },
-
-        // interactive client using code flow + pkce
+        // m2m client credentials flow client
         new Client
         {
-            ClientId = "interactive",
-            ClientSecrets = { new Secret("49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".Sha256()) },
+            ClientId = "BasketApiClient",
+            ClientName = "Basket API Client",
 
-            AllowedGrantTypes = GrantTypes.Code,
+            AllowedGrantTypes = GrantTypes.ClientCredentials, // this type for machine to machine communication
+            ClientSecrets = { new Secret("E6CA9A3E-E61B-4F2A-A271-C3FB38FE933E".Sha256()) },
 
-            RedirectUris = { "https://localhost:44300/signin-oidc" },
-            FrontChannelLogoutUri = "https://localhost:44300/signout-oidc",
-            PostLogoutRedirectUris = { "https://localhost:44300/signout-callback-oidc" },
-
-            AllowOfflineAccess = true,
-            AllowedScopes = { "openid", "profile", "scope2" }
-        }
+            AllowedScopes = { "basketapi" }
+        },
     ];
 }

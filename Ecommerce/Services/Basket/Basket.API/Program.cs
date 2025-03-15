@@ -10,6 +10,9 @@ using Basket.Infrastructure.Services;
 using Common.Logging;
 using Discount.Application.Protos;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -59,12 +62,25 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
 //Add RabbitMQ
 builder.Services.AddMassTransit(configuration =>
 {
-    configuration.UsingRabbitMq((_, cfg) =>
-    {
-        cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
-    });
+    configuration.UsingRabbitMq((_, cfg) => { cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]); });
 });
 builder.Services.AddMassTransitHostedService();
+
+//Identity Server
+var userPolicy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build(); // Require authenticated user
+builder.Services.AddControllers(config =>
+{
+    config.Filters.Add(new AuthorizeFilter(userPolicy)); // add the policy globally for all controllers
+});
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+        {
+            options.Authority = "https://localhost:9009/"; // Identity Server URL
+            options.Audience = "Basket";
+        }
+    );
 //Build
 var app = builder.Build();
 var versionDescProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
@@ -85,6 +101,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
