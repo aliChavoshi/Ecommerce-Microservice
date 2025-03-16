@@ -76,7 +76,5 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication(); //Identity Server
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
