@@ -67,20 +67,22 @@ builder.Services.AddMassTransit(configuration =>
 builder.Services.AddMassTransitHostedService();
 
 //Identity Server
-var userPolicy = new AuthorizationPolicyBuilder()
-    .RequireAuthenticatedUser()
-    .Build(); // Require authenticated user
-builder.Services.AddControllers(config =>
-{
-    config.Filters.Add(new AuthorizeFilter(userPolicy)); // add the policy globally for all controllers
-});
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
+    {
+        options.Authority = "https://localhost:9009"; // Identity Server URL
+        options.Audience = "Basket";
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
         {
-            options.Authority = "https://localhost:9009/"; // Identity Server URL
-            options.Audience = "Basket";
-        }
-    );
+            ValidateIssuer = true,
+            ValidIssuer = "https://localhost:9009", // Ensure this matches the issuer in the token
+            ValidateAudience = true,
+            ValidAudience = "Basket",
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+        };
+    });
+
 //Build
 var app = builder.Build();
 var versionDescProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
@@ -101,7 +103,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseAuthentication();
+app.UseAuthentication(); // Identity Server
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
