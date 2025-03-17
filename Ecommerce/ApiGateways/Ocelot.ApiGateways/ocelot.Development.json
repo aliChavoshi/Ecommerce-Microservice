@@ -39,6 +39,10 @@
       ],
       "UpstreamPathTemplate": "/Catalog/GetAllProducts",
       "UpstreamHttpMethod": [ "GET", "DELETE" ]
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": [ "catalogapi" ]
+      //}
     },
     //GetAllBrands
     {

@@ -1,16 +1,12 @@
-﻿using Ocelot.DependencyInjection;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Microsoft.IdentityModel.Protocols;
+using Microsoft.IdentityModel.Tokens;
+using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
-//
-// // Add services to the container.
-// builder.Services.AddCors(options =>
-// {
-//     options.AddPolicy("CorsPolicy", policy =>
-//     {
-//         policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-//     });
-// });
+
 //ocelot configuration
 builder.Host.ConfigureAppConfiguration((env, config) =>
 {
@@ -23,6 +19,31 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddOcelot();
+//Identity Server
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.Authority = "https://localhost:9009";
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = "https://localhost:9009",
+            ValidateAudience = true,
+            ValidAudiences = ["Catalog"],
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true
+        };
+        options.BackchannelHttpHandler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = (msg, cert, chain, errors) => true
+        };
+        // اضافه کردن این بخش برای بازیابی خودکار کلیدها
+        options.ConfigurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(
+            $"{options.Authority}/.well-known/openid-configuration",
+            new OpenIdConnectConfigurationRetriever(),
+            new HttpDocumentRetriever());
+    });
 
 var app = builder.Build();
 
@@ -34,10 +55,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
-// app.UseCors("CorsPolicy");
+// app.UseAuthentication();
 // app.UseAuthorization();
-
-app.MapControllers();
+// app.MapControllers();
 
 app.UseEndpoints(endpoints =>
 {

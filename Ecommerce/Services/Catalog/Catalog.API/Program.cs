@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 using Asp.Versioning;
 using Catalog.Application.Mappers;
 using Catalog.Application.Queries;
@@ -9,6 +9,10 @@ using Common.Logging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.IdentityModel.Protocols;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,7 +33,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new() { Title = "Catalog.API", Version = "v1", Description = "Catalog API" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog.API", Version = "v1", Description = "Catalog API" });
 });
 // Register Mapper
 builder.Services.AddAutoMapper(typeof(ProfileMapper));
@@ -47,21 +51,35 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ITypeRepository, ProductRepository>();
 builder.Services.AddScoped<IBrandRepository, ProductRepository>();
 
-//Identity Server
+//Identity Server changes
+var authorizationPolicy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); });
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://localhost:9009"; // Identity Server URL
+        options.Authority = "https://localhost:9009";
         options.Audience = "Catalog";
-        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
-            ValidIssuer = "https://localhost:9009", // Ensure this matches the issuer in the token
+            ValidIssuer = "https://localhost:9009",
             ValidateAudience = true,
             ValidAudience = "Catalog",
             ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
+            ValidateIssuerSigningKey = true
         };
+        options.BackchannelHttpHandler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = (msg, cert, chain, errors) => true
+        };
+        // اضافه کردن این بخش برای بازیابی خودکار کلیدها
+        options.ConfigurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(
+            $"{options.Authority}/.well-known/openid-configuration",
+            new OpenIdConnectConfigurationRetriever(),
+            new HttpDocumentRetriever());
     });
 
 var app = builder.Build();
@@ -74,7 +92,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseAuthentication(); //Identity Server
+app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
 app.Run();

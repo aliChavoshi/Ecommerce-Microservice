@@ -12,8 +12,8 @@ public static class Config
 
     public static IEnumerable<ApiScope> ApiScopes =>
     [
-        new ApiScope("catalogapi","Catalog Scope"),
-        new ApiScope("basketapi","Basket Scope"),
+        new ApiScope("catalogapi", "Catalog Scope"),
+        new ApiScope("basketapi", "Basket Scope"),
     ];
 
     public static IEnumerable<ApiResource> ApiResources =>
@@ -22,7 +22,7 @@ public static class Config
         // Catalog == Audience in the program.cs of the Catalog.API
         new ApiResource("Catalog", "Catalog.API")
         {
-            Scopes = { "catalogapi" }
+            Scopes = { "catalogapi" },
         },
         new ApiResource("Basket", "Basket.API")
         {
@@ -32,15 +32,14 @@ public static class Config
 
     public static IEnumerable<Client> Clients =>
     [
-        // m2m client credentials flow client
         new Client
         {
             ClientId = "CatalogApiClient",
             ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
-            
-            ClientName = "Catalog API Client",
-            AllowedGrantTypes = GrantTypes.ClientCredentials, // this type for machine to machine communication
-            AllowedScopes = { "catalogapi" , "basketapi" }
-        },
+            AllowedGrantTypes = GrantTypes.ClientCredentials,
+            AllowedScopes = { "catalogapi" },
+            AccessTokenType = AccessTokenType.Jwt,
+            AccessTokenLifetime = 3600
+        }
     ];
 }

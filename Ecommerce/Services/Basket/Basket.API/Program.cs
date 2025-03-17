@@ -67,6 +67,10 @@ builder.Services.AddMassTransit(configuration =>
 builder.Services.AddMassTransitHostedService();
 
 //Identity Server
+var authorizationPolicy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); });
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {

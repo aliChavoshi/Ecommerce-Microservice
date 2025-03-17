@@ -1,6 +1,7 @@
-using Duende.IdentityServer;
+﻿using Duende.IdentityServer;
 using IdentityServerAspNetIdentity.Data;
 using IdentityServerAspNetIdentity.Models;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -20,22 +21,21 @@ internal static class HostingExtensions
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-        builder.Services
-            .AddIdentityServer(options =>
+        builder.Services.AddIdentityServer(options =>
             {
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
-
-                // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
                 options.EmitStaticAudienceClaim = true;
+                options.IssuerUri = "https://localhost:9009"; // بسیار مهم!
             })
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryClients(Config.Clients)
             .AddInMemoryApiResources(Config.ApiResources)
-            .AddAspNetIdentity<ApplicationUser>();
+            .AddAspNetIdentity<ApplicationUser>()
+            .AddDeveloperSigningCredential();
 
         //this is for Google authentication
         // builder.Services.AddAuthentication()
@@ -63,6 +63,7 @@ internal static class HostingExtensions
         }
 
         app.UseStaticFiles();
+
         app.UseRouting();
         app.UseIdentityServer();
         app.UseAuthorization();
