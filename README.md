@@ -85,17 +85,6 @@
 
 **لینک‌های دوره:**
 
-- [ایجاد میکروسرویس‌های .NET Core با معماری تمیز](https://www.udemy.com/course/creating-net-core-microservices-using-clean-architecture/?couponCode=2CCD4C46CD20A6C4BAE0)  
-- [توسعه اپلیکیشن فروشگاهی FullStack با Spring Boot و React](https://www.udemy.com/course/building-fullstack-e-commerce-app-using-springboot-react/?couponCode=3570F02B303375EAF4B1)  
-- [توسعه اپلیکیشن فروشگاهی FullStack با Spring Boot و Angular](https://www.udemy.com/course/building-fullstack-ecommerce-app-using-springboot-angular/?couponCode=6B219FD3BDD2D7EEDAAF)  
-- [توسعه FullStack با .NET Core، Angular و ChatGPT](https://www.udemy.com/course/building-fullstack-app-using-netcore-angular-chatgpt/?couponCode=CFCABDEFE5600A6EB267)  
-- [Docker و Kubernetes برای توسعه‌دهندگان .NET و Angular](https://www.udemy.com/course/docker-for-net-and-angular-developers/?couponCode=3649D0167235A8D11778)  
-- [تسلط بر هوش مصنوعی: ChatGPT و فراتر از آن](https://www.udemy.com/course/ai-mastery-unleashed-chatgpt-and-beyond/?couponCode=321CE2D0B80CB60D9F32)
-
-**وبلاگ:**
-
-- [Medium](https://rahulsahay19.medium.com/)
-
 **منابع آموزشی تکمیلی از دانشجویار:**
 
 - [آموزش جامع ASP.NET Core 8](https://www.daneshjooyar.com/asp-net-core-8/)  
@@ -246,15 +235,3 @@ kubectl apply -f kiali-secret.yaml
 
 **Visualization با Graphana:**  
 ![Graphana Visualization](https://user-images.githubusercontent.com/3886381/223705814-8da56911-ee72-46be-b90a-19f1491260fe.png)
-
----
-
-## What's Next
-
-در آینده نزدیک، **Azure API Gateway** و **Azure AD** نیز به این دوره اضافه خواهند شد. پس همراه باشید و از ادامه یادگیری لذت ببرید.  
-**Happy Coding!**
-
----
-
-این متن نهایی، تمامی بخش‌های مهم از جمله معرفی دوره، تکنولوژی‌های استفاده‌شده، مطالب آموزشی، نکات پیاده‌سازی، ساختار پروژه، اطلاعات استقرار، هشدارها و منابع آموزشی مرتبط را به صورت جامع و یکپارچه پوشش می‌دهد.  
-اگر نیاز به تغییرات بیشتر یا اضافه کردن جزئیات دیگری دارید، در خدمت شما هستم.
