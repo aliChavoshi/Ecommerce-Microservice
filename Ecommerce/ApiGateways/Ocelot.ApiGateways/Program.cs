@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Tokens;
+using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -18,12 +19,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddOcelot();
+builder.Services.AddOcelot().AddCacheManager(x => x.WithDictionaryHandle());
 //Identity Server
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer("Bearer", options =>
     {
+        // آدرس Identity Server
         options.Authority = "https://localhost:9009";
+        // اگر گواهی HTTPS ندارید و در محیط توسعه هستید:
         options.RequireHttpsMetadata = false;
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -55,9 +58,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
-// app.UseAuthentication();
-// app.UseAuthorization();
-// app.MapControllers();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
 
 app.UseEndpoints(endpoints =>
 {
