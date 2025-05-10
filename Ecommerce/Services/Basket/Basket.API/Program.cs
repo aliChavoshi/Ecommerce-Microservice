@@ -74,12 +74,12 @@ builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilt
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://localhost:9009"; // Identity Server URL
+        options.Authority = "https://localhost:44300"; // Identity Server URL
         options.Audience = "Basket";
         options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
         {
             ValidateIssuer = true,
-            ValidIssuer = "https://localhost:9009", // Ensure this matches the issuer in the token
+            ValidIssuer = "https://localhost:44300", // Ensure this matches the issuer in the token
             ValidateAudience = true,
             ValidAudience = "Basket",
             ValidateLifetime = true,

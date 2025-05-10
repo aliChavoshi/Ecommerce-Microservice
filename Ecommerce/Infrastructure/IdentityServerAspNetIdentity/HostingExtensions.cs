@@ -28,7 +28,7 @@ internal static class HostingExtensions
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
                 options.EmitStaticAudienceClaim = true;
-                options.IssuerUri = "https://localhost:9009"; // بسیار مهم!
+                options.IssuerUri = "https://localhost:44300"; // بسیار مهم!
             })
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)

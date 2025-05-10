@@ -25,15 +25,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer("Bearer", options =>
     {
         // آدرس Identity Server
-        options.Authority = "https://localhost:9009";
+        options.Authority = "https://localhost:44300";
         // اگر گواهی HTTPS ندارید و در محیط توسعه هستید:
         options.RequireHttpsMetadata = false;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
-            ValidIssuer = "https://localhost:9009",
+            ValidIssuer = "https://localhost:44300",
             ValidateAudience = true,
-            ValidAudiences = ["Catalog"],
+            ValidAudiences =
+            [
+                "Catalog",
+                "https://localhost:44300/resources"
+            ],
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true
         };
@@ -60,13 +64,9 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers();
 
-app.UseEndpoints(endpoints =>
-{
-    if (endpoints == null) throw new ArgumentNullException(nameof(endpoints));
-    endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello Ocelot"); });
-});
+app.MapControllers();
+app.MapGet("/", () => "Hello Ocelot");
 
 await app.UseOcelot();
 await app.RunAsync();

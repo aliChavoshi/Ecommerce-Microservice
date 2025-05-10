@@ -23,7 +23,7 @@ try
         .ConfigurePipeline();
 
         SeedData.EnsureSeedData(app);
-
+        // app.MapGet("/test", () => "It's working!");
     app.Run();
 }
 catch (Exception ex) when (ex is not HostAbortedException)

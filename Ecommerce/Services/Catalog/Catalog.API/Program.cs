@@ -20,7 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 //Add Service for Serilog
 builder.Host.UseSerilog(Logging.ConfigureLogger);
 // Add services to the container.
-builder.Services.AddControllers();
+// builder.Services.AddControllers();
 // Add API Versioning
 builder.Services.AddApiVersioning(options =>
 {
@@ -62,15 +62,14 @@ builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilt
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://localhost:9009";
-        options.Audience = "Catalog";
+        options.Authority = "https://localhost:44300";
         options.RequireHttpsMetadata = false;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
-            ValidIssuer = "https://localhost:9009",
+            ValidIssuer = "https://localhost:44300",
             ValidateAudience = true,
-            ValidAudience = "Catalog",
+            ValidAudiences = ["Catalog", "https://localhost:44300/resources"],
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true
         };
@@ -78,12 +77,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             ServerCertificateCustomValidationCallback = (msg, cert, chain, errors) => true
         };
-        // اضافه کردن این بخش برای بازیابی خودکار کلیدها
         options.ConfigurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(
             $"{options.Authority}/.well-known/openid-configuration",
             new OpenIdConnectConfigurationRetriever(),
             new HttpDocumentRetriever());
     });
+
 
 var app = builder.Build();
 
