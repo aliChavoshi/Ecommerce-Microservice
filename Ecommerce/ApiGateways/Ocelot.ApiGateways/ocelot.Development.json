@@ -11,25 +11,12 @@
         }
       ],
       "UpstreamPathTemplate": "/Catalog",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
-      "FileCacheOptions": { "TtlSeconds": 30 },
+      "UpstreamHttpMethod": ["GET", "POST", "PUT"],
+      //"FileCacheOptions": { "TtlSeconds": 30 },
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": [ "catalogapi" ]
+        "AllowedScopes": ["catalogapi"]
       }
-    },
-    //GetProductById
-    {
-      "DownstreamPathTemplate": "/api/v1/Catalog/GetProductById/{id}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "host.docker.internal",
-          "Port": "8000"
-        }
-      ],
-      "UpstreamPathTemplate": "/Catalog/GetProductById/{id}",
-      "UpstreamHttpMethod": [ "GET", "DELETE" ]
     },
     //GetAllProducts
     {
@@ -42,8 +29,20 @@
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetAllProducts",
-      "UpstreamHttpMethod": [ "GET", "DELETE" ]
-     
+      "UpstreamHttpMethod": ["GET", "DELETE"]
+    },
+    //GetProductById
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetProductById/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": "8000"
+        }
+      ],
+      "UpstreamPathTemplate": "/Catalog/GetProductById/{id}",
+      "UpstreamHttpMethod": ["GET", "DELETE"]
     },
     //GetAllBrands
     {
@@ -56,7 +55,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetAllBrands",
-      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+      "UpstreamHttpMethod": ["GET", "DELETE"]
     },
     //GetAllTypes
     {
@@ -69,7 +68,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetAllTypes",
-      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+      "UpstreamHttpMethod": ["GET", "DELETE"]
     },
     //GetProductsByBrandName
     {
@@ -82,7 +81,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetProductsByBrandName/{brand}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": ["GET"]
     },
     //Basket API GetBasket
     {
@@ -95,7 +94,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Basket/GetBasket/{userName}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": ["GET"]
     },
     //DeleteBasket
     {
@@ -108,7 +107,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Basket/DeleteBasket/{userName}",
-      "UpstreamHttpMethod": [ "DELETE" ]
+      "UpstreamHttpMethod": ["DELETE"]
     },
     //CreateBasket
     {
@@ -121,7 +120,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Basket/CreateBasket",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": ["POST"]
     },
     //Checkout V1
     {
@@ -134,7 +133,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Basket/Checkout",
-      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamHttpMethod": ["POST"],
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
@@ -154,7 +153,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Basket/CheckoutV2",
-      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamHttpMethod": ["POST"],
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
@@ -174,7 +173,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Discount/{productName}",
-      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+      "UpstreamHttpMethod": ["GET", "DELETE"]
     },
     //Discount API Discount
     {
@@ -187,7 +186,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Discount",
-      "UpstreamHttpMethod": [ "PUT", "POST" ]
+      "UpstreamHttpMethod": ["PUT", "POST"]
     },
     //Order API Order
     {
@@ -200,7 +199,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Order/{userName}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": ["GET"]
     }
   ],
   "GlobalConfiguration": {
