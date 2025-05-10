@@ -69,7 +69,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuer = true,
             ValidIssuer = "https://localhost:44300",
             ValidateAudience = true,
-            ValidAudiences = ["Catalog", "https://localhost:44300/resources"],
+            ValidAudiences = ["Catalog"],
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true
         };
