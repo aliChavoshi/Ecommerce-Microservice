@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using System.Security.Cryptography.X509Certificates;
 using Ocelot.ApiGateways.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,50 +21,30 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddOcelot().AddDelegatingHandler<ForwardTokenHandler>()
     .AddCacheManager(x => x.WithDictionaryHandle());
 //Identity Server
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
-        options.Authority = "https://localhost:44300";
+        options.Authority = "https://host.docker.internal:44300"; // نکته مهم
         options.RequireHttpsMetadata = false;
-        options.MetadataAddress = "https://localhost:44300/.well-known/openid-configuration";
 
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
-            ValidIssuer = "https://localhost:44300",
+            ValidIssuer = "https://localhost:44300", // همان مقدار token issuer
             ValidateAudience = true,
-            ValidAudience = "Catalog", // فقط یک audience
+            ValidAudience = "Catalog",
             ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            // اگر کلیدها به صورت دستی دریافت می‌شوند:
-            IssuerSigningKeyResolver = (token, securityToken, kid, parameters) =>
-            {
-                // 1. دریافت JWKS از IdentityServer
-                var handler = new HttpClientHandler
-                {
-                    ServerCertificateCustomValidationCallback = (msg, cert, chain, errors) => true
-                };
-                using var httpClient = new HttpClient(handler);
-
-                // دریافت JWKS از آدرس jwks_uri
-                var jwksUri = "https://localhost:44300/.well-known/openid-configuration/jwks";
-                var jwksResponse = httpClient.GetAsync(jwksUri).GetAwaiter().GetResult();
-                jwksResponse.EnsureSuccessStatusCode();
-
-                // پردازش پاسخ
-                var jwksJson = jwksResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-                var jwks = new JsonWebKeySet(jwksJson);
-
-                // فیلتر کلیدها بر اساس kid
-                return jwks.Keys.Where(k => k.Kid == kid).ToList();
-            }
+            ValidateIssuerSigningKey = true
         };
 
+        // فقط در صورت نیاز به عبور از TLS Self-Signed:
         options.BackchannelHttpHandler = new HttpClientHandler
         {
             ServerCertificateCustomValidationCallback = (msg, cert, chain, errors) => true
         };
     });
+
+//End Identity
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

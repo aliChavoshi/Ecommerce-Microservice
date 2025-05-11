@@ -58,32 +58,44 @@ var authorizationPolicy = new AuthorizationPolicyBuilder()
     .Build();
 builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); });
 //end
-//Identity
+//Identity Server
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://localhost:44300";
+        options.Authority = "https://host.docker.internal:44300";
         options.RequireHttpsMetadata = false;
+
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
-            ValidIssuer = "https://localhost:44300",
+            ValidIssuer = "https://localhost:44300", // مهم: دقیقا همان مقداری که در توکن هست
             ValidateAudience = true,
-            ValidAudiences = ["Catalog"],
+            ValidAudience = "Catalog",
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true
         };
-        options.BackchannelHttpHandler = new HttpClientHandler
+
+        // این هندلر هم برای بک‌چنل هم برای ConfigurationManager استفاده می‌شود
+        var handler = new HttpClientHandler
         {
             ServerCertificateCustomValidationCallback = (msg, cert, chain, errors) => true
         };
+
+        options.BackchannelHttpHandler = handler;
+
+        var httpClient = new HttpClient(handler);
+        var retriever = new HttpDocumentRetriever(httpClient)
+        {
+            RequireHttps = false
+        };
+
         options.ConfigurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(
-            $"{options.Authority}/.well-known/openid-configuration",
+            "https://host.docker.internal:44300/.well-known/openid-configuration",
             new OpenIdConnectConfigurationRetriever(),
-            new HttpDocumentRetriever());
+            retriever);
     });
 
-
+//End Identity
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
