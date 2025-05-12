@@ -74,17 +74,9 @@ builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilt
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://localhost:44300"; // Identity Server URL
+        options.Authority = "http://identityserveraspnetidentity:44300"; // نکته مهم
         options.Audience = "Basket";
-        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidIssuer = "https://localhost:44300", // Ensure this matches the issuer in the token
-            ValidateAudience = true,
-            ValidAudience = "Basket",
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-        };
+        options.RequireHttpsMetadata = false;
     });
 
 //Build

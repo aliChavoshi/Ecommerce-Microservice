@@ -6,7 +6,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:9008"
+      "applicationUrl": "http://localhost:9008"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -20,7 +20,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "https://localhost:44300",
+      "applicationUrl": "http://localhost:44300",
       "sslPort": 44300
     }
   }

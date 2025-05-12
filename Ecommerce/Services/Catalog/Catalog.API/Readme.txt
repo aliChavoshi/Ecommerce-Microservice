@@ -1,1 +1,1 @@
-﻿"applicationUrl": "http://localhost:8000/swagger"
+﻿"applicationUrl": "http://localhost:9000/swagger"

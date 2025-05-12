@@ -51,50 +51,23 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ITypeRepository, ProductRepository>();
 builder.Services.AddScoped<IBrandRepository, ProductRepository>();
 
-//Identity Server changes
-//Add Authentication to all of controllers
+//IdentityServer
 var authorizationPolicy = new AuthorizationPolicyBuilder()
     .RequireAuthenticatedUser()
     .Build();
 builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); });
-//end
-//Identity Server
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://host.docker.internal:44300";
+        options.Authority = "http://identityserveraspnetidentity:44300"; // نکته مهم
+        options.Audience = "Catalog";
         options.RequireHttpsMetadata = false;
-
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidIssuer = "https://localhost:44300", // مهم: دقیقا همان مقداری که در توکن هست
-            ValidateAudience = true,
-            ValidAudience = "Catalog",
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true
-        };
-
-        // این هندلر هم برای بک‌چنل هم برای ConfigurationManager استفاده می‌شود
-        var handler = new HttpClientHandler
-        {
-            ServerCertificateCustomValidationCallback = (msg, cert, chain, errors) => true
-        };
-
-        options.BackchannelHttpHandler = handler;
-
-        var httpClient = new HttpClient(handler);
-        var retriever = new HttpDocumentRetriever(httpClient)
-        {
-            RequireHttps = false
-        };
-
-        options.ConfigurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(
-            "https://host.docker.internal:44300/.well-known/openid-configuration",
-            new OpenIdConnectConfigurationRetriever(),
-            retriever);
     });
-
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("CanRead", policy => policy.RequireClaim("scope", "catalogapi.read"));
+    options.AddPolicy("CanWrite", policy => policy.RequireClaim("scope", "catalogapi.write"));
+});
 //End Identity
 var app = builder.Build();
 

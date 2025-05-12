@@ -75,6 +75,13 @@ services:
      context: .
      dockerfile: ApiGateways\Ocelot.ApiGateways\Dockerfile
 
+  #identityserver
+  identityserveraspnetidentity:
+    image: ${DOCKER_REGISTRY-}identityserveraspnetidentity
+    build:
+      context: .
+      dockerfile: Infrastructure/IdentityServerAspNetIdentity/Dockerfile
+
 #volumes
 volumes:
  mongo_data:
@@ -83,3 +90,4 @@ volumes:
  pgadmin_data:
  orderdb_data:
  elasticsearch_data:
+

@@ -1,7 +1,5 @@
-﻿using Duende.IdentityServer;
-using IdentityServerAspNetIdentity.Data;
+﻿using IdentityServerAspNetIdentity.Data;
 using IdentityServerAspNetIdentity.Models;
-using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -28,7 +26,6 @@ internal static class HostingExtensions
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
                 options.EmitStaticAudienceClaim = true;
-                options.IssuerUri = "https://localhost:44300"; // بسیار مهم!
             })
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
