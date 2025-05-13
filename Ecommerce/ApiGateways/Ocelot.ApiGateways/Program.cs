@@ -12,6 +12,10 @@ builder.Host.ConfigureAppConfiguration((env, config) =>
     var environmentName = env.HostingEnvironment?.EnvironmentName ?? "Development";
     if (config != null) config.AddJsonFile($"ocelot.{environmentName}.json", true, true);
 });
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var authScheme = "EShoppingGatewayAuthScheme";
 builder.Services
@@ -28,19 +32,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 //End Identity
 var app = builder.Build();
-
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapGet("/", async context =>
-{
-    await context.Response.WriteAsync("Hello Ocelot");
-});
+app.MapControllers();
+app.MapGet("/", () => "Hello Ocelot");
 
 await app.UseOcelot();
+await app.RunAsync();
 
