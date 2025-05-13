@@ -184,14 +184,15 @@ services:
   ocelot.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_URLS=http://+:80
     depends_on:
+      - identityserveraspnetidentity
       - catalog.api
       - basket.api
       - discount.api
       - ordering.api
     ports:
-      - "9010:8080"
+      - "9010:80"
 
   #IdentityServer 44300
   identityserveraspnetidentity:
