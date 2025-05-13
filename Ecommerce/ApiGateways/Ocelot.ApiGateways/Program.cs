@@ -22,7 +22,7 @@ builder.Services
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(authScheme, options =>
     {
-        options.Authority = "http://identityserveraspnetidentity:44300"; // نکته مهم
+        options.Authority = "http://identityserveraspnetidentity:8080"; // نکته مهم
         options.Audience = "EShoppingGateway";
         options.RequireHttpsMetadata = false;
     });

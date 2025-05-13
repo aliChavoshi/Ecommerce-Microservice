@@ -74,7 +74,7 @@ builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilt
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "http://identityserveraspnetidentity:44300"; // نکته مهم
+        options.Authority = "http://identityserveraspnetidentity:8080"; // نکته مهم
         options.Audience = "Basket";
         options.RequireHttpsMetadata = false;
     });

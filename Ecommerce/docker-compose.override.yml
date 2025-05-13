@@ -61,7 +61,7 @@ services:
   catalog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:9000
+      # - ASPNETCORE_URLS=http://+:9000
       # __ instead of : because of the way the environment variables are parsed in the .NET Core configuration system
       # DatabaseSettings__ConnectionString means DatabaseSettings:ConnectionString in the appsettings.json file
       - "DatabaseSettings__ConnectionString=mongodb://catalogdb:27017"
@@ -87,7 +87,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings__Redis=basketdb:6379"
       - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_URLS=http://*:9001
+      # - ASPNETCORE_URLS=http://*:9001
       - "GrpcSettings__DiscountUrl=http://discount.api:8080"
       - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
       - "ElasticConfiguration__Uri=http://elasticsearch:9200"  
@@ -102,7 +102,7 @@ services:
     container_name: discount.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://*:9002
+      # - ASPNETCORE_URLS=http://*:9002
       - "DatabaseSettings__ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=admin;Password=Password@1;"
       - "ElasticConfiguration__Uri=http://elasticsearch:9200"  
     depends_on:
@@ -116,7 +116,7 @@ services:
     container_name: ordering.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://*:9003 
+      # - ASPNETCORE_URLS=http://*:9003 
       - "ConnectionStrings__OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=Rahul1234567;TrustServerCertificate=True" 
       - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
       - "ElasticConfiguration__Uri=http://elasticsearch:9200"  
@@ -196,6 +196,6 @@ services:
   identityserveraspnetidentity:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://*:44300      
+      # - ASPNETCORE_URLS=http://*:44300      
     ports:
       - "44300:8080"
