@@ -62,6 +62,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.Authority = "http://identityserveraspnetidentity:8080"; // نکته مهم
         options.Audience = "Catalog";
         options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = "http://identityserveraspnetidentity:8080",
+            // سایر تنظیمات
+        };
     });
 builder.Services.AddAuthorization(options =>
 {

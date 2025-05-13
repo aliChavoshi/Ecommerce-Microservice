@@ -16,7 +16,7 @@ builder.Host.ConfigureAppConfiguration((env, config) =>
 var authScheme = "EShoppingGatewayAuthScheme";
 builder.Services
     .AddOcelot()
-    .AddDelegatingHandler<ForwardTokenHandler>()
+    // .AddDelegatingHandler<ForwardTokenHandler>()
     .AddCacheManager(x => x.WithDictionaryHandle());
 //Identity Server
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -30,7 +30,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 //End Identity
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment()) app.UseDeveloperExceptionPage();
-app.UseRouting();
-app.MapGet("/", async context => { await context.Response.WriteAsync("Hello Ocelot"); });
+if (app.Environment.IsDevelopment())
+    app.UseDeveloperExceptionPage();
+
+app.MapGet("/", () => "Hello Ocelot");
+
 await app.UseOcelot();

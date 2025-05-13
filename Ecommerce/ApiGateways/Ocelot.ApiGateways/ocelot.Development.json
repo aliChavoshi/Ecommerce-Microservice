@@ -163,6 +163,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://ocelot.api:8080"
+    "BaseUrl": "http://localhost:9010"
   }
 }
