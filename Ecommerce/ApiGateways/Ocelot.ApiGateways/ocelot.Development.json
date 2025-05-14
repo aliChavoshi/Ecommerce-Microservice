@@ -1,5 +1,6 @@
 ﻿{
   "Routes": [
+    //Catalog to GetAllProducts
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetAllProducts",
       "DownstreamScheme": "http",
@@ -10,8 +11,12 @@
         }
       ],
       "UpstreamPathTemplate": "/Catalog",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "EShoppingGatewayAuthScheme"
+      }
     },
+    // /Catalog/GetAllProducts to GetAllProducts
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetAllProducts",
       "DownstreamScheme": "http",
