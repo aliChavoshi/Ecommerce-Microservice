@@ -54,8 +54,6 @@ public static class Config
             AllowedScopes = { CatalogApiReadScope, CatalogApiWriteScope, EShoppingGateway },
             AllowedGrantTypes = GrantTypes.ClientCredentials,
             ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
-            // AccessTokenType = AccessTokenType.Jwt,
-            // AccessTokenLifetime = 36000
         },
         new Client
         {
@@ -64,8 +62,6 @@ public static class Config
             AllowedScopes = { BasketApiScope },
             AllowedGrantTypes = GrantTypes.ClientCredentials,
             ClientSecrets = { new Secret("511536CF-F270-4058-80CA-1C89C192F69A".Sha256()) },
-            // AccessTokenType = AccessTokenType.Jwt,
-            // AccessTokenLifetime = 36000
         },
         new Client
         {
@@ -74,8 +70,6 @@ public static class Config
             AllowedScopes = { EShoppingGateway, BasketApiScope },
             AllowedGrantTypes = GrantTypes.ClientCredentials,
             ClientSecrets = { new Secret("577536CF-F270-4058-80CA-1C89C192F69A".Sha256()) },
-            // AccessTokenType = AccessTokenType.Jwt,
-            // AccessTokenLifetime = 36000
         }
     ];
 }

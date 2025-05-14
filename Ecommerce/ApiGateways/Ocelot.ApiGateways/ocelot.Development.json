@@ -29,6 +29,7 @@
       "UpstreamPathTemplate": "/Catalog/GetAllProducts",
       "UpstreamHttpMethod": [ "GET", "DELETE" ]
     },
+    // Get Product by Id
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetProductById/{id}",
       "DownstreamScheme": "http",
