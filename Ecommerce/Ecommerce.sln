@@ -59,6 +59,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocelot.ApiGateways", "ApiGa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServerAspNetIdentity", "Infrastructure\IdentityServerAspNetIdentity\IdentityServerAspNetIdentity.csproj", "{51C1EFA1-49ED-8DFA-52F1-FB7E3363BD7E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nginx", "nginx", "{FBC898DD-DA94-48AD-9DE8-7FC896D43E90}"
+	ProjectSection(SolutionItems) = preProject
+		nginx.Dockerfile = nginx.Dockerfile
+		nginx.local.conf = nginx.local.conf
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -178,6 +184,7 @@ Global
 		{9D5DC2AD-6E56-43E8-8EDE-F9A22B0A0BA5} = {05CC7355-41BA-4182-A967-2F40B80581AD}
 		{403A930C-7588-4FF5-9217-D48AE073672F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{51C1EFA1-49ED-8DFA-52F1-FB7E3363BD7E} = {05CC7355-41BA-4182-A967-2F40B80581AD}
+		{FBC898DD-DA94-48AD-9DE8-7FC896D43E90} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2B3E2DF-2001-4576-91A8-E30B7973D6D1}
