@@ -1,5 +1,6 @@
 ﻿using IdentityServerAspNetIdentity.Data;
 using IdentityServerAspNetIdentity.Models;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -53,6 +54,15 @@ internal static class HostingExtensions
 
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
+        //for Nginx reverse proxy
+        var forwardedHeaderOptions = new ForwardedHeadersOptions()
+        {
+            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+        };
+        forwardedHeaderOptions.KnownNetworks.Clear();
+        forwardedHeaderOptions.KnownProxies.Clear();
+        app.UseForwardedHeaders(forwardedHeaderOptions);
+        //
         app.UseSerilogRequestLogging();
 
         if (app.Environment.IsDevelopment())
