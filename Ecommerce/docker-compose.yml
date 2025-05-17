@@ -82,6 +82,12 @@ services:
       context: .
       dockerfile: Infrastructure/IdentityServerAspNetIdentity/Dockerfile
 
+  #reverseproxy
+  reverseproxy:
+    build:
+      context: .
+      dockerfile: nginx/nginx.Dockerfile
+
 #volumes
 volumes:
  mongo_data:
