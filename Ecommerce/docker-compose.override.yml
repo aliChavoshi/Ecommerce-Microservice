@@ -202,12 +202,12 @@ services:
     ports:
       - "44300:8080"
 
-  #reverseproxy 9100:9100
+  #reverseproxy 44344:443 ssl
   reverseproxy:
     container_name: nginxgateway
     restart: always
     ports:
-      - "9100:9100"
+      - "44344:443"
     depends_on:
       - identityserveraspnetidentity
       - catalog.api
