@@ -61,11 +61,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServerAspNetIdentit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nginx", "nginx", "{FBC898DD-DA94-48AD-9DE8-7FC896D43E90}"
 	ProjectSection(SolutionItems) = preProject
-		ApiGateways\nginx\nginx.Dockerfile = ApiGateways\nginx\nginx.Dockerfile
-		ApiGateways\nginx\nginx.local.conf = ApiGateways\nginx\nginx.local.conf
 		ApiGateways\nginx\id-local.conf = ApiGateways\nginx\id-local.conf
 		ApiGateways\nginx\id-local.crt = ApiGateways\nginx\id-local.crt
 		ApiGateways\nginx\id-local.key = ApiGateways\nginx\id-local.key
+		ApiGateways\nginx\nginx.Dockerfile = ApiGateways\nginx\nginx.Dockerfile
+		ApiGateways\nginx\nginx.local.conf = ApiGateways\nginx\nginx.local.conf
 	EndProjectSection
 EndProject
 Global
