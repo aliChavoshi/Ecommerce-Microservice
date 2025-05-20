@@ -86,7 +86,7 @@ services:
   reverseproxy:
     build:
       context: .
-      dockerfile: nginx/nginx.Dockerfile
+      dockerfile: ApiGateways/nginx/nginx.Dockerfile
 
 #volumes
 volumes:
@@ -96,4 +96,3 @@ volumes:
  pgadmin_data:
  orderdb_data:
  elasticsearch_data:
-
