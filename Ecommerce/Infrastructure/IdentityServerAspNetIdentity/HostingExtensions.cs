@@ -27,7 +27,8 @@ internal static class HostingExtensions
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
                 options.EmitStaticAudienceClaim = true;
-                options.IssuerUri = "http://identityserveraspnetidentity:8080"; //aud in jwt token
+                // options.IssuerUri = "http://identityserveraspnetidentity:8080"; //aud in jwt token : ocelot
+                options.IssuerUri = "https://id-local.eshopping.com:44344"; //aud in jwt token : nxing
             })
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
@@ -55,7 +56,7 @@ internal static class HostingExtensions
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
         //for Nginx reverse proxy
-        var forwardedHeaderOptions = new ForwardedHeadersOptions()
+        var forwardedHeaderOptions = new ForwardedHeadersOptions
         {
             ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
         };

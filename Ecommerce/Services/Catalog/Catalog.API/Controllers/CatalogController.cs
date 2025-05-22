@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.API.Controllers;
 
+[ApiVersion("1.0")]
 public class CatalogController(IMediator mediator, ILogger<CatalogController> logger) : ApiController
 {
     [HttpGet("{id}")]
@@ -23,6 +24,7 @@ public class CatalogController(IMediator mediator, ILogger<CatalogController> lo
     }
 
     [HttpGet]
+    [MapToApiVersion("1.0")]
     public async Task<ActionResult<IEnumerable<ProductResponse>>> GetAllProducts(
         [FromQuery] GetAllProductsQuery request)
     {

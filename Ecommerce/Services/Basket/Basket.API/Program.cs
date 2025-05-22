@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Asp.Versioning;
+﻿using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using Basket.API.SwaggerConfig;
 using Basket.Application.Commands;
@@ -12,17 +11,20 @@ using Discount.Application.Protos;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 //Add Service for Serilog
 builder.Host.UseSerilog(Logging.ConfigureLogger);
 // Add services to the container.
 builder.Services.AddControllers();
-// Add API Versioning and API Explorer for Swagger
+// Add API Version and API Explorer for Swagger
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigOptions>();
 builder.Services.AddApiVersioning(options =>
     {
@@ -74,15 +76,31 @@ builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilt
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "http://identityserveraspnetidentity:8080"; // نکته مهم
+        // options.Authority = "http://identityserveraspnetidentity:8080"; // for ocelot
+        options.Authority = "https://id-local.eshopping.com:44344"; // for nginx
         options.Audience = "Basket";
-        options.RequireHttpsMetadata = false;
+        options.RequireHttpsMetadata = true;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            // ValidIssuer = "http://identityserveraspnetidentity:8080",
+            ValidIssuer = "https://id-local.eshopping.com:44344",
+        };
     });
 
 //Build
 var app = builder.Build();
 var versionDescProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+//for Nginx reverse proxy
+var forwardedHeaderOptions = new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+};
+// forwardedHeaderOptions.KnownNetworks.Clear();
+// forwardedHeaderOptions.KnownProxies.Clear();
+app.UseForwardedHeaders(forwardedHeaderOptions);
 // Configure the HTTP request pipeline.
+// var nginxPath = "/basket";
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -94,7 +112,7 @@ if (app.Environment.IsDevelopment())
     {
         foreach (var desc in versionDescProvider.ApiVersionDescriptions)
         {
-            c.SwaggerEndpoint($"/swagger/{desc.GroupName}/swagger.json", $"Basket.API - {desc.GroupName.ToUpper()}");
+            c.SwaggerEndpoint($"{desc.GroupName}/swagger.json", $"Basket.API - {desc.GroupName.ToUpper()}");
         }
     });
 }
