@@ -41,7 +41,7 @@ builder.Services.AddSwaggerGen();
 // builder.Services.AddOpenApi();
 // Register Mapper
 builder.Services.AddAutoMapper(typeof(ProfileMapper));
-//Register Mediatr
+//Register Mediator
 var assemblies = new Assembly[]
 {
     Assembly.GetExecutingAssembly(),
@@ -63,15 +63,15 @@ builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilt
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        // options.Authority = "http://identityserveraspnetidentity:8080"; // نکته مهم
-        options.Authority = "https://id-local.eshopping.com:44344"; // نکته مهم
+        options.Authority = "http://identityserveraspnetidentity:8080"; // نکته مهم
+        // options.Authority = "https://id-local.eshopping.com:44344"; // نکته مهم
         options.Audience = "Catalog";
         options.RequireHttpsMetadata = false;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
-            // ValidIssuer = "http://identityserveraspnetidentity:8080",
-            ValidIssuer = "https://id-local.eshopping.com:44344",
+            ValidIssuer = "http://identityserveraspnetidentity:8080",
+            // ValidIssuer = "https://id-local.eshopping.com:44344",
         };
     });
 builder.Services.AddAuthorization(options =>
