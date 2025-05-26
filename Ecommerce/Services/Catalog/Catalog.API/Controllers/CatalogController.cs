@@ -69,4 +69,12 @@ public class CatalogController(IMediator mediator, ILogger<CatalogController> lo
     {
         return Ok(await mediator.Send(new DeleteProductCommand(id), cancellationToken));
     }
+
+    [HttpGet]
+    public IActionResult Test()
+    {
+        var authHeader = Request.Headers["Authorization"].FirstOrDefault();
+        Console.WriteLine("Authorization Header: " + authHeader);
+        return Ok(); // موقت برای بررسی
+    }
 }

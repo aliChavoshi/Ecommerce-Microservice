@@ -72,6 +72,9 @@ services:
       - "ElasticConfiguration__Uri=http://elasticsearch:9200"  
     depends_on:
       - catalogdb
+    #nginx https : host docker IP
+    extra_hosts:
+      - "id-local.eshopping.com:192.168.65.1"
     ports:
         # Now, any traffic sent to port 9000 on your host machine will be forwarded to port 8080 within the container. 
         # HOST_PORT:CONTAINER_PORT
