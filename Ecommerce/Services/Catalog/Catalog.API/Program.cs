@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Net;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 
@@ -33,11 +34,11 @@ builder.Services.AddControllers();
 // Add API Version and API Explorer for Swagger
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigOptions>();
 builder.Services.AddApiVersioning(options =>
-{
-    options.DefaultApiVersion = new ApiVersion(1, 0);
-    options.AssumeDefaultVersionWhenUnspecified = true;
-    options.ReportApiVersions = true;
-})
+    {
+        options.DefaultApiVersion = new ApiVersion(1, 0);
+        options.AssumeDefaultVersionWhenUnspecified = true;
+        options.ReportApiVersions = true;
+    })
     .AddApiExplorer(options =>
     {
         options.SubstituteApiVersionInUrl = true; // this is for set default version in url
@@ -77,15 +78,21 @@ var authorizationPolicy = new AuthorizationPolicyBuilder()
     .RequireAuthenticatedUser()
     .Build();
 builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); });
+var httpHandler = new HttpClientHandler
+{
+    ServerCertificateCustomValidationCallback =
+        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+};
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        // options.Authority = "http://identityserveraspnetidentity:8080"; // نکته مهم (کامنت شما)
-        options.Authority = "https://id-local.eshopping.com:44344";
+        options.Authority = "http://identityserveraspnetidentity:8080"; // نکته مهم (کامنت شما)
+        // options.Authority = "https://id-local.eshopping.com:44344";
 
         options.Audience = "Catalog";
         options.RequireHttpsMetadata = false;
-
+        options.BackchannelHttpHandler = httpHandler;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -93,10 +100,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidIssuers =
             [
-                // "http://identityserveraspnetidentity:8080", //ocelot
-                "https://id-local.eshopping.com:44344" //nginx
+                "http://identityserveraspnetidentity:8080", //ocelot
+                // "https://id-local.eshopping.com:44344" //nginx
             ],
         };
+        options.IncludeErrorDetails = true;
         options.Events = new JwtBearerEvents
         {
             OnAuthenticationFailed = context =>
@@ -126,10 +134,11 @@ app.UsePathBase(nginxPath);
 //for Nginx reverse proxy
 var forwardedHeaderOptions = new ForwardedHeadersOptions
 {
-    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost
 };
-// forwardedHeaderOptions.KnownNetworks.Clear(); // .
-// forwardedHeaderOptions.KnownProxies.Clear(); // .
+forwardedHeaderOptions.KnownNetworks.Clear(); // پاک کردن پیش‌فرض‌ها
+forwardedHeaderOptions.KnownProxies.Clear(); // پاک کردن پیش‌فرض‌ها
+forwardedHeaderOptions.KnownProxies.Add(IPAddress.Parse("172.18.0.16")); // IP داخلی کانتینر Nginx
 app.UseForwardedHeaders(forwardedHeaderOptions);
 
 if (app.Environment.IsDevelopment())
@@ -153,6 +162,7 @@ if (app.Environment.IsDevelopment())
         }
     });
 }
+
 // بالای app.UsePathBase(...)
 app.Use(async (ctx, next) =>
 {
@@ -161,6 +171,7 @@ app.Use(async (ctx, next) =>
     {
         Console.WriteLine($"{h.Key}: {h.Value}");
     }
+
     Console.WriteLine("----  END REQUEST HEADERS  ----");
     await next();
 });
