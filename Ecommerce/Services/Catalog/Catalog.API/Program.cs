@@ -18,7 +18,6 @@ using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Net;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,8 +52,6 @@ builder.Services.AddSwaggerGen(c =>
     // برای سادگی و حفظ کامنت شما، آن را نگه می‌داریم.
     c.AddServer(new OpenApiServer { Url = nginxPath });
 });
-
-// builder.Services.AddOpenApi(); // .
 
 // Register Mapper
 builder.Services.AddAutoMapper(typeof(ProfileMapper));
@@ -138,7 +135,7 @@ var forwardedHeaderOptions = new ForwardedHeadersOptions
 };
 forwardedHeaderOptions.KnownNetworks.Clear(); // پاک کردن پیش‌فرض‌ها
 forwardedHeaderOptions.KnownProxies.Clear(); // پاک کردن پیش‌فرض‌ها
-forwardedHeaderOptions.KnownProxies.Add(IPAddress.Parse("172.18.0.16")); // IP داخلی کانتینر Nginx
+// forwardedHeaderOptions.KnownProxies.Add(IPAddress.Parse("172.18.0.16")); // IP داخلی کانتینر Nginx
 app.UseForwardedHeaders(forwardedHeaderOptions);
 
 if (app.Environment.IsDevelopment())
