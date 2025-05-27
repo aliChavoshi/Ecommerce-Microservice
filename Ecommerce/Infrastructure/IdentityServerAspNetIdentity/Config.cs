@@ -29,7 +29,7 @@ public static class Config
     public static IEnumerable<ApiResource> ApiResources =>
     [
         // Catalog == Audience in the program.cs of the Catalog.API
-        // List of Microservices can be added here
+        // List of Micro-services can be added here
         new ApiResource("Catalog", "Catalog.API")
         {
             Scopes = { CatalogApiReadScope, CatalogApiWriteScope }
