@@ -18,6 +18,7 @@ public static class Logging
                 .Enrich.WithProperty("ApplicationName", env.ApplicationName)
                 .Enrich.WithProperty("EnvironmentName", env.EnvironmentName)
                 .Enrich.WithExceptionDetails()
+                .MinimumLevel.Override("Default", LogEventLevel.Warning)
                 .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
                 .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Warning)
                 .WriteTo.Console();
@@ -29,6 +30,7 @@ public static class Logging
                 loggerConfiguration.MinimumLevel.Override("Discount", LogEventLevel.Debug);
                 loggerConfiguration.MinimumLevel.Override("Ordering", LogEventLevel.Debug);
             }
+
             //Elastic Search
             var elasticUrl = context.Configuration.GetValue<string>("ElasticConfiguration:Uri");
             if (!string.IsNullOrEmpty(elasticUrl))

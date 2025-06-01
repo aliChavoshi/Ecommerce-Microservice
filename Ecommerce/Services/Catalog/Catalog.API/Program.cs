@@ -50,7 +50,8 @@ builder.Services.AddSwaggerGen(c =>
     // این خط را برای اضافه کردن سرور به OpenApi spec حفظ می‌کنیم.
     // اگرچه در سناریوهای پیچیده‌تر ممکن است نیاز به تنظیمات دقیق‌تر یا حذف داشته باشد،
     // برای سادگی و حفظ کامنت شما، آن را نگه می‌داریم.
-    c.AddServer(new OpenApiServer { Url = nginxPath });
+    c.AddServer(new OpenApiServer { Url = nginxPath, Description = "Catalog for nginx" });
+    c.AddServer(new OpenApiServer { Url = "test", Description = "this is a test" });
 });
 
 // Register Mapper
@@ -131,7 +132,8 @@ app.UsePathBase(nginxPath);
 //for Nginx reverse proxy
 var forwardedHeaderOptions = new ForwardedHeadersOptions
 {
-    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto |
+                       ForwardedHeaders.XForwardedHost
 };
 forwardedHeaderOptions.KnownNetworks.Clear(); // پاک کردن پیش‌فرض‌ها
 forwardedHeaderOptions.KnownProxies.Clear(); // پاک کردن پیش‌فرض‌ها
