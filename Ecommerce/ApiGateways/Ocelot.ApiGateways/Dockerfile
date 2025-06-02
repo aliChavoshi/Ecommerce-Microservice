@@ -11,6 +11,7 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["ApiGateways/Ocelot.ApiGateways/Ocelot.ApiGateways.csproj", "ApiGateways/Ocelot.ApiGateways/"]
+COPY ["Infrastructure/Common.Logging/Common.Logging.csproj","Infrastructure/Common.Logging/"]
 RUN dotnet restore "./ApiGateways/Ocelot.ApiGateways/Ocelot.ApiGateways.csproj"
 COPY . .
 WORKDIR "/src/ApiGateways/Ocelot.ApiGateways"

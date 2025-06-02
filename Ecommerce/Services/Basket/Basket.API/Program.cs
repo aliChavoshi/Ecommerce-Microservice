@@ -7,6 +7,7 @@ using Basket.Application.Mappers;
 using Basket.Core.Repositories;
 using Basket.Infrastructure.Services;
 using Common.Logging;
+using Common.Logging.Correlations;
 using Discount.Application.Protos;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -22,10 +23,15 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 //Add Service for Serilog
 builder.Host.UseSerilog(Logging.ConfigureLogger);
+
 // Add services to the container.
 builder.Services.AddControllers();
 // Add API Version and API Explorer for Swagger
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigOptions>();
+
+//Logging & Correlation
+builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
+
 builder.Services.AddApiVersioning(options =>
     {
         options.DefaultApiVersion = new ApiVersion(1, 0);
@@ -76,15 +82,15 @@ builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilt
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        // options.Authority = "http://identityserveraspnetidentity:8080"; // for ocelot
-        options.Authority = "https://id-local.eshopping.com:44344"; // for nginx
+        options.Authority = "http://identityserveraspnetidentity:8080"; // for ocelot
+        // options.Authority = "https://id-local.eshopping.com:44344"; // for nginx
         options.Audience = "Basket";
         options.RequireHttpsMetadata = true;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
-            // ValidIssuer = "http://identityserveraspnetidentity:8080",
-            ValidIssuer = "https://id-local.eshopping.com:44344",
+            ValidIssuer = "http://identityserveraspnetidentity:8080",
+            // ValidIssuer = "https://id-local.eshopping.com:44344",
         };
     });
 

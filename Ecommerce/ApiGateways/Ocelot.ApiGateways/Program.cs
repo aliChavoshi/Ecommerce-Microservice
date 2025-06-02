@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Common.Logging;
+using Common.Logging.Correlations;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog(Logging.ConfigureLogger);
 
 //ocelot configuration
 builder.Host.ConfigureAppConfiguration((env, config) =>
@@ -15,6 +19,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Logging & Correlation
+builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
 
 var authScheme = "EShoppingGatewayAuthScheme";
 builder.Services
@@ -36,6 +43,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+//Correlations and Logging
+app.AddCorrelationIdMiddleware();
 
 app.UseRouting();
 app.UseAuthentication();

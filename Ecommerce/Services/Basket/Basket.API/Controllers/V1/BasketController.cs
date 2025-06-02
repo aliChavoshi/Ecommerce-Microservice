@@ -9,24 +9,38 @@ using EventBus.Messages.Events;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Emit;
+using Common.Logging.Correlations;
 
 namespace Basket.API.Controllers.V1;
 
 [ApiVersion("1.0")]
-public class BasketController(
-    IMediator mediator,
-    IMapper mapper,
-    IPublishEndpoint publishEndpoint,
-    ILogger<BasketController> logger)
-    : ApiController
+public class BasketController : ApiController
 {
+    private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
+    private readonly IPublishEndpoint _publishEndpoint;
+    private readonly ILogger<BasketController> _logger;
+
+    public BasketController(IMediator mediator,
+        IMapper mapper,
+        IPublishEndpoint publishEndpoint,
+        ILogger<BasketController> logger, ICorrelationIdGenerator idGenerator)
+    {
+        _mediator = mediator;
+        _mapper = mapper;
+        _publishEndpoint = publishEndpoint;
+        _logger = logger;
+        _logger.LogInformation("CorrelationId {correlationId}", idGenerator.Get());
+    }
+
     [HttpPost]
     [MapToApiVersion("1.0")]
     public async Task<ActionResult<ShoppingCartResponse>> CreateBasket([FromBody] CreateShoppingCartCommand command,
         CancellationToken cancellationToken)
     {
-        logger.LogInformation("CreateBasketCommand: {UserName} {Items}", command.UserName, command.Items);
-        return Ok(await mediator.Send(command, cancellationToken));
+        _logger.LogInformation("CreateBasketCommand: {UserName} {Items}", command.UserName, command.Items);
+        return Ok(await _mediator.Send(command, cancellationToken));
     }
 
     [HttpGet("{username}")]
@@ -34,14 +48,14 @@ public class BasketController(
     public async Task<ActionResult<ShoppingCartResponse>> GetBasketByUserName(string username,
         CancellationToken cancellationToken)
     {
-        return Ok(await mediator.Send(new GetBasketByUserNameQuery(username), cancellationToken));
+        return Ok(await _mediator.Send(new GetBasketByUserNameQuery(username), cancellationToken));
     }
 
     [HttpDelete("{username}")]
     [MapToApiVersion("1.0")]
     public async Task<ActionResult<bool>> DeleteBasketByUserName(string username, CancellationToken cancellationToken)
     {
-        return Ok(await mediator.Send(new DeleteBasketByUserNameCommand(username), cancellationToken));
+        return Ok(await _mediator.Send(new DeleteBasketByUserNameCommand(username), cancellationToken));
     }
 
     [HttpPost]
@@ -49,16 +63,16 @@ public class BasketController(
     public async Task<IActionResult> Checkout([FromBody] BasketCheckout basketCheckout)
     {
         var query = new GetBasketByUserNameQuery(basketCheckout.UserName);
-        var basket = await mediator.Send(query);
+        var basket = await _mediator.Send(query);
         //Create a basketCheckout event -- Set TotalPrice on basketCheckout eventMessage
-        var eventMsg = mapper.Map<BasketCheckoutEvent>(basketCheckout);
+        var eventMsg = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
         eventMsg.TotalPrice = basket.TotalPrice;
-        await publishEndpoint.Publish(eventMsg); // publish the event
-        logger.LogInformation("BasketCheckoutEvent published successfully. EventId: {EventId} {DateTime} {UserName}",
+        await _publishEndpoint.Publish(eventMsg); // publish the event
+        _logger.LogInformation("BasketCheckoutEvent published successfully. EventId: {EventId} {DateTime} {UserName}",
             eventMsg.CorrelationId, eventMsg.CreationDate, eventMsg.UserName);
         //Remove the basket
         var deleteCommand = new DeleteBasketByUserNameCommand(basket.UserName);
-        await mediator.Send(deleteCommand);
+        await _mediator.Send(deleteCommand);
         // 202 (Accepted) response
         return Accepted();
     }

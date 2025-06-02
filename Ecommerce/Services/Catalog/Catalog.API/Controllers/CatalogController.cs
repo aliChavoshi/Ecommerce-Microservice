@@ -1,26 +1,38 @@
 ﻿using Catalog.Application.Commands;
 using Catalog.Application.Queries;
 using Catalog.Application.Responses;
+using Common.Logging.Correlations;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.API.Controllers;
 
 [ApiVersion("1.0")]
-public class CatalogController(IMediator mediator, ILogger<CatalogController> logger) : ApiController
+public class CatalogController : ApiController
 {
+    private readonly IMediator _mediator;
+    private readonly ILogger<CatalogController> _logger;
+
+    public CatalogController(IMediator mediator, ILogger<CatalogController> logger,
+        ICorrelationIdGenerator idGenerator)
+    {
+        _mediator = mediator;
+        _logger = logger;
+        _logger.LogInformation("CorrelationId {correlationId}", idGenerator.Get());
+    }
+
     [HttpGet("{id}")]
     public async Task<ActionResult<ProductResponse>> GetProductById(string id, CancellationToken cancellationToken)
     {
-        return Ok(await mediator.Send(new GetProductByIdQuery(id), cancellationToken));
+        return Ok(await _mediator.Send(new GetProductByIdQuery(id), cancellationToken));
     }
 
     [HttpGet("{name}")]
     public async Task<ActionResult<IEnumerable<ProductResponse>>> GetProductsByName(string name,
         CancellationToken cancellationToken)
     {
-        logger.LogInformation("GetProductsByName called {ProductName}", name);
-        return Ok(await mediator.Send(new GetProductsByNameQuery(name), cancellationToken));
+        _logger.LogInformation("GetProductsByName called {ProductName}", name);
+        return Ok(await _mediator.Send(new GetProductsByNameQuery(name), cancellationToken));
     }
 
     [HttpGet]
@@ -28,46 +40,46 @@ public class CatalogController(IMediator mediator, ILogger<CatalogController> lo
     public async Task<ActionResult<IEnumerable<ProductResponse>>> GetAllProducts(
         [FromQuery] GetAllProductsQuery request)
     {
-        return Ok(await mediator.Send(request));
+        return Ok(await _mediator.Send(request));
     }
 
     [HttpGet]
     public async Task<ActionResult<List<BrandResponse>>> GetAllBrands()
     {
-        return Ok(await mediator.Send(new GetAllBrandsQuery()));
+        return Ok(await _mediator.Send(new GetAllBrandsQuery()));
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TypeResponse>>> GetAllTypes()
     {
-        return Ok(await mediator.Send(new GetAllTypesQuery()));
+        return Ok(await _mediator.Send(new GetAllTypesQuery()));
     }
 
     [HttpGet("{brand}")]
     public async Task<ActionResult<IEnumerable<ProductResponse>>> GetProductsByBrandName(string brand,
         CancellationToken cancellationToken)
     {
-        return Ok(await mediator.Send(new GetProductsByBrandQuery(brand), cancellationToken));
+        return Ok(await _mediator.Send(new GetProductsByBrandQuery(brand), cancellationToken));
     }
 
     [HttpPost]
     public async Task<ActionResult<ProductResponse>> CreateProduct([FromBody] CreateProductCommand command,
         CancellationToken cancellationToken)
     {
-        return Ok(await mediator.Send(command, cancellationToken));
+        return Ok(await _mediator.Send(command, cancellationToken));
     }
 
     [HttpPut]
     public async Task<ActionResult<bool>> UpdateProduct([FromBody] UpdateProductCommand command,
         CancellationToken cancellationToken)
     {
-        return Ok(await mediator.Send(command, cancellationToken));
+        return Ok(await _mediator.Send(command, cancellationToken));
     }
 
     [HttpDelete("{id}")]
     public async Task<ActionResult<bool>> DeleteProduct(string id, CancellationToken cancellationToken)
     {
-        return Ok(await mediator.Send(new DeleteProductCommand(id), cancellationToken));
+        return Ok(await _mediator.Send(new DeleteProductCommand(id), cancellationToken));
     }
 
     [HttpGet]

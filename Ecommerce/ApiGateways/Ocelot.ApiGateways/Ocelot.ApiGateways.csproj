@@ -22,4 +22,8 @@
 	  <Folder Include="Handlers\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Infrastructure\Common.Logging\Common.Logging.csproj" />
+	</ItemGroup>
+
 </Project>
