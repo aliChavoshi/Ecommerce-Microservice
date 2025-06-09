@@ -1,6 +1,7 @@
 ﻿using Common.Logging;
 using Common.Logging.Correlations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Ocelot.ApiGateways.Handlers;
 using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
@@ -20,13 +21,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Logging & Correlation
-builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
+//Logging & Correlation : TODO important
+builder.Services.AddTransient<ICorrelationIdGenerator, CorrelationIdGenerator>();
+builder.Services.AddTransient<CorrelationDelegatingHandler>();
 
-var authScheme = "EShoppingGatewayAuthScheme";
 builder.Services
     .AddOcelot()
+    .AddDelegatingHandler<CorrelationDelegatingHandler>() // Add the correlation handler
     .AddCacheManager(x => x.WithDictionaryHandle());
+
+var authScheme = "EShoppingGatewayAuthScheme";
 //Identity Server
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(authScheme, options =>

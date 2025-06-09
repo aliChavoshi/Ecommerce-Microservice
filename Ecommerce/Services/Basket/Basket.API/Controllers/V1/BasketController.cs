@@ -9,7 +9,6 @@ using EventBus.Messages.Events;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Emit;
 using Common.Logging.Correlations;
 
 namespace Basket.API.Controllers.V1;
@@ -25,13 +24,13 @@ public class BasketController : ApiController
     public BasketController(IMediator mediator,
         IMapper mapper,
         IPublishEndpoint publishEndpoint,
-        ILogger<BasketController> logger, ICorrelationIdGenerator correlation)
+        ILogger<BasketController> logger, ICorrelationIdGenerator idGenerator)
     {
         _mediator = mediator;
         _mapper = mapper;
         _publishEndpoint = publishEndpoint;
         _logger = logger;
-        _logger.LogInformation("CorrelationId {correlationId}", correlation.Get());
+        _logger.LogInformation("CorrelationId {correlationId}", idGenerator.Get());
     }
 
     [HttpPost]
