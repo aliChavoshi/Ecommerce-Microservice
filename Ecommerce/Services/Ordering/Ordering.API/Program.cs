@@ -1,6 +1,6 @@
-using System.Reflection;
-using Asp.Versioning;
+﻿using Asp.Versioning;
 using Common.Logging;
+using Common.Logging.Correlations;
 using EventBus.Messages.Common;
 using MassTransit;
 using Microsoft.OpenApi.Models;
@@ -10,10 +10,14 @@ using Ordering.Application;
 using Ordering.Infrastructure;
 using Ordering.Infrastructure.Data;
 using Serilog;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 //Add Service for Serilog
 builder.Host.UseSerilog(Logging.ConfigureLogger);
+
+//Logging & Correlation
+builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
 
 builder.Services.AddControllers();
 // Add API Versioning
@@ -53,6 +57,9 @@ builder.Services.AddMassTransit(configuration =>
 });
 builder.Services.AddMassTransitHostedService();
 var app = builder.Build();
+//Correlation and Logging
+app.AddCorrelationIdMiddleware(); // معمولاً بعد از app.UseRouting و قبل از UseEndpoints
+
 app.MigrateDatabase<OrderContext>((context, services) =>
 {
     var logger = services.GetService<ILogger<OrderContextSeed>>();

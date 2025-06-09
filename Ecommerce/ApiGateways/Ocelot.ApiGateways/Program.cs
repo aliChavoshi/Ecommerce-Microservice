@@ -43,6 +43,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 //Correlations and Logging
 app.AddCorrelationIdMiddleware();
 

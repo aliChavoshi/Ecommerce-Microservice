@@ -25,13 +25,13 @@ public class BasketController : ApiController
     public BasketController(IMediator mediator,
         IMapper mapper,
         IPublishEndpoint publishEndpoint,
-        ILogger<BasketController> logger, ICorrelationIdGenerator idGenerator)
+        ILogger<BasketController> logger, ICorrelationIdGenerator correlation)
     {
         _mediator = mediator;
         _mapper = mapper;
         _publishEndpoint = publishEndpoint;
         _logger = logger;
-        _logger.LogInformation("CorrelationId {correlationId}", idGenerator.Get());
+        _logger.LogInformation("CorrelationId {correlationId}", correlation.Get());
     }
 
     [HttpPost]

@@ -85,10 +85,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.Authority = "http://identityserveraspnetidentity:8080"; // for ocelot
         // options.Authority = "https://id-local.eshopping.com:44344"; // for nginx
         options.Audience = "Basket";
-        options.RequireHttpsMetadata = true;
+        options.RequireHttpsMetadata = false;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
+            ValidateIssuerSigningKey = true,
+            ValidateAudience = true,
             ValidIssuer = "http://identityserveraspnetidentity:8080",
             // ValidIssuer = "https://id-local.eshopping.com:44344",
         };
@@ -96,6 +98,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 //Build
 var app = builder.Build();
+//Correlation and Logging
+app.AddCorrelationIdMiddleware(); // معمولاً بعد از app.UseRouting و قبل از UseEndpoints
+
 var versionDescProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 //for Nginx reverse proxy
 var forwardedHeaderOptions = new ForwardedHeadersOptions

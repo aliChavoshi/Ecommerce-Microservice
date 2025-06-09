@@ -14,11 +14,11 @@ public class CatalogController : ApiController
     private readonly ILogger<CatalogController> _logger;
 
     public CatalogController(IMediator mediator, ILogger<CatalogController> logger,
-        ICorrelationIdGenerator idGenerator)
+        ICorrelationIdGenerator correlation)
     {
         _mediator = mediator;
         _logger = logger;
-        _logger.LogInformation("CorrelationId {correlationId}", idGenerator.Get());
+        _logger.LogInformation("CorrelationId {correlationId}", correlation.Get());
     }
 
     [HttpGet("{id}")]

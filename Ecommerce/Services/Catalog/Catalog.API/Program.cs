@@ -35,6 +35,7 @@ builder.Services.AddControllers();
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigOptions>();
 //Logging & Correlation
 builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
+// 
 builder.Services.AddApiVersioning(options =>
     {
         options.DefaultApiVersion = new ApiVersion(1, 0);
@@ -128,7 +129,8 @@ builder.Services.AddAuthorization(options =>
 //End Identity
 
 var app = builder.Build();
-
+//Correlation and Logging
+app.AddCorrelationIdMiddleware(); // معمولاً بعد از app.UseRouting و قبل از UseEndpoints
 // ۱) این خط را اضافه کن (PathBase را برای برنامه تنظیم می‌کند)
 app.UsePathBase(nginxPath);
 
