@@ -20,17 +20,19 @@ public class BasketController : ApiController
     private readonly IMapper _mapper;
     private readonly IPublishEndpoint _publishEndpoint;
     private readonly ILogger<BasketController> _logger;
+    private readonly ICorrelationIdGenerator _correlation;
 
     public BasketController(IMediator mediator,
         IMapper mapper,
         IPublishEndpoint publishEndpoint,
-        ILogger<BasketController> logger, ICorrelationIdGenerator idGenerator)
+        ILogger<BasketController> logger, ICorrelationIdGenerator correlation)
     {
         _mediator = mediator;
         _mapper = mapper;
         _publishEndpoint = publishEndpoint;
         _logger = logger;
-        _logger.LogInformation("CorrelationId {correlationId}", idGenerator.Get());
+        _correlation = correlation;
+        _logger.LogInformation("CorrelationId {correlationId}", correlation.Get());
     }
 
     [HttpPost]
@@ -66,8 +68,10 @@ public class BasketController : ApiController
         //Create a basketCheckout event -- Set TotalPrice on basketCheckout eventMessage
         var eventMsg = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
         eventMsg.TotalPrice = basket.TotalPrice;
+        // Set the correlation ID
+        eventMsg.CorrelationId = _correlation.Get();
         await _publishEndpoint.Publish(eventMsg); // publish the event
-        _logger.LogInformation("BasketCheckoutEvent published successfully. EventId: {EventId} {DateTime} {UserName}",
+        _logger.LogInformation("BasketCheckoutEvent published successfully: {correlationId} {DateTime} {UserName}",
             eventMsg.CorrelationId, eventMsg.CreationDate, eventMsg.UserName);
         //Remove the basket
         var deleteCommand = new DeleteBasketByUserNameCommand(basket.UserName);

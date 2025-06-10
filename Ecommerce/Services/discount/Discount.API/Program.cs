@@ -14,7 +14,7 @@ builder.Host.UseSerilog(Logging.ConfigureLogger);
 
 // Register Mapper
 builder.Services.AddAutoMapper(typeof(DiscountProfile));
-//Register Mediatr
+//Register Mediator
 var assemblies = new[]
 {
     Assembly.GetExecutingAssembly(),
