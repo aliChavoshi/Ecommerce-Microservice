@@ -27,7 +27,9 @@
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetAllProducts",
-      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      //important
+      "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
     },
     // Get Product by Id
     {

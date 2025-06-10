@@ -18,6 +18,7 @@ builder.Host.UseSerilog(Logging.ConfigureLogger);
 
 //Logging & Correlation
 builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers();
 // Add API Versioning

@@ -25,11 +25,16 @@ public static class Logging
 
             if (context.HostingEnvironment.IsDevelopment())
             {
-                loggerConfiguration.MinimumLevel.Override("Catalog", LogEventLevel.Debug);
-                loggerConfiguration.MinimumLevel.Override("Basket", LogEventLevel.Debug);
-                loggerConfiguration.MinimumLevel.Override("Discount", LogEventLevel.Debug);
-                loggerConfiguration.MinimumLevel.Override("Ordering", LogEventLevel.Debug);
+                loggerConfiguration
+                    .MinimumLevel.Override("Catalog", LogEventLevel.Debug)
+                    .MinimumLevel.Override("Basket", LogEventLevel.Debug)
+                    .MinimumLevel.Override("Discount", LogEventLevel.Debug)
+                    .MinimumLevel.Override("Ordering", LogEventLevel.Debug)
+                    .MinimumLevel.Override("Ocelot.ApiGateways", LogEventLevel.Debug)
+                    .MinimumLevel.Override("Ocelot", LogEventLevel.Debug)
+                    .MinimumLevel.Override("Common", LogEventLevel.Debug);
             }
+
 
             //Elastic Search
             var elasticUrl = context.Configuration.GetValue<string>("ElasticConfiguration:Uri");

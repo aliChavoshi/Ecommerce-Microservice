@@ -24,6 +24,7 @@ builder.Services.AddSwaggerGen();
 //Logging & Correlation : TODO important
 builder.Services.AddTransient<ICorrelationIdGenerator, CorrelationIdGenerator>();
 builder.Services.AddTransient<CorrelationDelegatingHandler>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services
     .AddOcelot()
@@ -57,6 +58,15 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapGet("/", () => "Hello Ocelot");
+//FOR Test
+app.Use(async (context, next) =>
+{
+    var correlation = context.RequestServices.GetRequiredService<ICorrelationIdGenerator>();
+    var correlationId = correlation.Get();
+    Log.Information("Middleware CorrelationId In Ocelot: {correlationId}", correlationId);
+
+    await next();
+});
 
 await app.UseOcelot();
 await app.RunAsync();

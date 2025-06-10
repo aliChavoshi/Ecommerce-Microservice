@@ -31,6 +31,7 @@ builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfi
 
 //Logging & Correlation
 builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddApiVersioning(options =>
     {

@@ -185,6 +185,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
+      - "ElasticConfiguration__Uri=http://elasticsearch:9200"  
     depends_on:
       - identityserveraspnetidentity
       - catalog.api
