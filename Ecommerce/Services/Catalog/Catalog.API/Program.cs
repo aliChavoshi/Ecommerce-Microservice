@@ -34,7 +34,7 @@ builder.Services.AddControllers();
 // Add API Version and API Explorer for Swagger
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigOptions>();
 //Logging & Correlation
-builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>(); builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>(); 
 builder.Services.AddHttpContextAccessor();
 
 // 

@@ -3,7 +3,9 @@ using Serilog;
 
 namespace Ocelot.ApiGateways.Handlers;
 
-public class CorrelationDelegatingHandler(ICorrelationIdGenerator correlation, ILogger<CorrelationDelegatingHandler> logger) : DelegatingHandler
+public class CorrelationDelegatingHandler(
+    ICorrelationIdGenerator correlation,
+    ILogger<CorrelationDelegatingHandler> logger) : DelegatingHandler
 {
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
         CancellationToken cancellationToken)
