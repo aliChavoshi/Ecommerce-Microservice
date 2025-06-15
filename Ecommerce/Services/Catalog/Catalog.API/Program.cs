@@ -1,12 +1,9 @@
-﻿using Asp.Versioning;
-using Asp.Versioning.ApiExplorer;
-using Catalog.API.SwaggerConfig;
+﻿using Asp.Versioning.ApiExplorer;
 using Catalog.Application.Mappers;
 using Catalog.Application.Queries;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
 using Catalog.Infrastructure.Repositories;
-using Common.Logging;
 using Common.Logging.Correlations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -17,53 +14,61 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Net;
 using System.Reflection;
+using Asp.Versioning;
+using Catalog.API.SwaggerConfig;
+using Common.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// مسیر پایه برای Nginx و Ocelot
+// -----------------------------
+// Base Path for Nginx or Ocelot
+// -----------------------------
 var nginxPath = "/catalog";
 
-// Add Service for Serilog
+// -----------------------------
+// Logging with Serilog
+// -----------------------------
 builder.Host.UseSerilog(Logging.ConfigureLogger);
 
-// Add services to the container.
+// -----------------------------
+// Add Services to the Container
+// -----------------------------
+
+// MVC Controller Support
 builder.Services.AddControllers();
 
-// Add API Version and API Explorer for Swagger
-builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigOptions>();
-//Logging & Correlation
-builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>(); 
-builder.Services.AddHttpContextAccessor();
-
-// 
+// API Versioning & Explorer (for Swagger)
 builder.Services.AddApiVersioning(options =>
     {
-        options.DefaultApiVersion = new ApiVersion(1, 0);
-        options.AssumeDefaultVersionWhenUnspecified = true;
-        options.ReportApiVersions = true;
+        options.DefaultApiVersion = new ApiVersion(1, 0); // Default to v1.0
+        options.AssumeDefaultVersionWhenUnspecified = true; // Fallback to default if version not specified
+        options.ReportApiVersions = true; // Report available versions
     })
     .AddApiExplorer(options =>
     {
-        options.SubstituteApiVersionInUrl = true; // this is for set default version in url
+        options.SubstituteApiVersionInUrl = true; // Replace {version} in route URL
     });
 
-//Swagger
+// Swagger Configuration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    // این خط را برای اضافه کردن سرور به OpenApi spec حفظ می‌کنیم.
-    // اگرچه در سناریوهای پیچیده‌تر ممکن است نیاز به تنظیمات دقیق‌تر یا حذف داشته باشد،
-    // برای سادگی و حفظ کامنت شما، آن را نگه می‌داریم.
+    // Server definitions for Swagger UI
     c.AddServer(new OpenApiServer { Url = nginxPath, Description = "Catalog for nginx" });
     c.AddServer(new OpenApiServer { Url = "test", Description = "this is a test" });
 });
+builder.Services
+    .AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigOptions>(); // Versioned Swagger options
 
-// Register Mapper
+// Logging & Correlation Middleware
+builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
+builder.Services.AddHttpContextAccessor();
+
+// AutoMapper Setup
 builder.Services.AddAutoMapper(typeof(ProfileMapper));
 
-//Register Mediator
+// MediatR for CQRS
 var assemblies = new Assembly[]
 {
     Assembly.GetExecutingAssembly(),
@@ -71,32 +76,39 @@ var assemblies = new Assembly[]
 };
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
 
-// Register Repositories
+// Repositories and Data Access
 builder.Services.AddScoped<ICatalogContext, CatalogContext>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ITypeRepository, ProductRepository>();
 builder.Services.AddScoped<IBrandRepository, ProductRepository>();
 
-//IdentityServer
+// -----------------------------
+// IdentityServer Authentication & Authorization
+// -----------------------------
 var authorizationPolicy = new AuthorizationPolicyBuilder()
     .RequireAuthenticatedUser()
     .Build();
+
+// Global authorization filter
 builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); });
+
+// Accept any server certificate (for dev or self-signed certs)
 var httpHandler = new HttpClientHandler
 {
     ServerCertificateCustomValidationCallback =
         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
 };
 
+// Configure JWT Bearer Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "http://identityserveraspnetidentity:8080"; // نکته مهم (کامنت شما)
-        // options.Authority = "https://id-local.eshopping.com:44344";
+        options.Authority = "http://identityserveraspnetidentity:8080"; // IdentityServer endpoint (Docker/Ocelot)
+        // options.Authority = "https://id-local.eshopping.com:44344";   // For Nginx deployment (commented)
 
-        options.Audience = "Catalog";
-        options.RequireHttpsMetadata = false;
-        options.BackchannelHttpHandler = httpHandler;
+        options.Audience = "Catalog"; // API resource name
+        options.RequireHttpsMetadata = false; // Disable HTTPS requirement
+        options.BackchannelHttpHandler = httpHandler; // Accept all certs
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -104,8 +116,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidIssuers =
             [
-                "http://identityserveraspnetidentity:8080", //ocelot
-                // "https://id-local.eshopping.com:44344" //nginx
+                "http://identityserveraspnetidentity:8080", // Ocelot
+                // "https://id-local.eshopping.com:44344"               // Nginx
             ],
         };
         options.IncludeErrorDetails = true;
@@ -123,53 +135,61 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             }
         };
     });
+
+// Custom authorization policies
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("CanRead", policy => policy.RequireClaim("scope", "catalogapi.read"));
     options.AddPolicy("CanWrite", policy => policy.RequireClaim("scope", "catalogapi.write"));
 });
-//End Identity
 
+// -----------------------------
+// Build and Configure the Application
+// -----------------------------
 var app = builder.Build();
-//Correlation and Logging
-app.AddCorrelationIdMiddleware(); // معمولاً بعد از app.UseRouting و قبل از UseEndpoints
-// ۱) این خط را اضافه کن (PathBase را برای برنامه تنظیم می‌کند)
+
+// Add correlation ID middleware (for tracing requests)
+app.AddCorrelationIdMiddleware();
+
+// Set application base path (important for reverse proxy like Nginx or Ocelot)
 app.UsePathBase(nginxPath);
 
-//for Nginx reverse proxy
+// Configure Forwarded Headers (for reverse proxy support)
 var forwardedHeaderOptions = new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto |
                        ForwardedHeaders.XForwardedHost
 };
-forwardedHeaderOptions.KnownNetworks.Clear(); // پاک کردن پیش‌فرض‌ها
-forwardedHeaderOptions.KnownProxies.Clear(); // پاک کردن پیش‌فرض‌ها
-// forwardedHeaderOptions.KnownProxies.Add(IPAddress.Parse("172.18.0.16")); // IP داخلی کانتینر Nginx
+forwardedHeaderOptions.KnownNetworks.Clear(); // Clear default trusted networks
+forwardedHeaderOptions.KnownProxies.Clear(); // Clear default trusted proxies
+// forwardedHeaderOptions.KnownProxies.Add(IPAddress.Parse("172.18.0.16")); // Docker internal IP (if needed)
 app.UseForwardedHeaders(forwardedHeaderOptions);
 
+// -----------------------------
+// Dev Environment Configuration
+// -----------------------------
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
-    app.MapOpenApi();
+    app.UseDeveloperExceptionPage(); // Show detailed error pages
+    app.MapOpenApi(); // Register minimal OpenAPI endpoint
 
-    //Swagger
-    app.UseSwagger(); // generate the json file for swagger
+    // Enable Swagger and SwaggerUI
+    app.UseSwagger(); // Generate Swagger JSON
     var versionDescProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
-
-    // for presentation for dropdown ()
     app.UseSwaggerUI(c =>
     {
-        c.RoutePrefix = "swagger"; // این می تواند خالی باشد یا "swagger" ()
+        c.RoutePrefix = "swagger"; // Route prefix can be empty or 'swagger'
         foreach (var desc in versionDescProvider.ApiVersionDescriptions)
         {
-            // مسیر کامل شامل nginxPath ()
             c.SwaggerEndpoint($"{nginxPath}/swagger/{desc.GroupName}/swagger.json",
                 $"Catalog.API - {desc.GroupName.ToUpper()}");
         }
     });
 }
 
-// بالای app.UsePathBase(...)
+// -----------------------------
+// Debug Middleware: Log Request Headers
+// -----------------------------
 app.Use(async (ctx, next) =>
 {
     Console.WriteLine("---- BEGIN REQUEST HEADERS ----");
@@ -181,8 +201,15 @@ app.Use(async (ctx, next) =>
     Console.WriteLine("----  END REQUEST HEADERS  ----");
     await next();
 });
-app.UseAuthentication();
-app.UseAuthorization();
-app.MapControllers();
 
+// -----------------------------
+// Final Middleware Pipeline
+// -----------------------------
+app.UseAuthentication(); // Authenticate incoming requests
+app.UseAuthorization(); // Authorize requests based on policy
+app.MapControllers(); // Map controller routes
+
+// -----------------------------
+// Run the Application
+// -----------------------------
 app.Run();
