@@ -1,4 +1,5 @@
-﻿using Asp.Versioning;
+﻿using System.Reflection;
+using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using Basket.API.SwaggerConfig;
 using Basket.Application.Commands;
@@ -18,110 +19,135 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-//Add Service for Serilog
+
+// -----------------------------
+// Serilog Logging
+// -----------------------------
 builder.Host.UseSerilog(Logging.ConfigureLogger);
 
-// Add services to the container.
+// -----------------------------
+// Add Services to the Container
+// -----------------------------
+
+// MVC Controller Support
 builder.Services.AddControllers();
-// Add API Version and API Explorer for Swagger
-builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigOptions>();
 
-//Logging & Correlation
-builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
-builder.Services.AddHttpContextAccessor();
-
+// API Versioning & API Explorer (for Swagger grouping)
 builder.Services.AddApiVersioning(options =>
     {
-        options.DefaultApiVersion = new ApiVersion(1, 0);
-        options.AssumeDefaultVersionWhenUnspecified = true;
-        options.ReportApiVersions = true;
+        options.DefaultApiVersion = new ApiVersion(1, 0); // Set default API version to 1.0
+        options.AssumeDefaultVersionWhenUnspecified = true; // Use default version when none is specified
+        options.ReportApiVersions = true; // Add API versions to response headers
     })
     .AddApiExplorer(options =>
     {
-        options.SubstituteApiVersionInUrl = true; // this is for set default version in url
+        options.SubstituteApiVersionInUrl = true; // Enable version substitution in route URLs
     });
-//Swagger
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-// Register Mapper
+
+// Swagger Configuration
+builder.Services.AddEndpointsApiExplorer(); // Required for minimal APIs
+builder.Services.AddSwaggerGen(); // Add Swagger generator
+builder.Services
+    .AddTransient<IConfigureOptions<SwaggerGenOptions>,
+        SwaggerConfigOptions>(); // Custom Swagger options based on API versioning
+
+// Logging & Correlation
+builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
+builder.Services.AddHttpContextAccessor();
+
+// AutoMapper Configuration
 builder.Services.AddAutoMapper(typeof(BasketMappingProfile));
-//Register Mediatr
+
+// MediatR (CQRS)
 var assemblies = new[]
 {
     Assembly.GetExecutingAssembly(),
     typeof(CreateShoppingCartCommandHandler).Assembly
 };
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
-//Redis
+
+// Redis Cache
 builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
 });
-//DI
+
+// Dependency Injection for Repositories
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
-//GRPC
+
+// gRPC Client for Discount Service
 builder.Services.AddScoped<DiscountGrpcService>();
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
 {
     options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
 });
-//Add RabbitMQ
+
+// MassTransit (RabbitMQ)
 builder.Services.AddMassTransit(configuration =>
 {
     configuration.UsingRabbitMq((_, cfg) => { cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]); });
 });
 builder.Services.AddMassTransitHostedService();
 
-//Identity Server
+// Authentication & Authorization with IdentityServer
 var authorizationPolicy = new AuthorizationPolicyBuilder()
     .RequireAuthenticatedUser()
     .Build();
-builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); });
+
+builder.Services.AddControllers(config =>
+{
+    config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); // Apply global authorization policy
+});
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "http://identityserveraspnetidentity:8080"; // for ocelot
-        // options.Authority = "https://id-local.eshopping.com:44344"; // for nginx
-        options.Audience = "Basket";
-        options.RequireHttpsMetadata = false;
+        options.Authority = "http://identityserveraspnetidentity:8080"; // IdentityServer URL for token validation
+        // options.Authority = "https://id-local.eshopping.com:44344";  // For Nginx deployment (commented)
+        options.Audience = "Basket"; // API Resource name
+        options.RequireHttpsMetadata = false; // Allow non-HTTPS for development/testing
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateIssuerSigningKey = true,
             ValidateAudience = true,
             ValidIssuer = "http://identityserveraspnetidentity:8080",
-            // ValidIssuer = "https://id-local.eshopping.com:44344",
+            // ValidIssuer = "https://id-local.eshopping.com:44344",    // For Nginx deployment (commented)
         };
     });
 
-//Build
+// -----------------------------
+// Build the Application
+// -----------------------------
 var app = builder.Build();
-//Correlation and Logging
-app.AddCorrelationIdMiddleware(); // معمولاً بعد از app.UseRouting و قبل از UseEndpoints
 
-var versionDescProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
-//for Nginx reverse proxy
+// Correlation ID Middleware (must be before endpoints)
+app.AddCorrelationIdMiddleware();
+
+// Reverse Proxy (e.g., Nginx) Support
 var forwardedHeaderOptions = new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 };
-// forwardedHeaderOptions.KnownNetworks.Clear();
-// forwardedHeaderOptions.KnownProxies.Clear();
+// forwardedHeaderOptions.KnownNetworks.Clear(); // Uncomment if necessary
+// forwardedHeaderOptions.KnownProxies.Clear();  // Uncomment if necessary
 app.UseForwardedHeaders(forwardedHeaderOptions);
-// Configure the HTTP request pipeline.
-// var nginxPath = "/basket";
+
+// -----------------------------
+// Development-only Middleware
+// -----------------------------
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
-    app.MapOpenApi();
-    //Swagger
-    app.UseSwagger(); // generate the json file for swagger
-    // for presentation for dropdown
+    app.UseDeveloperExceptionPage(); // Detailed error pages in development
+    app.MapOpenApi(); // Minimal API OpenAPI mapping
+
+    // Swagger UI Configuration
+    app.UseSwagger(); // Generate Swagger JSON
     app.UseSwaggerUI(c =>
     {
+        var versionDescProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
         foreach (var desc in versionDescProvider.ApiVersionDescriptions)
         {
             c.SwaggerEndpoint($"{desc.GroupName}/swagger.json", $"Basket.API - {desc.GroupName.ToUpper()}");
@@ -129,7 +155,14 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseAuthentication(); // Identity Server
-app.UseAuthorization();
-app.MapControllers();
+// -----------------------------
+// Request Pipeline
+// -----------------------------
+app.UseAuthentication(); // Authenticate the request
+app.UseAuthorization(); // Authorize the request
+app.MapControllers(); // Map controller endpoints
+
+// -----------------------------
+// Run the Application
+// -----------------------------
 app.Run();
