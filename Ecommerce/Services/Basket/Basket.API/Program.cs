@@ -40,6 +40,16 @@ builder.Services.AddApiVersioning(options =>
         options.DefaultApiVersion = new ApiVersion(1, 0); // Set default API version to 1.0
         options.AssumeDefaultVersionWhenUnspecified = true; // Use default version when none is specified
         options.ReportApiVersions = true; // Add API versions to response headers
+        //#1
+        // options.ApiVersionReader = new HeaderApiVersionReader("X-Version"); // Read version from custom header "X-Version"
+        // options.ApiVersionReader = new MediaTypeApiVersionReader("X-Version"); // Read version from media type (e.g., application/vnd.eshopping.v1+json)
+        // options.ApiVersionReader =
+        //     new QueryStringApiVersionReader("X-Version"); // Read version from query string parameter "X-Version"
+        //#2
+        // options.ApiVersionReader = ApiVersionReader.Combine(
+        //     new HeaderApiVersionReader("H-Version"),
+        //     new MediaTypeApiVersionReader("M-Version"),
+        //     new QueryStringApiVersionReader("Q-Version"));
     })
     .AddApiExplorer(options =>
     {
