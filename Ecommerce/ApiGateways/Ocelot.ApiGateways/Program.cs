@@ -23,6 +23,22 @@ builder.Services.AddSwaggerGen();
 
 //Logging & Correlation : TODO important
 builder.Services.AddTransient<ICorrelationIdGenerator, CorrelationIdGenerator>();
+
+//CORS
+var corsPolicyName = "AllowAllOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: corsPolicyName,
+        policy =>
+        {
+            policy
+                // .AllowAnyOrigin()
+                .WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+
 builder.Services.AddTransient<CorrelationDelegatingHandler>();
 builder.Services.AddHttpContextAccessor();
 
@@ -49,6 +65,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+//CORS
+app.UseCors(corsPolicyName);
 //Correlations and Logging
 app.AddCorrelationIdMiddleware();
 
@@ -70,4 +88,3 @@ app.Use(async (context, next) =>
 
 await app.UseOcelot();
 await app.RunAsync();
-
