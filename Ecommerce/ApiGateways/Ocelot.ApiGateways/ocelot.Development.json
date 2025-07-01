@@ -1,206 +1,208 @@
 ﻿{
-  "Routes": [
-    // /Catalog to GetAllProducts
-    {
-      "DownstreamPathTemplate": "/api/v1/Catalog/GetAllProducts",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
+    "Routes": [
+        // /Catalog to GetAllProducts
         {
-          "Host": "catalog.api",
-          "Port": 8080
-        }
-      ],
-      "UpstreamPathTemplate": "/Catalog",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "EShoppingGatewayAuthScheme"
-      },
-      //important
-      "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
-    },
-    // /Catalog/GetAllProducts to GetAllProducts
-    {
-      "DownstreamPathTemplate": "/api/v1/Catalog/GetAllProducts",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
+            "DownstreamPathTemplate": "/api/v1/Catalog/GetAllProducts",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "catalog.api",
+                    "Port": 8080
+                }
+            ],
+            "UpstreamPathTemplate": "/Catalog",
+            "UpstreamHttpMethod": ["GET", "POST", "PUT"],
+            //"AuthenticationOptions": {
+            //    "AuthenticationProviderKey": "EShoppingGatewayAuthScheme",
+            //    "AllowedScopes": []
+
+            //},
+            //important
+            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
+        },
+        // /Catalog/GetAllProducts to GetAllProducts
         {
-          "Host": "catalog.api",
-          "Port": 8080
-        }
-      ],
-      "UpstreamPathTemplate": "/Catalog/GetAllProducts",
-      "UpstreamHttpMethod": [ "GET", "DELETE" ],
-      //important
-      "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
-    },
-    // Get Product by Id
-    {
-      "DownstreamPathTemplate": "/api/v1/Catalog/GetProductById/{id}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
+            "DownstreamPathTemplate": "/api/v1/Catalog/GetAllProducts",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "catalog.api",
+                    "Port": 8080
+                }
+            ],
+            "UpstreamPathTemplate": "/Catalog/GetAllProducts",
+            "UpstreamHttpMethod": ["GET", "DELETE"],
+            //important
+            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
+        },
+        // Get Product by Id
         {
-          "Host": "catalog.api",
-          "Port": 8080
-        }
-      ],
-      "UpstreamPathTemplate": "/Catalog/GetProductById/{id}",
-      "UpstreamHttpMethod": [ "GET", "DELETE" ],
-      //important
-      "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
-    },
-    // GetAllBrands
-    {
-      "DownstreamPathTemplate": "/api/v1/Catalog/GetAllBrands",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
+            "DownstreamPathTemplate": "/api/v1/Catalog/GetProductById/{id}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "catalog.api",
+                    "Port": 8080
+                }
+            ],
+            "UpstreamPathTemplate": "/Catalog/GetProductById/{id}",
+            "UpstreamHttpMethod": ["GET", "DELETE"],
+            //important
+            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
+        },
+        // GetAllBrands
         {
-          "Host": "catalog.api",
-          "Port": 8080
-        }
-      ],
-      "UpstreamPathTemplate": "/Catalog/GetAllBrands",
-      "UpstreamHttpMethod": [ "GET", "DELETE" ],
-      //important
-      "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
-    },
-    // GetAllTypes
-    {
-      "DownstreamPathTemplate": "/api/v1/Catalog/GetAllTypes",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
+            "DownstreamPathTemplate": "/api/v1/Catalog/GetAllBrands",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "catalog.api",
+                    "Port": 8080
+                }
+            ],
+            "UpstreamPathTemplate": "/Catalog/GetAllBrands",
+            "UpstreamHttpMethod": ["GET", "DELETE"],
+            //important
+            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
+        },
+        // GetAllTypes
         {
-          "Host": "catalog.api",
-          "Port": 8080
-        }
-      ],
-      "UpstreamPathTemplate": "/Catalog/GetAllTypes",
-      "UpstreamHttpMethod": [ "GET", "DELETE" ],
-      //important
-      "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
-    },
-    // GetProductsByName
-    {
-      "DownstreamPathTemplate": "/api/v1/Catalog/GetProductsByBrandName/{brand}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
+            "DownstreamPathTemplate": "/api/v1/Catalog/GetAllTypes",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "catalog.api",
+                    "Port": 8080
+                }
+            ],
+            "UpstreamPathTemplate": "/Catalog/GetAllTypes",
+            "UpstreamHttpMethod": ["GET", "DELETE"],
+            //important
+            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
+        },
+        // GetProductsByName
         {
-          "Host": "catalog.api",
-          "Port": 8080
-        }
-      ],
-      "UpstreamPathTemplate": "/Catalog/GetProductsByBrandName/{brand}",
-      "UpstreamHttpMethod": [ "GET" ],
-      //important
-      "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
-    },
-    // GetBasket
-    {
-      "DownstreamPathTemplate": "/api/v1/Basket/GetBasketByUserName/{userName}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
+            "DownstreamPathTemplate": "/api/v1/Catalog/GetProductsByBrandName/{brand}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "catalog.api",
+                    "Port": 8080
+                }
+            ],
+            "UpstreamPathTemplate": "/Catalog/GetProductsByBrandName/{brand}",
+            "UpstreamHttpMethod": ["GET"],
+            //important
+            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
+        },
+        // GetBasket
         {
-          "Host": "basket.api",
-          "Port": 8080
-        }
-      ],
-      "UpstreamPathTemplate": "/Basket/GetBasketByUserName/{userName}",
-      "UpstreamHttpMethod": [ "GET" ],
-      //important
-      "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
-    },
-    // DeleteBasket
-    {
-      "DownstreamPathTemplate": "/api/v1/Basket/DeleteBasketByUserName/{userName}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
+            "DownstreamPathTemplate": "/api/v1/Basket/GetBasketByUserName/{userName}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "basket.api",
+                    "Port": 8080
+                }
+            ],
+            "UpstreamPathTemplate": "/Basket/GetBasketByUserName/{userName}",
+            "UpstreamHttpMethod": ["GET"],
+            //important
+            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
+        },
+        // DeleteBasket
         {
-          "Host": "basket.api",
-          "Port": 8080
-        }
-      ],
-      "UpstreamPathTemplate": "/Basket/DeleteBasketByUserName/{userName}",
-      "UpstreamHttpMethod": [ "DELETE" ],
-      //important
-      "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
-    },
-    // CreateBasket
-    {
-      "DownstreamPathTemplate": "/api/v1/Basket/CreateBasket",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
+            "DownstreamPathTemplate": "/api/v1/Basket/DeleteBasketByUserName/{userName}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "basket.api",
+                    "Port": 8080
+                }
+            ],
+            "UpstreamPathTemplate": "/Basket/DeleteBasketByUserName/{userName}",
+            "UpstreamHttpMethod": ["DELETE"],
+            //important
+            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
+        },
+        // CreateBasket
         {
-          "Host": "basket.api",
-          "Port": 8080
-        }
-      ],
-      "UpstreamPathTemplate": "/Basket/CreateBasket",
-      "UpstreamHttpMethod": [ "POST" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "EShoppingGatewayAuthScheme"
-      },
-      "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
-    },
-    // Checkout Basket
-    {
-      "DownstreamPathTemplate": "/api/v1/Basket/Checkout",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
+            "DownstreamPathTemplate": "/api/v1/Basket/CreateBasket",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "basket.api",
+                    "Port": 8080
+                }
+            ],
+            "UpstreamPathTemplate": "/Basket/CreateBasket",
+            "UpstreamHttpMethod": ["POST"],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "EShoppingGatewayAuthScheme"
+            },
+            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
+        },
+        // Checkout Basket
         {
-          "Host": "basket.api",
-          "Port": 8080
-        }
-      ],
-      "UpstreamPathTemplate": "/Basket/Checkout",
-      "UpstreamHttpMethod": [ "POST" ],
-      //important
-      "DelegatingHandlers": [ "CorrelationDelegatingHandler" ],
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
-        "Period": "3s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      }
-    },
-    // Checkout Basket V2
-    {
-      "DownstreamPathTemplate": "/api/v2/Basket/Checkout",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
+            "DownstreamPathTemplate": "/api/v1/Basket/Checkout",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "basket.api",
+                    "Port": 8080
+                }
+            ],
+            "UpstreamPathTemplate": "/Basket/Checkout",
+            "UpstreamHttpMethod": ["POST"],
+            //important
+            "DelegatingHandlers": ["CorrelationDelegatingHandler"],
+            "RateLimitOptions": {
+                "ClientWhitelist": [],
+                "EnableRateLimiting": true,
+                "Period": "3s",
+                "PeriodTimespan": 1,
+                "Limit": 1
+            }
+        },
+        // Checkout Basket V2
         {
-          "Host": "basket.api",
-          "Port": 8080
-        }
-      ],
-      "UpstreamPathTemplate": "/Basket/CheckoutV2",
-      "UpstreamHttpMethod": [ "POST" ],
-      //important
-      "DelegatingHandlers": [ "CorrelationDelegatingHandler" ],
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
-        "Period": "3s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      }
-    },
-    // Discount
-    {
-      "DownstreamPathTemplate": "/api/v1/Discount/{productName}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
+            "DownstreamPathTemplate": "/api/v2/Basket/Checkout",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "basket.api",
+                    "Port": 8080
+                }
+            ],
+            "UpstreamPathTemplate": "/Basket/CheckoutV2",
+            "UpstreamHttpMethod": ["POST"],
+            //important
+            "DelegatingHandlers": ["CorrelationDelegatingHandler"],
+            "RateLimitOptions": {
+                "ClientWhitelist": [],
+                "EnableRateLimiting": true,
+                "Period": "3s",
+                "PeriodTimespan": 1,
+                "Limit": 1
+            }
+        },
+        // Discount
         {
-          "Host": "discount.api",
-          "Port": 8080
+            "DownstreamPathTemplate": "/api/v1/Discount/{productName}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "discount.api",
+                    "Port": 8080
+                }
+            ],
+            "UpstreamPathTemplate": "/Discount/{productName}",
+            "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"],
+            //important
+            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
         }
-      ],
-      "UpstreamPathTemplate": "/Discount/{productName}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
-      //important
-      "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "http://localhost:9010"
     }
-  ],
-  "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:9010"
-  }
 }

@@ -8,75 +8,100 @@ using Ocelot.Middleware;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+// -----------------------------
+// اضافه شده برای لاگ‌گیری
+// -----------------------------
 builder.Host.UseSerilog(Logging.ConfigureLogger);
 
-//ocelot configuration
+// -----------------------------
+// بارگذاری پیکربندی Ocelot
+// -----------------------------
 builder.Host.ConfigureAppConfiguration((env, config) =>
 {
     var environmentName = env.HostingEnvironment?.EnvironmentName ?? "Development";
-    if (config != null) config.AddJsonFile($"ocelot.{environmentName}.json", true, true);
+    config.AddJsonFile($"ocelot.{environmentName}.json", optional: true, reloadOnChange: true);
 });
+
+// -----------------------------
+// سرویس‌های پایه
+// -----------------------------
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Logging & Correlation : TODO important
+// -----------------------------
+// افزودن Correlation ID
+// -----------------------------
 builder.Services.AddTransient<ICorrelationIdGenerator, CorrelationIdGenerator>();
-
-//CORS
-var corsPolicyName = "AllowAllOrigins";
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: corsPolicyName,
-        policy =>
-        {
-            policy
-                // .AllowAnyOrigin()
-                .WithOrigins("http://localhost:4200")
-                .AllowAnyMethod()
-                .AllowAnyHeader();
-        });
-});
-
 builder.Services.AddTransient<CorrelationDelegatingHandler>();
 builder.Services.AddHttpContextAccessor();
 
+// -----------------------------
+// تنظیمات CORS برای فرانت‌اند
+// -----------------------------
+var corsPolicyName = "AllowAllOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: corsPolicyName, policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:4200")
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
+// -----------------------------
+// افزودن Ocelot و کش و Handler سفارشی
+// -----------------------------
 builder.Services
     .AddOcelot()
-    .AddDelegatingHandler<CorrelationDelegatingHandler>() // Add the correlation handler
+    .AddDelegatingHandler<CorrelationDelegatingHandler>()
     .AddCacheManager(x => x.WithDictionaryHandle());
 
+// -----------------------------
+// احراز هویت JWT با IdentityServer
+// -----------------------------
+// اگر قصد داشته باشی بعضی مسیرها (مثل Catalog) بدون احراز هویت باشن
+// این بخش همچنان لازم هست برای مسیرهای محافظت‌شده دیگر.
+// اما روت‌های خاص را می‌تونی در ocelot.json از Authentication حذف کنی.
 var authScheme = "EShoppingGatewayAuthScheme";
-//Identity Server
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(authScheme, options =>
     {
-        options.Authority = "http://identityserveraspnetidentity:8080"; // نکته مهم
-        options.Audience = "EShoppingGateway";
+        options.Authority = "http://identityserveraspnetidentity:8080"; // آدرس سرور احراز هویت
+        options.Audience = "EShoppingGateway"; // نام مخاطب
         options.RequireHttpsMetadata = false;
     });
 
-//End Identity
+// -----------------------------
+// ساخت اپلیکیشن و میدلورها
+// -----------------------------
 var app = builder.Build();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-//CORS
+// فعال‌سازی CORS
 app.UseCors(corsPolicyName);
-//Correlations and Logging
+
+// Middleware برای افزودن CorrelationId
 app.AddCorrelationIdMiddleware();
 
 app.UseRouting();
+
+// فعال‌سازی احراز هویت و مجوز
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// فقط برای تست لاگ
 app.MapGet("/", () => "Hello Ocelot");
-//FOR Test
+
 app.Use(async (context, next) =>
 {
     var correlation = context.RequestServices.GetRequiredService<ICorrelationIdGenerator>();
@@ -86,5 +111,6 @@ app.Use(async (context, next) =>
     await next();
 });
 
+// اجرای Ocelot به عنوان API Gateway
 await app.UseOcelot();
 await app.RunAsync();
