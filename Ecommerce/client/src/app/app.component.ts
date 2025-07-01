@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './shared/navbar/navbar.component';
+import { NavbarComponent } from './core/navbar/navbar.component';
 import { HttpClient } from '@angular/common/http';
 import { IPaginate } from './shared/models/IPaginate';
-import { Catalog } from './shared/models/catalog';
+import { Catalog } from './shared/models/Catalog';
 
 @Component({
   selector: 'app-root',
