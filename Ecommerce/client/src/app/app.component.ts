@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HttpClient } from '@angular/common/http';
+import { IPaginate } from './shared/models/IPaginate';
+import { Catalog } from './shared/models/catalog';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'client';
   constructor(private http: HttpClient) {
-    this.http.get('http://localhost:9010/Catalog').subscribe({
+    this.http.get<IPaginate<Catalog>>('http://localhost:9010/Catalog').subscribe({
       next: (response) => {
         console.log(response);
       },
