@@ -1,0 +1,133 @@
+<div class="main-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="icon-wrapper me-3">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <h1 class="fw-bold mb-0">
+                    Welcome to <span class="text-warning">Premium Shopping</span>!!!
+                </h1>
+            </div>
+            <p class="text-center mt-2 mb-0 opacity-75">Discover amazing products at unbeatable prices</p>
+        </div>
+
+        <div class="container-fluid p-4">
+            <div class="row">
+                <!-- Left Sidebar -->
+                <div class="col-lg-4 col-md-6">
+                    <!-- Categories -->
+                    <div class="category-card">
+                        <h5 class="section-title">
+                            <i class="fas fa-tags me-2"></i>Categories
+                        </h5>
+                        <ul class="list-group">
+                            <li class="list-group-item active" onclick="selectCategory('Electronics')">
+                                <i class="fas fa-laptop me-2"></i>Electronics
+                            </li>
+                            <li class="list-group-item" onclick="selectCategory('Fashion')">
+                                <i class="fas fa-tshirt me-2"></i>Fashion
+                            </li>
+                            <li class="list-group-item" onclick="selectCategory('Home & Garden')">
+                                <i class="fas fa-home me-2"></i>Home & Garden
+                            </li>
+                            <li class="list-group-item" onclick="selectCategory('Sports')">
+                                <i class="fas fa-futbol me-2"></i>Sports
+                            </li>
+                            <li class="list-group-item" onclick="selectCategory('Books')">
+                                <i class="fas fa-book me-2"></i>Books
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Brands -->
+                    <div class="brand-card">
+                        <h5 class="section-title">
+                            <i class="fas fa-star me-2"></i>Brands
+                        </h5>
+                        <ul class="list-group">
+                            <li class="list-group-item" onclick="selectBrand('Apple')">
+                                <i class="fab fa-apple me-2"></i>Apple
+                            </li>
+                            <li class="list-group-item active" onclick="selectBrand('Samsung')">
+                                <i class="fas fa-mobile-alt me-2"></i>Samsung
+                            </li>
+                            <li class="list-group-item" onclick="selectBrand('Nike')">
+                                <i class="fas fa-running me-2"></i>Nike
+                            </li>
+                            <li class="list-group-item" onclick="selectBrand('Adidas')">
+                                <i class="fas fa-shoe-prints me-2"></i>Adidas
+                            </li>
+                            <li class="list-group-item" onclick="selectBrand('Sony')">
+                                <i class="fas fa-headphones me-2"></i>Sony
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right Content -->
+                <div class="col-lg-8 col-md-6 mt-4 mt-md-0">
+                    <div class="search-section">
+                        <!-- Search Bar -->
+                        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-4">
+                            <div class="results-info mb-3 mb-lg-0">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Showing <strong class="text-primary">10</strong> of <strong class="text-primary">100</strong> Results
+                            </div>
+                            <div class="d-flex flex-column flex-sm-row gap-2">
+                                <div class="input-group" style="max-width: 300px;">
+                                    <input type="text" placeholder="Search products..." class="form-control" id="searchInput">
+                                    <button class="btn btn-primary" onclick="search()">
+                                        <i class="fas fa-search me-1"></i>Search
+                                    </button>
+                                </div>
+                                <button class="btn btn-secondary" onclick="reset()">
+                                    <i class="fas fa-redo me-1"></i>Reset
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Filter Tags -->
+                        <div class="mb-4">
+                            <h6 class="text-muted mb-2">Active Filters:</h6>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-primary rounded-pill px-3 py-2">
+                                    Electronics <i class="fas fa-times ms-1" style="cursor: pointer;"></i>
+                                </span>
+                                <span class="badge bg-info rounded-pill px-3 py-2">
+                                    Samsung <i class="fas fa-times ms-1" style="cursor: pointer;"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Products Grid Placeholder -->
+                        <app-product-item></app-product-item>
+                        <!-- Pagination -->
+                        <nav aria-label="Page navigation" class="mt-4">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" style="border-radius: 50px 0 0 50px;">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" style="border-radius: 0 50px 50px 0;">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
