@@ -10,11 +10,15 @@ import { ProductItemComponent } from "./product-item/product-item.component";
   styleUrl: './store.component.css'
 })
 export class StoreComponent implements OnInit {
+  //properties
   products: Catalog[] = [];
+  //
   constructor(private storeService: StoreService) {}
+  //
   ngOnInit(): void {
     this.getAllProducts();
   }
+  //private methods
   private getAllProducts() {
     this.storeService.getAllCatalogs().subscribe((res) => {
       this.products = res.data;
