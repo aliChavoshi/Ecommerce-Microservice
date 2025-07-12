@@ -19,24 +19,14 @@
         <!-- Categories -->
         <div class="category-card">
           <h5 class="section-title">
-            <i class="fas fa-tags me-2"></i>Categories
+            <i class="fas fa-tags me-2"></i>Types
           </h5>
           <ul class="list-group">
-            <li class="list-group-item active" onclick="selectCategory('Electronics')">
-              <i class="fas fa-laptop me-2"></i>Electronics
+            @for (item of types; track $index) {
+            <li class="list-group-item">
+              <i class="fas fa-laptop me-2"></i>{{item.name}}
             </li>
-            <li class="list-group-item" onclick="selectCategory('Fashion')">
-              <i class="fas fa-tshirt me-2"></i>Fashion
-            </li>
-            <li class="list-group-item" onclick="selectCategory('Home & Garden')">
-              <i class="fas fa-home me-2"></i>Home & Garden
-            </li>
-            <li class="list-group-item" onclick="selectCategory('Sports')">
-              <i class="fas fa-futbol me-2"></i>Sports
-            </li>
-            <li class="list-group-item" onclick="selectCategory('Books')">
-              <i class="fas fa-book me-2"></i>Books
-            </li>
+            }
           </ul>
         </div>
 
@@ -46,21 +36,11 @@
             <i class="fas fa-star me-2"></i>Brands
           </h5>
           <ul class="list-group">
-            <li class="list-group-item" onclick="selectBrand('Apple')">
-              <i class="fab fa-apple me-2"></i>Apple
+            @for (item of brands; track $index) {
+            <li class="list-group-item">
+              <i class="fa-brands fa-sketch me-2"></i>{{item.name}}
             </li>
-            <li class="list-group-item active" onclick="selectBrand('Samsung')">
-              <i class="fas fa-mobile-alt me-2"></i>Samsung
-            </li>
-            <li class="list-group-item" onclick="selectBrand('Nike')">
-              <i class="fas fa-running me-2"></i>Nike
-            </li>
-            <li class="list-group-item" onclick="selectBrand('Adidas')">
-              <i class="fas fa-shoe-prints me-2"></i>Adidas
-            </li>
-            <li class="list-group-item" onclick="selectBrand('Sony')">
-              <i class="fas fa-headphones me-2"></i>Sony
-            </li>
+            }
           </ul>
         </div>
       </div>

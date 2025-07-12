@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Catalog } from '../shared/models/Catalog';
+import { Brand, Catalog, Type } from '../shared/models/Catalog';
 import { IPaginate } from '../shared/models/IPaginate';
 
 @Injectable({
@@ -14,5 +14,13 @@ export class StoreService {
 
   getAllCatalogs() {
     return this.http.get<IPaginate<Catalog>>(`${this.baseUrl}/Catalog`);
+  }
+
+  getAllTypes(){
+    return this.http.get<Type[]>(`${this.baseUrl}/Catalog/GetAllTypes`);
+  }
+
+  getAllBrands(){
+    return this.http.get<Brand[]>(`${this.baseUrl}/Catalog/GetAllBrands`);
   }
 }
