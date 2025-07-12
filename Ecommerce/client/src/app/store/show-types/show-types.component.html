@@ -1,0 +1,12 @@
+<div class="category-card">
+  <h5 class="section-title">
+    <i class="fas fa-tags me-2"></i>Types
+  </h5>
+  <ul class="list-group">
+    @for (item of types; track $index) {
+    <li class="list-group-item" [ngClass]="{active: item.id==selectedItem?.id}" (click)="selectItem(item.id)">
+      <i class="fas fa-laptop me-2"></i>{{item.name}}
+    </li>
+    }
+  </ul>
+</div>

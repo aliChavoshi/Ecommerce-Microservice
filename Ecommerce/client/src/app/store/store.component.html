@@ -16,33 +16,11 @@
     <div class="row">
       <!-- Left Sidebar -->
       <div class="col-lg-4 col-md-6">
-        <!-- Categories -->
-        <div class="category-card">
-          <h5 class="section-title">
-            <i class="fas fa-tags me-2"></i>Types
-          </h5>
-          <ul class="list-group">
-            @for (item of types; track $index) {
-            <li class="list-group-item">
-              <i class="fas fa-laptop me-2"></i>{{item.name}}
-            </li>
-            }
-          </ul>
-        </div>
+        <!-- Types -->
+        <app-show-types></app-show-types>
 
         <!-- Brands -->
-        <div class="brand-card">
-          <h5 class="section-title">
-            <i class="fas fa-star me-2"></i>Brands
-          </h5>
-          <ul class="list-group">
-            @for (item of brands; track $index) {
-            <li class="list-group-item">
-              <i class="fa-brands fa-sketch me-2"></i>{{item.name}}
-            </li>
-            }
-          </ul>
-        </div>
+        <app-show-brands></app-show-brands>
       </div>
 
       <!-- Right Content -->

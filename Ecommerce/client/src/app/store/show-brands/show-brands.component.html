@@ -1,0 +1,12 @@
+<div class="brand-card">
+  <h5 class="section-title">
+    <i class="fas fa-tags me-2"></i>Brands
+  </h5>
+  <ul class="list-group">
+    @for (item of brands; track $index) {
+    <li class="list-group-item" [ngClass]="{'active': selectedItem?.id == item.id}" (click)="selectItem(item.id)">
+      <i class="fa-brands fa-sketch me-2"></i>{{item.name}}
+    </li>
+    }
+  </ul>
+</div>

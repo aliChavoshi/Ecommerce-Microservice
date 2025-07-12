@@ -8,6 +8,14 @@ export interface Catalog {
   types: Type;
   price: number;
 }
+export class CatalogParams {
+  pageIndex = 1;
+  pageSize = 9;
+  brandId?: number;
+  typeId?: number;
+  sort!: 'priceAsc' | 'priceDesc';
+  search?: string;
+}
 export interface Brand {
   id: string;
   name: string;
