@@ -2,16 +2,28 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Brand, Catalog, CatalogParams, Type } from '../shared/models/Catalog';
 import { IPaginate } from '../shared/models/IPaginate';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
   private baseUrl = 'http://localhost:9010';
+  private paramsSource = new BehaviorSubject<CatalogParams>(new CatalogParams());
+  params$ = this.paramsSource.asObservable();
+
   constructor(private http: HttpClient) {}
 
-  getAllCatalogs(catalogParams: CatalogParams) {
-    let params = this.generateCatalogParams(catalogParams);
+  getCurrentParams() {
+    return this.paramsSource.value;
+  }
+
+  setParams(params: CatalogParams) {
+    this.paramsSource.next(params);
+  }
+
+  getAllCatalogs() {
+    let params = this.generateCatalogParams(this.getCurrentParams());
     return this.http.get<IPaginate<Catalog>>(`${this.baseUrl}/Catalog`, {
       params
     });
@@ -24,7 +36,7 @@ export class StoreService {
   getAllBrands() {
     return this.http.get<Brand[]>(`${this.baseUrl}/Catalog/GetAllBrands`);
   }
-  
+
   private generateCatalogParams(catalogParams: CatalogParams) {
     let params = new HttpParams();
     if (catalogParams.brandId) {

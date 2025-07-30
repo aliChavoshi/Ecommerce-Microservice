@@ -15,13 +15,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class StoreComponent implements OnInit {
   products: Catalog[] = [];
   brands: Brand[] = [];
-  params = new CatalogParams();
+  params!: CatalogParams;
   //
   constructor(private storeService: StoreService) {}
   //
   ngOnInit(): void {
+    this.subscribeParams();
     this.getAllProducts();
   }
+
   reset() {
     this.params = new CatalogParams();
     this.getAllProducts();
@@ -30,14 +32,20 @@ export class StoreComponent implements OnInit {
     this.params.typeId = type.id;
     this.getAllProducts();
   }
-  //pr
   changedBrand(brand: Brand) {
     this.params.brandId = brand.id;
     this.getAllProducts();
   }
   //private methods
+  private subscribeParams() {
+    this.storeService.params$.subscribe((params) => {
+      this.params = params;
+    });
+  }
+
   private getAllProducts() {
-    this.storeService.getAllCatalogs(this.params).subscribe((res) => {
+    this.storeService.setParams(this.params);
+    this.storeService.getAllCatalogs().subscribe((res) => {
       this.products = res.data;
     });
   }
