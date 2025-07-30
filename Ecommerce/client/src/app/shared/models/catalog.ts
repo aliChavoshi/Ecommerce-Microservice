@@ -11,8 +11,8 @@ export interface Catalog {
 export class CatalogParams {
   pageIndex = 1;
   pageSize = 9;
-  brandId?: number;
-  typeId?: number;
+  brandId?: string;
+  typeId?: string;
   sort!: 'priceAsc' | 'priceDesc';
   search?: string;
 }

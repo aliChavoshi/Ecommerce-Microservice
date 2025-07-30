@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, output } from '@angular/core';
 import { StoreService } from '../store.service';
 import { Brand } from '../../shared/models/Catalog';
 import { CommonModule } from '@angular/common';
@@ -12,9 +12,11 @@ import { CommonModule } from '@angular/common';
 export class ShowBrandsComponent implements OnInit {
   brands: Brand[] = [];
   selectedItem?: Brand;
+  @Output() selectedBrand = new EventEmitter<Brand>();
   //
   selectItem(id: string) {
     this.selectedItem = this.brands.find((x) => x.id == id);
+    this.selectedBrand.emit(this.selectedItem);
   }
 
   constructor(private storeService: StoreService) {}

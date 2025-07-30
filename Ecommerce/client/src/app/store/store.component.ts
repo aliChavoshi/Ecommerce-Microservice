@@ -4,6 +4,7 @@ import { Brand, Catalog, CatalogParams, Type } from '../shared/models/Catalog';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { ShowTypesComponent } from './show-types/show-types.component';
 import { ShowBrandsComponent } from './show-brands/show-brands.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-store',
@@ -20,6 +21,11 @@ export class StoreComponent implements OnInit {
   constructor(private storeService: StoreService) {}
   //
   ngOnInit(): void {
+    this.getAllProducts();
+  }
+
+  changedBrand(brand: Brand) {
+    this.params.brandId = brand.id;
     this.getAllProducts();
   }
   //private methods

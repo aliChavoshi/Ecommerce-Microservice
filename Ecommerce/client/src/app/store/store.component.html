@@ -18,11 +18,9 @@
       <div class="col-lg-4 col-md-6">
         <!-- Types -->
         <app-show-types></app-show-types>
-
         <!-- Brands -->
-        <app-show-brands></app-show-brands>
+        <app-show-brands (selectedBrand)="changedBrand($event)"></app-show-brands>
       </div>
-
       <!-- Right Content -->
       <div class="col-lg-8 col-md-6 mt-4 mt-md-0">
         <div class="search-section">
