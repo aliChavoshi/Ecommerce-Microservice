@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { StoreService } from '../store.service';
 import { Type } from '../../shared/models/Catalog';
 import { CommonModule } from '@angular/common';
@@ -12,10 +12,13 @@ import { CommonModule } from '@angular/common';
 export class ShowTypesComponent implements OnInit {
   types: Type[] = [];
   selectedItem?: Type;
+  @Output() selectedType = new EventEmitter<Type>();
   //
   constructor(private storeService: StoreService) {}
+
   selectItem(id: string) {
     this.selectedItem = this.types.find((x) => x.id == id);
+    this.selectedType.emit(this.selectedItem);
   }
   ngOnInit(): void {
     this.getAllTypes();

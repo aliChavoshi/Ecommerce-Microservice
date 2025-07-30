@@ -24,6 +24,7 @@ export class StoreService {
   getAllBrands() {
     return this.http.get<Brand[]>(`${this.baseUrl}/Catalog/GetAllBrands`);
   }
+  
   private generateCatalogParams(catalogParams: CatalogParams) {
     let params = new HttpParams();
     if (catalogParams.brandId) {

@@ -13,7 +13,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './store.component.css'
 })
 export class StoreComponent implements OnInit {
-  //properties
   products: Catalog[] = [];
   brands: Brand[] = [];
   params = new CatalogParams();
@@ -23,7 +22,15 @@ export class StoreComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProducts();
   }
-
+  reset() {
+    this.params = new CatalogParams();
+    this.getAllProducts();
+  }
+  changedType(type: Type) {
+    this.params.typeId = type.id;
+    this.getAllProducts();
+  }
+  //pr
   changedBrand(brand: Brand) {
     this.params.brandId = brand.id;
     this.getAllProducts();
