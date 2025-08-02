@@ -1,6 +1,7 @@
 ﻿using Catalog.Application.Commands;
 using Catalog.Application.Queries;
 using Catalog.Application.Responses;
+using Catalog.Core.Specs;
 using Common.Logging.Correlations;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -37,10 +38,11 @@ public class CatalogController : ApiController
 
     [HttpGet]
     [MapToApiVersion("1.0")]
-    public async Task<ActionResult<IEnumerable<ProductResponse>>> GetAllProducts(
+    public async Task<ActionResult<Pagination<ProductResponse>>> GetAllProducts(
         [FromQuery] GetAllProductsQuery request)
     {
-        return Ok(await _mediator.Send(request));
+        var result = await _mediator.Send(request);
+        return Ok(result);
     }
 
     [HttpGet]

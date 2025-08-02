@@ -28,11 +28,16 @@
         <div class="search-section">
           <!-- Search Bar -->
           <div
-            class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-4">
+            class="text-nowrap d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-4">
+            @if(paginationProducts!==undefined){
             <div class="results-info mb-3 mb-lg-0">
               <i class="fas fa-info-circle me-2"></i>
-              Showing <strong class="text-primary">10</strong> of <strong class="text-primary">100</strong> Results
+              Showing<strong class="text-primary"> {{(params.pageSize * (params.pageIndex-1))+1}}
+                to {{calculateEndPagination()}}</strong> of
+              <strong class="text-primary">{{paginationProducts.count}}</strong> Results
             </div>
+            }
+
             <div class="d-flex flex-column flex-sm-row gap-2">
               <div class="input-group" style="max-width: 300px;">
                 <input type="text" placeholder="Search products..." class="form-control" id="searchInput">
@@ -47,7 +52,7 @@
           </div>
 
           <!-- Filter Tags -->
-          <div class="mb-4">
+          <!-- <div class="mb-4">
             <h6 class="text-muted mb-2">Active Filters:</h6>
             <div class="d-flex flex-wrap gap-2">
               <span class="badge bg-primary rounded-pill px-3 py-2">
@@ -57,40 +62,28 @@
                 Samsung <i class="fas fa-times ms-1" style="cursor: pointer;"></i>
               </span>
             </div>
-          </div>
+          </div> -->
 
           <!-- Products Grid Placeholder -->
           <div class="row">
-            @for (product of products; track $index) {
+            @if(paginationProducts !== undefined){
+            @for (product of paginationProducts.data; track $index) {
             <div class="col-md-6 col-lg-4 mb-4">
               <app-product-item [product]="product"></app-product-item>
             </div>
             }
+            }
+
           </div>
           <!-- Pagination -->
-          <nav aria-label="Page navigation" class="mt-4">
-            <ul class="pagination justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" style="border-radius: 50px 0 0 50px;">
-                  <i class="fas fa-chevron-left"></i>
-                </a>
-              </li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">2</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">3</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#" style="border-radius: 0 50px 50px 0;">
-                  <i class="fas fa-chevron-right"></i>
-                </a>
-              </li>
-            </ul>
-          </nav>
+          @if(paginationProducts!==undefined){
+          <div class="d-flex justify-content-center">
+            <pagination [boundaryLinks]="true" [totalItems]="paginationProducts.count" previousText="&lsaquo;"
+              (pageChanged)="onPageChanged($event)" [itemsPerPage]="params.pageSize" [maxSize]="9" nextText="&rsaquo;"
+              firstText="&laquo;" lastText="&raquo;">
+            </pagination>
+          </div>
+          }
         </div>
       </div>
     </div>

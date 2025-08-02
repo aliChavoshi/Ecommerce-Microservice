@@ -1,3 +1,4 @@
+import { routes } from './../app.routes';
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from './store.service';
 import { Brand, Catalog, CatalogParams, Type } from '../shared/models/Catalog';
@@ -6,15 +7,17 @@ import { ShowTypesComponent } from './show-types/show-types.component';
 import { ShowBrandsComponent } from './show-brands/show-brands.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SortingComponent } from './sorting/sorting.component';
+import { IPaginate } from '../shared/models/IPaginate';
+import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-store',
-  imports: [ProductItemComponent, ShowTypesComponent, ShowBrandsComponent, SortingComponent],
+  imports: [ProductItemComponent, ShowTypesComponent, ShowBrandsComponent, SortingComponent, PaginationModule],
   templateUrl: './store.component.html',
   styleUrl: './store.component.css'
 })
 export class StoreComponent implements OnInit {
-  products: Catalog[] = [];
+  paginationProducts!: IPaginate<Catalog>;
   brands: Brand[] = [];
   params!: CatalogParams;
   //
@@ -24,9 +27,8 @@ export class StoreComponent implements OnInit {
     this.subscribeParams();
     this.getAllProducts();
   }
-
   reset() {
-    this.params = new CatalogParams();
+    this.params.search = '';
     this.getAllProducts();
   }
   changeSorting(sort: any) {
@@ -37,9 +39,16 @@ export class StoreComponent implements OnInit {
     this.params.typeId = type.id;
     this.getAllProducts();
   }
+  onPageChanged(event: PageChangedEvent) {
+    this.params.pageIndex = event.page;
+    this.getAllProducts();
+  }
   changedBrand(brand: Brand) {
     this.params.brandId = brand.id;
     this.getAllProducts();
+  }
+  calculateEndPagination() {
+    return this.params.pageSize * this.params.pageIndex > this.paginationProducts?.count ? this.paginationProducts?.count : this.params.pageSize * this.params.pageIndex;
   }
   //private methods
   private subscribeParams() {
@@ -51,7 +60,7 @@ export class StoreComponent implements OnInit {
   private getAllProducts() {
     this.storeService.setParams(this.params);
     this.storeService.getAllCatalogs().subscribe((res) => {
-      this.products = res.data;
+      this.paginationProducts = res;
     });
   }
 }

@@ -15,6 +15,7 @@ export class CatalogParams {
   typeId?: string;
   sort: 'priceAsc' | 'priceDesc' = 'priceAsc';
   search?: string;
+  count?: number;
 }
 export interface Brand {
   id: string;
