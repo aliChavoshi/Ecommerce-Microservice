@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ShowTypesComponent implements OnInit {
   types: Type[] = [];
-  selectedItem?: Type;
+  selectedItem?: Type = { id: '', name: '' };
   @Output() selectedType = new EventEmitter<Type>();
   //
   constructor(private storeService: StoreService) {}

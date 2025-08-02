@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ShowBrandsComponent implements OnInit {
   brands: Brand[] = [];
-  selectedItem?: Brand;
+  selectedItem?: Brand = { id: '', name: '' };
   @Output() selectedBrand = new EventEmitter<Brand>();
   //
   selectItem(id: string) {

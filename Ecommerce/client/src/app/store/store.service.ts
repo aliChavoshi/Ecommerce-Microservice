@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Brand, Catalog, CatalogParams, Type } from '../shared/models/Catalog';
 import { IPaginate } from '../shared/models/IPaginate';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,11 +30,11 @@ export class StoreService {
   }
 
   getAllTypes() {
-    return this.http.get<Type[]>(`${this.baseUrl}/Catalog/GetAllTypes`);
+    return this.http.get<Type[]>(`${this.baseUrl}/Catalog/GetAllTypes`).pipe(map((x) => [{ id: '', name: 'All' }, ...x]));
   }
 
   getAllBrands() {
-    return this.http.get<Brand[]>(`${this.baseUrl}/Catalog/GetAllBrands`);
+    return this.http.get<Brand[]>(`${this.baseUrl}/Catalog/GetAllBrands`).pipe(map((x) => [{ id: '', name: 'All' }, ...x]));
   }
 
   private generateCatalogParams(catalogParams: CatalogParams) {
