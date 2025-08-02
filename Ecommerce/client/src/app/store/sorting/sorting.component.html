@@ -1,0 +1,12 @@
+<div class="category-card">
+  <h5 class="section-title">
+    <i class="fas fa-tags me-2"></i>Sorting
+  </h5>
+  <ul class="list-group">
+    @for (item of sortOptions; track $index) {
+    <li (click)="changeSorting(item)" class="list-group-item" [ngClass]="{'active': item.value == selectedItem}">
+      {{item.name}}
+    </li>
+    }
+  </ul>
+</div>

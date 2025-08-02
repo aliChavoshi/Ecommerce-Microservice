@@ -5,10 +5,11 @@ import { ProductItemComponent } from './product-item/product-item.component';
 import { ShowTypesComponent } from './show-types/show-types.component';
 import { ShowBrandsComponent } from './show-brands/show-brands.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SortingComponent } from './sorting/sorting.component';
 
 @Component({
   selector: 'app-store',
-  imports: [ProductItemComponent, ShowTypesComponent, ShowBrandsComponent],
+  imports: [ProductItemComponent, ShowTypesComponent, ShowBrandsComponent, SortingComponent],
   templateUrl: './store.component.html',
   styleUrl: './store.component.css'
 })
@@ -26,6 +27,10 @@ export class StoreComponent implements OnInit {
 
   reset() {
     this.params = new CatalogParams();
+    this.getAllProducts();
+  }
+  changeSorting(sort: any) {
+    this.params.sort = sort;
     this.getAllProducts();
   }
   changedType(type: Type) {

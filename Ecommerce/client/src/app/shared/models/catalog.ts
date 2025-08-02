@@ -13,7 +13,7 @@ export class CatalogParams {
   pageSize = 9;
   brandId?: string;
   typeId?: string;
-  sort!: 'priceAsc' | 'priceDesc';
+  sort: 'priceAsc' | 'priceDesc' = 'priceAsc';
   search?: string;
 }
 export interface Brand {
