@@ -19,7 +19,7 @@ public class ProductRepository(ICatalogContext context) : IProductRepository, IB
         var filter = builder.Empty;
         if (!string.IsNullOrEmpty(specParams.Search))
         {
-            filter &= builder.Where(x => x.Name.ToLower().Contains(specParams.Search));
+            filter &= builder.Where(x => x.Name.ToLower().Contains(specParams.Search.ToLower()));
         }
 
         if (!string.IsNullOrEmpty(specParams.BrandId))

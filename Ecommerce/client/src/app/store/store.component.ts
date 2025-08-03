@@ -5,20 +5,21 @@ import { Brand, Catalog, CatalogParams, Type } from '../shared/models/Catalog';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { ShowTypesComponent } from './show-types/show-types.component';
 import { ShowBrandsComponent } from './show-brands/show-brands.component';
-import { ActivatedRoute, Router } from '@angular/router';
 import { SortingComponent } from './sorting/sorting.component';
 import { IPaginate } from '../shared/models/IPaginate';
 import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-store',
-  imports: [ProductItemComponent, ShowTypesComponent, ShowBrandsComponent, SortingComponent, PaginationModule],
+  imports: [ProductItemComponent, ShowTypesComponent, ShowBrandsComponent, SortingComponent, PaginationModule,FormsModule],
   templateUrl: './store.component.html',
   styleUrl: './store.component.css'
 })
 export class StoreComponent implements OnInit {
   paginationProducts!: IPaginate<Catalog>;
   brands: Brand[] = [];
+  searchInput = '';
   params!: CatalogParams;
   //
   constructor(private storeService: StoreService) {}
@@ -29,6 +30,7 @@ export class StoreComponent implements OnInit {
   }
   reset() {
     this.params.search = '';
+    this.searchInput = '';
     this.getAllProducts();
   }
   changeSorting(sort: any) {
@@ -49,6 +51,10 @@ export class StoreComponent implements OnInit {
   }
   calculateEndPagination() {
     return this.params.pageSize * this.params.pageIndex > this.paginationProducts?.count ? this.paginationProducts?.count : this.params.pageSize * this.params.pageIndex;
+  }
+  search(){
+    this.params.search = this.searchInput;
+    this.getAllProducts();
   }
   //private methods
   private subscribeParams() {
