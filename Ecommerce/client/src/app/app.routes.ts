@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { StoreComponent } from './store/store.component';
+import { ProductDetailsComponent } from './store/product-details/product-details.component';
 
 export const routes: Routes = [
   {
@@ -17,10 +17,14 @@ export const routes: Routes = [
   },
   {
     path: 'store',
-    component: StoreComponent,
+    loadComponent: () => import('./store/store.component').then((x) => x.StoreComponent),
     children: [
       {
-        path: 'detail/:id',
+        path: '',
+        loadComponent: () => import('./store/home-store/home-store.component').then((x) => x.HomeStoreComponent)
+      },
+      {
+        path: ':id',
         loadComponent: () => import('./store/product-details/product-details.component').then((x) => x.ProductDetailsComponent)
       }
     ]

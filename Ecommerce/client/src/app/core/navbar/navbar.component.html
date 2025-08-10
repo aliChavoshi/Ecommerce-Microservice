@@ -15,13 +15,13 @@
     <div class="collapse navbar-collapse" id="mainNavbar">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item">
-          <a class="nav-link fw-bold text-uppercase" href="#">Home</a>
+          <a class="nav-link fw-bold text-uppercase" [routerLink]="['home']" routerLinkActive="active" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link fw-bold text-uppercase" href="#">Store</a>
+          <a class="nav-link fw-bold text-uppercase" [routerLink]="['/store']" routerLinkActive="active" >Store</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link fw-bold text-uppercase" href="#">Contact US</a>
+          <a class="nav-link fw-bold text-uppercase" [routerLink]="['/contact-us']" routerLinkActive="active">Contact US</a>
         </li>
         <li class="nav-item">
           <a class="nav-link fw-bold text-uppercase" href="#">Basket</a>

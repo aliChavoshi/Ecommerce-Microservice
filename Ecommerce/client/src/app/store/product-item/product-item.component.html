@@ -1,4 +1,4 @@
-<div class="card h-100 shadow-sm border-0" style="border-radius: 15px; overflow: hidden;">
+<div class="card h-100 shadow-sm border-0" style="border-radius: 15px; overflow: hidden;" [routerLink]="['/store/',product.id]">
   @if(product.imageFile){
   <img [src]="product.imageFile" alt="404">
   }@else {
@@ -7,7 +7,7 @@
     <i class="fas fa-mobile-alt text-white" style="font-size: 3rem;"></i>
   </div>
   }
-  <div class="card-body">
+  <div class="card-body" >
     <h6 class="card-title">{{product.name}}</h6>
     <!-- <p class="card-text text-muted small">{{product.brands}} - {{product.types}}</p> -->
     <p class="card-text text-muted small">{{product.summary}}</p>

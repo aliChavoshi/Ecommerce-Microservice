@@ -1,13 +1,14 @@
 import { Component, Input, Pipe } from '@angular/core';
 import { Catalog } from '../../shared/models/Catalog';
 import { CommonModule, CurrencyPipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-product-item',
-  imports: [CurrencyPipe,CommonModule],
+  imports: [CurrencyPipe, CommonModule, RouterModule],
   templateUrl: './product-item.component.html',
-  styleUrls: ['./product-item.component.css','../store.component.css']
+  styleUrls: ['./product-item.component.css', '../store.component.css']
 })
 export class ProductItemComponent {
-  @Input({required : true }) product! : Catalog;
+  @Input({ required: true }) product!: Catalog;
 }

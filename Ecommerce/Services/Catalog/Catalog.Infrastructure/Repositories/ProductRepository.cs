@@ -8,11 +8,6 @@ namespace Catalog.Infrastructure.Repositories;
 
 public class ProductRepository(ICatalogContext context) : IProductRepository, IBrandRepository, ITypeRepository
 {
-    public async Task<IEnumerable<Product>> GetProducts()
-    {
-        return await context.Products.Find(x => true).ToListAsync();
-    }
-
     public async Task<Pagination<Product>> GetProducts(CatalogSpecParams specParams)
     {
         var builder = Builders<Product>.Filter;
