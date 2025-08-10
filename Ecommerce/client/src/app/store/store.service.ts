@@ -14,6 +14,10 @@ export class StoreService {
 
   constructor(private http: HttpClient) {}
 
+  getProductById(productId:string){
+    return this.http.get<Catalog>(`${this.baseUrl}/Catalog/GetProductById/${productId}`);
+  }
+
   getCurrentParams() {
     return this.paramsSource.value;
   }

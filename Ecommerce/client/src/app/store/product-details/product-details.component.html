@@ -1,1 +1,164 @@
-<p>product-details works!</p>
+<div class="main-container">
+  <!-- Header Section -->
+  <div class="header-section p-5">
+    <a [routerLink]="['/store']" class="back-button">
+      <i class="fas fa-arrow-left me-2"></i>Back to Shop
+    </a>
+
+    <!-- <div class="text-center">
+      <div class="breadcrumb-section d-inline-block">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home me-1"></i>Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Shop</a></li>
+            <li class="breadcrumb-item"><a href="#">Shoes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Yonex Super Ace Light</li>
+          </ol>
+        </nav>
+      </div>
+    </div> -->
+  </div>
+
+  <div class="container-fluid p-4">
+    <div class="row">
+      <!-- Product Images -->
+      <div class="col-lg-5 mb-4">
+        <div class="product-image-section">
+          <!-- <i class="fas fa-running product-placeholder"></i> -->
+          <img [src]="product.imageFile" class="main-product-image img-thumbnail h-100">
+          <div class="position-absolute top-0 end-0 p-2">
+            <button class="btn btn-sm btn-light rounded-circle">
+              <i class="fas fa-heart text-danger"></i>
+            </button>
+          </div>
+
+          <div class="thumbnail-images">
+            <div class="thumbnail active">
+              <i class="fas fa-running"></i>
+            </div>
+            <div class="thumbnail">
+              <i class="fas fa-running"></i>
+            </div>
+            <div class="thumbnail">
+              <i class="fas fa-running"></i>
+            </div>
+            <div class="thumbnail">
+              <i class="fas fa-running"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Information -->
+      <div class="col-lg-7">
+        <div class="product-info-section">
+          <div class="product-badge">
+            <i class="fas fa-star me-2"></i>Best Seller
+          </div>
+
+          <h1 class="product-title">{{product.name}}</h1>
+
+
+          <div class="row">
+            <div class="col-6">
+              <div class="product-brand">
+                <i class="fas fa-award me-2"></i>
+                Brand: <strong class="ms-1">{{product.brands.name}}</strong>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="product-brand">
+                <i class="fas fa-award me-2"></i>
+                Type: <strong class="ms-1">{{product.types.name}}</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="rating-section">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span class="fw-bold">4.5</span>
+            <span class="text-muted">(128 reviews)</span>
+          </div>
+
+          <div class="price-section">
+            <div class="current-price">$ {{product.price | number}}</div>
+            <div class="price-label">Free shipping included</div>
+          </div>
+
+          <div class="description-section">
+            <h5 class="section-title">
+              <i class="fas fa-info-circle"></i>Product Description
+            </h5>
+            <p class="mb-3">{{product.description}}</p>
+
+            <h6 class="section-title">
+              <i class="fas fa-list-ul"></i>Key Features
+            </h6>
+            <ul class="features-list">
+              <li><i class="fas fa-check-circle"></i>Maximum shock absorption technology</li>
+              <li><i class="fas fa-check-circle"></i>Quick compression recovery system</li>
+              <li><i class="fas fa-check-circle"></i>High resilience insoles for durability</li>
+              <li><i class="fas fa-check-circle"></i>Meticulously contoured for comfort</li>
+              <li><i class="fas fa-check-circle"></i>Enhanced forefoot and toe stability</li>
+            </ul>
+          </div>
+
+          <div class="quantity-section">
+            <label class="fw-bold me-3">Quantity:</label>
+            <div class="quantity-controls">
+              <button class="quantity-btn" onclick="decreaseQuantity()">
+                <i class="fas fa-minus"></i>
+              </button>
+              <input type="number" value="1" min="1" max="10" class="quantity-input" id="quantity">
+              <button class="quantity-btn" onclick="increaseQuantity()">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn btn-primary-custom">
+              <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+            </button>
+            <button class="btn btn-outline-custom">
+              <i class="fas fa-bolt me-2"></i>Buy Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Product Information -->
+    <div class="product-info-cards">
+      <div class="info-card">
+        <i class="fas fa-shipping-fast"></i>
+        <h6>Free Shipping</h6>
+        <p>Free delivery on orders over $100</p>
+      </div>
+
+      <div class="info-card">
+        <i class="fas fa-undo-alt"></i>
+        <h6>30 Day Returns</h6>
+        <p>Easy return policy within 30 days</p>
+      </div>
+
+      <div class="info-card">
+        <i class="fas fa-shield-alt"></i>
+        <h6>Warranty</h6>
+        <p>1 year manufacturer warranty</p>
+      </div>
+
+      <div class="info-card">
+        <i class="fas fa-headset"></i>
+        <h6>24/7 Support</h6>
+        <p>Customer support available anytime</p>
+      </div>
+    </div>
+  </div>
+</div>
