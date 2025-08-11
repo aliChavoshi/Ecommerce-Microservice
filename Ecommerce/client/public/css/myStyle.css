@@ -450,29 +450,6 @@ body {
   overflow: hidden;
 }
 
-.breadcrumb-section {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 25px;
-  padding: 0.5rem 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.breadcrumb {
-  background: transparent;
-  padding: 0;
-  margin: 0;
-}
-
-.breadcrumb-item a {
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-}
-
-.breadcrumb-item.active {
-  color: white;
-}
-
 .product-image-section {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 20px;
@@ -827,4 +804,22 @@ body {
     margin-bottom: 1rem;
     display: inline-block;
   }
+}
+
+/* .breadcrumb */
+.xng-breadcrumb-root {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  margin-bottom: 1rem;
+}
+.xng-breadcrumb-list{
+ background: transparent;
+  padding: 0;
+  margin: 0;
+}
+.xng-breadcrumb-item {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
 }

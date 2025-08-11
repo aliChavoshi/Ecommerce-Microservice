@@ -3,12 +3,18 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'store',
-    pathMatch: 'full'
+    redirectTo: 'home',
+    pathMatch: 'full',
+    data : {
+      breadcrumb: 'Home'
+    }
   },
   {
     path: 'home',
-    loadComponent: () => import('./home/home.component').then((x) => x.HomeComponent)
+    loadComponent: () => import('./home/home.component').then((x) => x.HomeComponent),
+    data : {
+      breadcrumb: {skip : true}
+    }
   },
   {
     path: 'contact-us',
@@ -17,6 +23,9 @@ export const routes: Routes = [
   {
     path: 'store',
     loadComponent: () => import('./store/store.component').then((x) => x.StoreComponent),
+    data : {
+      breadcrumb: 'Store'
+    },
     children: [
       {
         path: '',
