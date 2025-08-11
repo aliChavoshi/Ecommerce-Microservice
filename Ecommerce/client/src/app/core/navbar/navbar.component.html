@@ -1,44 +1,51 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom bg-dark">
+<nav class="navbar navbar-expand-lg navbar-custom">
   <div class="container">
-    <!-- لوگو -->
-    <a class="navbar-brand d-flex align-items-center" href="#">
-      <i class="fa fa-shopping-cart fa-lg me-2 text-warning"></i>
-      <strong>Store</strong>
+    <a class="navbar-brand" href="#">
+      <i class="fas fa-shopping-bag me-2"></i>Premium Shopping
     </a>
 
-    <!-- دکمه برای نمایش در موبایل -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- آیتم‌های منو -->
-    <div class="collapse navbar-collapse" id="mainNavbar">
-      <ul class="navbar-nav mx-auto">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link fw-bold text-uppercase" [routerLink]="['home']" routerLinkActive="active" href="#">Home</a>
+          <a class="nav-link active" [routerLink]="['home']" routerLinkActive="active">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link fw-bold text-uppercase" [routerLink]="['/store']" routerLinkActive="active" >Store</a>
+          <a class="nav-link" [routerLink]="['/store']" routerLinkActive="active">Shop</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link fw-bold text-uppercase" [routerLink]="['/contact-us']" routerLinkActive="active">Contact US</a>
+          <a class="nav-link" href="#">Categories</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link fw-bold text-uppercase" href="#">Basket</a>
+          <a class="nav-link" href="#">Brands</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/contact-us']" routerLinkActive="active">Contact</a>
         </li>
       </ul>
 
-      <!-- سبد خرید + دکمه‌ها -->
-      <div class="d-flex align-items-center">
-        <div class="position-relative me-3">
-          <i class="fa fa-shopping-cart fa-lg text-dark"></i>
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-purple text-white"
-            style="font-size: 0.7rem">
-            7
-          </span>
+      <div class="d-flex align-items-center gap-3">
+        <div class="search-container">
+          <div class="input-group">
+            <input type="text" class="form-control search-input" placeholder="Search products...">
+            <button class="btn search-btn">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
         </div>
-        <button class="btn btn-outline-dark me-2">Login</button>
-        <button class="btn btn-outline-dark">Sign up</button>
+
+        <a href="#" class="text-white fs-5">
+          <i class="fas fa-heart"></i>
+        </a>
+        <a href="#" class="text-white fs-5">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+        <a href="#" class="text-white fs-5">
+          <i class="fas fa-user"></i>
+        </a>
       </div>
     </div>
   </div>

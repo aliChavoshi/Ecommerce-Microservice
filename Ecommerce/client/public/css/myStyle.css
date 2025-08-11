@@ -814,12 +814,19 @@ body {
   padding: 0.5rem 1.5rem;
   margin-bottom: 1rem;
 }
-.xng-breadcrumb-list{
- background: transparent;
+
+.xng-breadcrumb-list {
+  background: transparent;
   padding: 0;
   margin: 0;
 }
+
 .xng-breadcrumb-item {
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f8f9fa;
 }
