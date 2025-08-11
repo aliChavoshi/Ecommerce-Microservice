@@ -3,6 +3,7 @@ import { StoreService } from '../store.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Catalog } from '../../shared/models/Catalog';
 import { DecimalPipe } from '@angular/common';
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-product-details',
@@ -13,7 +14,7 @@ import { DecimalPipe } from '@angular/common';
 export class ProductDetailsComponent {
   private productId!: string;
   product! : Catalog;
-  constructor(private storeService: StoreService, private route: ActivatedRoute) {
+  constructor(private storeService: StoreService, private route: ActivatedRoute,private bcService : BreadcrumbService) {
     this.productId = this.route.snapshot.params['id'];
   }
   ngOnInit(): void {
@@ -23,6 +24,7 @@ export class ProductDetailsComponent {
   private getProductById() {
     this.storeService.getProductById(this.productId).subscribe((res) => {
       this.product = res;
+      this.bcService.set('@productDetail', this.product.name);
     });
   }
 }

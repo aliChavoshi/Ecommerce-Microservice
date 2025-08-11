@@ -33,7 +33,12 @@ export const routes: Routes = [
       },
       {
         path: ':id',
-        loadComponent: () => import('./store/product-details/product-details.component').then((x) => x.ProductDetailsComponent)
+        loadComponent: () => import('./store/product-details/product-details.component').then((x) => x.ProductDetailsComponent),
+        data : {
+          breadcrumb: {
+            alias : 'productDetail'
+          }
+        }
       }
     ]
   },
