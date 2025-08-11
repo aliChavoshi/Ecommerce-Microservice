@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { ProductDetailsComponent } from './store/product-details/product-details.component';
 
 export const routes: Routes = [
   {
@@ -28,6 +27,18 @@ export const routes: Routes = [
         loadComponent: () => import('./store/product-details/product-details.component').then((x) => x.ProductDetailsComponent)
       }
     ]
+  },
+  {
+    path: 'not-found',
+    loadComponent: () => import('./core/not-found/not-found.component').then((x) => x.NotFoundComponent)
+  },
+  {
+    path: 'server-error',
+    loadComponent: () => import('./core/server-error/server-error.component').then((x) => x.ServerErrorComponent)
+  },
+  {
+    path: 'unauthorized',
+    loadComponent: () => import('./core/unauthorized/unauthorized.component').then((x) => x.UnauthorizedComponent)
   },
   {
     path: '**',
