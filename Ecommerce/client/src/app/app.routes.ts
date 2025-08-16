@@ -5,25 +5,21 @@ export const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
-    data : {
+    data: {
       breadcrumb: 'Home'
     }
   },
   {
     path: 'home',
     loadComponent: () => import('./home/home.component').then((x) => x.HomeComponent),
-    data : {
-      breadcrumb: {skip : true}
+    data: {
+      breadcrumb: { skip: true }
     }
-  },
-  {
-    path: 'contact-us',
-    loadComponent: () => import('./core/contact-us/contact-us.component').then((x) => x.ContactUsComponent)
   },
   {
     path: 'store',
     loadComponent: () => import('./store/store.component').then((x) => x.StoreComponent),
-    data : {
+    data: {
       breadcrumb: 'Store'
     },
     children: [
@@ -34,13 +30,27 @@ export const routes: Routes = [
       {
         path: ':id',
         loadComponent: () => import('./store/product-details/product-details.component').then((x) => x.ProductDetailsComponent),
-        data : {
+        data: {
           breadcrumb: {
-            alias : 'productDetail'
+            alias: 'productDetail'
           }
         }
       }
     ]
+  },
+  {
+    path: 'basket',
+    loadComponent: () => import('./basket/basket.component').then((x) => x.BasketComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./basket/home-basket/home-basket.component').then((x) => x.HomeBasketComponent)
+      }
+    ]
+  },
+  {
+    path: 'contact-us',
+    loadComponent: () => import('./core/contact-us/contact-us.component').then((x) => x.ContactUsComponent)
   },
   {
     path: 'not-found',
