@@ -1,20 +1,22 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Brand, Catalog, CatalogParams, Type } from '../shared/models/Catalog';
 import { IPaginate } from '../shared/models/IPaginate';
 import { BehaviorSubject, map, Observable, Subject } from 'rxjs';
+import { APP_CONFIG } from '../core/configs/appConfig.token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
-  private baseUrl = 'http://localhost:9010';
+  private cfg = inject(APP_CONFIG);
+  private baseUrl = this.cfg.baseUrl;
   private paramsSource = new BehaviorSubject<CatalogParams>(new CatalogParams());
   params$ = this.paramsSource.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  getProductById(productId:string){
+  getProductById(productId: string) {
     return this.http.get<Catalog>(`${this.baseUrl}/Catalog/GetProductById/${productId}`);
   }
 
