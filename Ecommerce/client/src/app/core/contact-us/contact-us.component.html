@@ -1,1 +1,166 @@
-<p>contact-us works!</p>
+  <div class="main-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="floating-elements">
+                <div class="floating-shape shape1"></div>
+                <div class="floating-shape shape2"></div>
+                <div class="floating-shape shape3"></div>
+            </div>
+            <h1 class="display-4 fw-bold mb-3">
+                <i class="fas fa-envelope me-3"></i>
+                تماس با ما
+            </h1>
+            <p class="lead mb-0">ما همیشه آماده پاسخگویی به سوالات شما هستیم</p>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="contact-grid">
+            <!-- Contact Form Section -->
+            <div class="contact-form-section">
+                <h3 class="section-title">
+                    <i class="fas fa-paper-plane me-2"></i>
+                    پیام خود را ارسال کنید
+                </h3>
+
+                <form id="contactForm">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">نام</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="نام خود را وارد کنید" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">نام خانوادگی</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="نام خانوادگی خود را وارد کنید" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">ایمیل</label>
+                        <input type="email" class="form-control" id="email" placeholder="ایمیل خود را وارد کنید" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">شماره تماس</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="شماره تماس خود را وارد کنید">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">موضوع</label>
+                        <select class="form-control" id="subject" required>
+                            <option value="">موضوع را انتخاب کنید</option>
+                            <option value="support">پشتیبانی فنی</option>
+                            <option value="sales">فروش و خرید</option>
+                            <option value="complaint">شکایت</option>
+                            <option value="suggestion">پیشنهاد</option>
+                            <option value="other">سایر</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">پیام</label>
+                        <textarea class="form-control" id="message" rows="6" placeholder="پیام خود را اینجا بنویسید..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary-custom">
+                        <i class="fas fa-paper-plane me-2"></i>
+                        ارسال پیام
+                    </button>
+                </form>
+            </div>
+
+            <!-- Contact Info Section -->
+            <div class="contact-info-section">
+                <h3 class="section-title">
+                    <i class="fas fa-info-circle me-2"></i>
+                    اطلاعات تماس
+                </h3>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h5>آدرس</h5>
+                        <p>تهران، خیابان ولیعصر، پلاک 123، طبقه 4</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h5>تلفن تماس</h5>
+                        <p>021-12345678<br>09123456789</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h5>ایمیل</h5>
+                        <p>info-company.com<br>support-company.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h5>وب‌سایت</h5>
+                        <p>www.company.com</p>
+                    </div>
+                </div>
+
+                <!-- Office Hours -->
+                <div class="office-hours">
+                    <h6><i class="fas fa-clock me-2"></i>ساعات کاری</h6>
+                    <div class="hours-item">
+                        <span>شنبه - چهارشنبه</span>
+                        <span>8:00 - 17:00</span>
+                    </div>
+                    <div class="hours-item">
+                        <span>پنج‌شنبه</span>
+                        <span>8:00 - 13:00</span>
+                    </div>
+                    <div class="hours-item">
+                        <span>جمعه</span>
+                        <span>تعطیل</span>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="social-links">
+                    <a href="#" class="social-link" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Telegram">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" class="social-link" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="social-link" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="map-section">
+            <h3 class="section-title">
+                <i class="fas fa-map me-2"></i>
+                موقعیت مکانی
+            </h3>
+            <div class="map-placeholder">
+                <div class="text-center">
+                    <i class="fas fa-map-marked-alt fa-3x mb-3"></i>
+                    <p>نقشه در اینجا نمایش داده می‌شود</p>
+                </div>
+            </div>
+        </div>
+    </div>

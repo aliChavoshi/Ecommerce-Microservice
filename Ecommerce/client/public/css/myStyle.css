@@ -830,3 +830,9 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #f8f9fa;
 }
+
+img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain !important;
+}
