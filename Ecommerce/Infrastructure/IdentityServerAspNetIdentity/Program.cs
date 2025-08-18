@@ -1,5 +1,6 @@
 ﻿using IdentityServerAspNetIdentity;
 using Serilog;
+using ServiceDefaults;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -10,7 +11,7 @@ Log.Information("Starting up");
 try
 {
     var builder = WebApplication.CreateBuilder(args);
-
+    builder.AddServiceDefaults();
     builder.Host.UseSerilog((ctx, lc) => lc
         .WriteTo.Console(
             outputTemplate:
@@ -22,8 +23,8 @@ try
         .ConfigureServices()
         .ConfigurePipeline();
 
-        SeedData.EnsureSeedData(app);
-        // app.MapGet("/test", () => "It's working!");
+    SeedData.EnsureSeedData(app);
+    // app.MapGet("/test", () => "It's working!");
     app.Run();
 }
 catch (Exception ex) when (ex is not HostAbortedException)

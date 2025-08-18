@@ -6,8 +6,10 @@ using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Serilog;
+using ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.AddServiceDefaults();
 // -----------------------------
 // اضافه شده برای لاگ‌گیری
 // -----------------------------

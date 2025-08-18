@@ -16,6 +16,9 @@ public static class InfrastructureServices
         {
             options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString"),
                 sqlServerOptions => sqlServerOptions.EnableRetryOnFailure());
+            //For Aspire
+            // options.UseSqlServer(configuration.GetConnectionString("sqlServer"),
+            //     sqlServerOptions => sqlServerOptions.EnableRetryOnFailure());
         });
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IOrderRepository, OrderRepository>();

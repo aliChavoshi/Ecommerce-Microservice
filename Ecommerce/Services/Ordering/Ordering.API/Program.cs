@@ -10,9 +10,11 @@ using Ordering.Application;
 using Ordering.Infrastructure;
 using Ordering.Infrastructure.Data;
 using Serilog;
+using ServiceDefaults;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.AddServiceDefaults();
 //Add Service for Serilog
 builder.Host.UseSerilog(Logging.ConfigureLogger);
 

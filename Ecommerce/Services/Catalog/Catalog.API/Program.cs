@@ -18,9 +18,10 @@ using System.Reflection;
 using Asp.Versioning;
 using Catalog.API.SwaggerConfig;
 using Common.Logging;
+using ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.AddServiceDefaults();
 // -----------------------------
 // Base Path for Nginx or Ocelot
 // -----------------------------

@@ -7,8 +7,10 @@ using Discount.Core.Interfaces;
 using Discount.Infrastructure.Extensions;
 using Discount.Infrastructure.Services;
 using Serilog;
+using ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.AddServiceDefaults();
 //Add Service for Serilog
 builder.Host.UseSerilog(Logging.ConfigureLogger);
 
@@ -25,7 +27,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies
 builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
 //GRPC
 builder.Services.AddGrpc();
-// 
+//
 var app = builder.Build();
 //Migration
 app.MigrateDatabase<Program>();

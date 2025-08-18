@@ -18,10 +18,11 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using ServiceDefaults;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.AddServiceDefaults();
 // -----------------------------
 // Serilog Logging
 // -----------------------------
