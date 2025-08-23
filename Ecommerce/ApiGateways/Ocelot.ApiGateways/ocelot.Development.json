@@ -137,9 +137,9 @@
             ],
             "UpstreamPathTemplate": "/Basket/CreateBasket",
             "UpstreamHttpMethod": ["POST"],
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "EShoppingGatewayAuthScheme"
-            },
+            //"AuthenticationOptions": {
+            //    "AuthenticationProviderKey": "EShoppingGatewayAuthScheme"
+            //},
             "DelegatingHandlers": ["CorrelationDelegatingHandler"]
         },
         // Checkout Basket
