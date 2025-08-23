@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Pipe } from '@angular/core';
-import { Catalog } from '../../shared/models/Catalog';
+import { IProduct } from '../../shared/models/product';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { StoreService } from '../store.service';
@@ -11,6 +11,6 @@ import { StoreService } from '../store.service';
   styleUrls: ['./product-item.component.css', '../store.component.css']
 })
 export class ProductItemComponent  {
-  @Input({ required: true }) product!: Catalog;
+  @Input({ required: true }) product!: IProduct;
 
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { StoreService } from '../store.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Catalog } from '../../shared/models/Catalog';
+import { IProduct } from '../../shared/models/product';
 import { DecimalPipe } from '@angular/common';
 import { BreadcrumbService } from 'xng-breadcrumb';
 
@@ -13,7 +13,7 @@ import { BreadcrumbService } from 'xng-breadcrumb';
 })
 export class ProductDetailsComponent {
   private productId!: string;
-  product! : Catalog;
+  product! : IProduct;
   constructor(private storeService: StoreService, private route: ActivatedRoute,private bcService : BreadcrumbService) {
     this.productId = this.route.snapshot.params['id'];
   }

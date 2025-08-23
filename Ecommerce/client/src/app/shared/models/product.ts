@@ -1,14 +1,14 @@
-export interface Catalog {
+export interface IProduct {
   id: string;
   name: string;
   summary: string;
   description: string;
   imageFile: string;
-  brands: Brand;
-  types: Type;
+  brands: IBrand;
+  types: IType;
   price: number;
 }
-export class CatalogParams {
+export class ProductParams {
   pageIndex = 1;
   pageSize = 9;
   brandId?: string;
@@ -17,12 +17,12 @@ export class CatalogParams {
   search?: string;
   count?: number;
 }
-export interface Brand {
+export interface IBrand {
   id: string;
   name: string;
 }
 
-export interface Type {
+export interface IType {
   id: string;
   name: string;
 }

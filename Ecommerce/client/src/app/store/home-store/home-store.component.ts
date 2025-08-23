@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PageChangedEvent, PaginationModule } from 'ngx-bootstrap/pagination';
-import { Brand, Catalog, CatalogParams, Type } from '../../shared/models/Catalog';
-import { IPaginate } from '../../shared/models/IPaginate';
+import { IBrand, IProduct, ProductParams, IType } from '../../shared/models/product';
+import { IPaginate } from '../../shared/models/paginate';
 import { StoreService } from '../store.service';
 import { ProductItemComponent } from '../product-item/product-item.component';
 import { RouterModule } from '@angular/router';
@@ -17,10 +17,10 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './home-store.component.css'
 })
 export class HomeStoreComponent {
-  paginationProducts!: IPaginate<Catalog>;
-  brands: Brand[] = [];
+  paginationProducts!: IPaginate<IProduct>;
+  brands: IBrand[] = [];
   searchInput = '';
-  params!: CatalogParams;
+  params!: ProductParams;
   //
   constructor(private storeService: StoreService) {}
   //
@@ -37,7 +37,7 @@ export class HomeStoreComponent {
     this.params.sort = sort;
     this.getAllProducts();
   }
-  changedType(type: Type) {
+  changedType(type: IType) {
     this.params.typeId = type.id;
     this.getAllProducts();
   }
@@ -45,7 +45,7 @@ export class HomeStoreComponent {
     this.params.pageIndex = event.page;
     this.getAllProducts();
   }
-  changedBrand(brand: Brand) {
+  changedBrand(brand: IBrand) {
     this.params.brandId = brand.id;
     this.getAllProducts();
   }

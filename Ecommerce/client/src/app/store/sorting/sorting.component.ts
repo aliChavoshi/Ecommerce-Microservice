@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { StoreService } from '../store.service';
-import { CatalogParams } from '../../shared/models/Catalog';
+import { ProductParams } from '../../shared/models/product';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -24,7 +24,7 @@ export class SortingComponent implements OnInit {
       value: 'priceAsc'
     }
   ];
-  params!: CatalogParams;
+  params!: ProductParams;
   selectedItem = this.params?.sort ?? 'priceAsc';
   @Output() sortingValue = new EventEmitter<string>();
   //

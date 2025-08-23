@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { StoreService } from '../store.service';
-import { Type } from '../../shared/models/Catalog';
+import { IType } from '../../shared/models/product';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,9 +10,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: '../store.component.css'
 })
 export class ShowTypesComponent implements OnInit {
-  types: Type[] = [];
-  selectedItem?: Type = { id: '', name: '' };
-  @Output() selectedType = new EventEmitter<Type>();
+  types: IType[] = [];
+  selectedItem?: IType = { id: '', name: '' };
+  @Output() selectedType = new EventEmitter<IType>();
   //
   constructor(private storeService: StoreService) {}
 
