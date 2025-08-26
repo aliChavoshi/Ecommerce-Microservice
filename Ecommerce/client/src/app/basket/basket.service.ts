@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IBasket, Basket, IBasketItem } from '../shared/models/basket';
 import { APP_CONFIG } from '../core/configs/appConfig.token';
 import { IProduct } from '../shared/models/product';

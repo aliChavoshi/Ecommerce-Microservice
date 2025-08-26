@@ -16,6 +16,7 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/store']" routerLinkActive="active">Shop</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" routerLink="/basket">Basket</a>
         </li>
@@ -40,9 +41,14 @@
         <a href="#" class="text-white fs-5">
           <i class="fas fa-heart"></i>
         </a>
-        <a href="#" class="text-white fs-5">
+        @if(basketService.basket$ | async; as basket){
+        <a type="button" class="text-white fs-5 position-relative">
           <i class="fas fa-shopping-cart"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: small;">
+            {{getBasketCount(basket.items)}}
+          </span>
         </a>
+        }
         <a href="#" class="text-white fs-5">
           <i class="fas fa-user"></i>
         </a>
