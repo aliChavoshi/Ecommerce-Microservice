@@ -42,7 +42,7 @@
           <i class="fas fa-heart"></i>
         </a>
         @if(basketService.basket$ | async; as basket){
-        <a type="button" class="text-white fs-5 position-relative">
+        <a type="button" class="text-white fs-5 position-relative" routerLink="/basket">
           <i class="fas fa-shopping-cart"></i>
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: small;">
             {{getBasketCount(basket.items)}}

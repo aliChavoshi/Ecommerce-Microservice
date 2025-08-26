@@ -28,7 +28,8 @@
             ],
             "styles": [
               "node_modules/ngx-spinner/animations/square-jelly-box.css",
-              "src/styles.css"
+              "src/styles.css",
+              "https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css"
             ],
             "scripts": []
           },
