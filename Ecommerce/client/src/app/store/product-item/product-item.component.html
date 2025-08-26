@@ -16,12 +16,13 @@
       <!-- show no digit after the price ?  -->
       <span class="h5 text-primary mb-0">{{product.price | currency:'USD': 'symbol':'1.0-0'}}</span>
     </div>
-    @if(showAddCartBtn){
+    @if(showingBtnCart){
     <div class="d-flex justify-content-end align-items-center" (click)="$event.stopPropagation()">
       <button class="btn btn-sm  btn-primary p-2" (click)="addItemToBasket()">
         <i class="fas fa-cart-plus mx-2"></i>Add to Cart
       </button>
     </div>
     }
+
   </div>
 </div>

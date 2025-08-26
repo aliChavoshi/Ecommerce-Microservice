@@ -4,6 +4,7 @@ import { NavbarComponent } from './core/navbar/navbar.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { HeaderComponent } from './core/header/header.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { BasketService } from './basket/basket.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,11 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppComponent implements OnInit {
-  constructor() {}
-  ngOnInit(): void {}
+  constructor(private basketService : BasketService) {}
+  ngOnInit(): void {
+    const loggedUser = localStorage.getItem('basket_username');
+    if(loggedUser){
+      this.basketService.getBasket(loggedUser).subscribe();
+    }
+  }
 }

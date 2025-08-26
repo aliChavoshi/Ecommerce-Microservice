@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { IBasket, Basket, IBasketItem } from '../shared/models/basket';
 import { APP_CONFIG } from '../core/configs/appConfig.token';
 import { IProduct } from '../shared/models/product';
-import { UntypedFormArray } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +29,7 @@ export class BasketService {
   addItemToBasket(product: IProduct, quantity: number = 1): Observable<IBasket> {
     const itemToAdd = this.mapProductToItemBasket(product);
     const basket = this.getCurrentBasket() ?? this.createBasket();
-    console.log("🚀 ~ BasketService ~ addItemToBasket ~ basket:", basket)
-    basket.Items = this.addOrUpdateItemBasket(basket?.Items ?? [], itemToAdd, quantity);
+    basket.items = this.addOrUpdateItemBasket(basket.items, itemToAdd, quantity);
     return this.setBasket(basket);
   }
 
@@ -47,15 +45,15 @@ export class BasketService {
 
   private createBasket(): Basket {
     let loginUser = 'Ali Chavoshi';
-    const basket = new Basket(loginUser); // TODO
+    const basket = new Basket(loginUser);
     localStorage.setItem('basket_username', loginUser);
     return basket;
   }
 
   private addOrUpdateItemBasket(items: IBasketItem[], itemToAdd: IBasketItem, quantity: number): IBasketItem[] {
-    console.log("🚀 ~ BasketService ~ addOrUpdateItemBasket ~ items:", items)
-    const itemInBasket = items.find((x) => x.productId == itemToAdd.productId);
-    console.log("🚀 ~ BasketService ~ addOrUpdateItemBasket ~ itemInBasket:", itemInBasket)
+    console.log('🚀 ~ BasketService ~ addOrUpdateItemBasket ~ itemToAdd:', itemToAdd);
+    console.log('🚀 ~ BasketService ~ addOrUpdateItemBasket ~ items:', items);
+    const itemInBasket = items?.find((x) => x.productId == itemToAdd.productId);
     if (itemInBasket) {
       itemInBasket.quantity += quantity;
     } else {

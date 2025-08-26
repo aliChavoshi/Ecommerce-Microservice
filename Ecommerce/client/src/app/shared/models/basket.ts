@@ -1,6 +1,6 @@
 export interface IBasket {
   userName: string;
-  Items: IBasketItem[];
+  items: IBasketItem[];
   totalPrice: number;
 }
 
@@ -13,12 +13,12 @@ export interface IBasketItem {
 }
 
 export class Basket implements IBasket {
-  constructor(userName: string) {
+  constructor(userName:string) {
     this.userName = userName;
-    this.Items = [];
     this.totalPrice = 0;
+    this.items = [];
   }
-  userName: string;
-  Items: IBasketItem[];
+  userName: string ;
   totalPrice: number;
+  items: IBasketItem[];
 }

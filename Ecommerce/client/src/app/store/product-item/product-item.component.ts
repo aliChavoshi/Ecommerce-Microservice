@@ -11,15 +11,14 @@ import { BasketService } from '../../basket/basket.service';
   styleUrls: ['./product-item.component.css', '../store.component.css']
 })
 export class ProductItemComponent implements OnInit {
-  showAddCartBtn = false;
+  showingBtnCart = false;
   @Input({ required: true }) product!: IProduct;
   constructor(public basketService: BasketService) {}
 
   addItemToBasket() {
     this.basketService.addItemToBasket(this.product, 1).subscribe((res) => {
-      console.log("🚀 ~ ProductItemComponent ~ addItemToBasket ~ res:", res)
       if (res) {
-        this.showAddCartBtn = false;
+        this.showingBtnCart = false;
       }
     });
   }
@@ -27,10 +26,10 @@ export class ProductItemComponent implements OnInit {
     this.calculatingShowAddToCartBtn();
   }
   calculatingShowAddToCartBtn() {
-    const basket = this.basketService.getCurrentBasket();
-    const result = basket?.Items?.find((x) => x.productId == this.product.id);
+    const currentBasket = this.basketService.getCurrentBasket();
+    const result = currentBasket?.items?.find((x) => x.productId == this.product.id);
     if (!result) {
-      this.showAddCartBtn = true;
+      this.showingBtnCart = true;
     }
   }
 }
