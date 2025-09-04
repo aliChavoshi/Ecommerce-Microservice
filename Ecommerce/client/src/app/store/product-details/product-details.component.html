@@ -1,4 +1,5 @@
-<div class="main-container">
+@if(product){
+  <div class="main-container">
   <!-- Header Section -->
   <div class="header-section p-5">
     <a [routerLink]="['/store']" class="back-button">
@@ -108,15 +109,16 @@
               </button>
             </div>
           </div>
-
-          <div class="action-buttons">
-            <button class="btn btn-primary-custom">
-              <i class="fas fa-shopping-cart me-2"></i>Add to Cart
-            </button>
-            <button class="btn btn-outline-custom">
-              <i class="fas fa-bolt me-2"></i>Buy Now
-            </button>
-          </div>
+          @if(!ExistedInBasket){
+            <div class="action-buttons">
+              <button class="btn btn-primary-custom" (click)="addItemToBasket()">
+                <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+              </button>
+              <button class="btn btn-outline-custom" (click)="addItemToBasket()">
+                <i class="fas fa-bolt me-2"></i>Buy Now
+              </button>
+            </div>
+          }
         </div>
       </div>
     </div>
@@ -149,3 +151,4 @@
     </div>
   </div>
 </div>
+}
