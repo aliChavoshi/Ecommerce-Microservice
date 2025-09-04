@@ -70,29 +70,30 @@
         <i class="fas fa-calculator me-2"></i>
         خلاصه سفارش
       </h3>
-
-      <div class="cart-summary">
-        <div class="summary-row">
-          <span>جمع کالاها (<span id="totalItems">{{basket.items.length}}</span> کالا):</span>
-          <span id="subtotal">${{basket.totalPrice| number}}</span>
+      @if(basketService.basketTotal$ | async;as totalResult){
+        <div class="cart-summary">
+          <div class="summary-row">
+            <span>جمع کالاها (<span id="totalItems">{{basket.items.length}}</span> کالا):</span>
+            <span id="subtotal">${{totalResult.totalItems}}</span>
+          </div>
+          <div class="summary-row">
+            <span>هزینه ارسال:</span>
+            <span id="shipping">{{totalResult.shippingTotal}}</span>
+          </div>
+          <div class="summary-row">
+            <span>تخفیف:</span>
+            <span id="discount" class="text-success">{{totalResult.discount}}</span>
+          </div>
+          <div class="summary-row">
+            <span>مالیات (9%):</span>
+            <span id="tax">{{totalResult.tax}}</span>
+          </div>
+          <div class="summary-row total-row text-nowrap fs-6">
+            <span>مبلغ قابل پرداخت:</span>
+            <span id="total">{{totalResult.totalToPay}}</span>
+          </div>
         </div>
-        <div class="summary-row">
-          <span>هزینه ارسال:</span>
-          <span id="shipping">0</span>
-        </div>
-        <div class="summary-row">
-          <span>تخفیف:</span>
-          <span id="discount" class="text-success">0</span>
-        </div>
-        <div class="summary-row">
-          <span>مالیات (9%):</span>
-          <span id="tax">{{basket.totalPrice * 0.09}}</span>
-        </div>
-        <div class="summary-row total-row text-nowrap fs-6">
-          <span>مبلغ قابل پرداخت:</span>
-          <span id="total">{{basket.totalPrice + basket.totalPrice*0.09}}</span>
-        </div>
-      </div>
+      }
 
       <!-- Shipping Info -->
       <div class="shipping-info">

@@ -13,12 +13,19 @@ export interface IBasketItem {
 }
 
 export class Basket implements IBasket {
-  constructor(userName:string) {
+  constructor(userName: string) {
     this.userName = userName;
     this.totalPrice = 0;
     this.items = [];
   }
-  userName: string ;
+  userName: string;
   totalPrice: number;
   items: IBasketItem[];
+}
+export interface IBasketTotal {
+  totalItems: number;
+  tax: number;
+  shippingTotal: number;
+  discount: number;
+  totalToPay : number
 }
