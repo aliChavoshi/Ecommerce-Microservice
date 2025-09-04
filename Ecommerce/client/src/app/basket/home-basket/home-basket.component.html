@@ -23,7 +23,6 @@
         <i class="fas fa-list me-2"></i>
         محصولات سبد خرید (<span id="itemCount">{{basket.items.length}}</span> کالا)
       </h3>
-
       <div id="cartItems">
         @for (item of basket.items; track $index) {
         <!-- Cart Item 1 -->
@@ -58,16 +57,6 @@
         </div>
         }
       </div>
-
-      <!-- TODO -->
-      <!-- Empty Cart Message (Hidden by default) -->
-      <div class="empty-cart d-none" id="emptyCart">
-        <i class="fas fa-shopping-cart"></i>
-        <h3>سبد خرید شما خالی است</h3>
-        <p>هنوز محصولی به سبد خرید خود اضافه نکرده‌اید</p>
-        <a href="#" class="continue-shopping">ادامه خرید</a>
-      </div>
-
       <div class="text-center mt-4">
         <a href="#" class="continue-shopping">
           <i class="fas fa-arrow-right me-2"></i>
@@ -75,7 +64,6 @@
         </a>
       </div>
     </div>
-
     <!-- Cart Summary Section -->
     <div class="cart-summary-section">
       <h3 class="section-title">
@@ -138,6 +126,19 @@
           <i class="fas fa-university fa-2x text-success"></i>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+}@else{
+<div class="main-container">
+  <!-- Cart Items Section -->
+  <div class="cart-items-section">
+    <!-- Empty Cart Message (Hidden by default) -->
+    <div class="empty-cart" id="emptyCart">
+      <i class="fas fa-shopping-cart"></i>
+      <h3>سبد خرید شما خالی است</h3>
+      <p>هنوز محصولی به سبد خرید خود اضافه نکرده‌اید</p>
+      <a href="#" class="continue-shopping">ادامه خرید</a>
     </div>
   </div>
 </div>

@@ -1,1 +1,128 @@
-<p>unauthorized works!</p>
+ <div class="main-container">
+        <div class="floating-elements">
+            <div class="floating-shape shape1"></div>
+            <div class="floating-shape shape2"></div>
+            <div class="floating-shape shape3"></div>
+        </div>
+
+        <div class="header-section pulse-border">
+            <div class="lock-container">
+                <div class="lock-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="lock-key">
+                    <i class="fas fa-key"></i>
+                </div>
+            </div>
+            <div class="error-code">401</div>
+            <div class="error-title">دسترسی غیرمجاز</div>
+        </div>
+
+        <div class="error-content">
+            <div class="error-message">
+                برای دسترسی به این صفحه نیاز به احراز هویت دارید.
+                <br>
+                لطفاً وارد حساب کاربری خود شوید یا ثبت‌نام کنید.
+            </div>
+
+            <div class="login-section">
+                <h5><i class="fas fa-sign-in-alt"></i> ورود سریع</h5>
+                <form id="quickLoginForm">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="ایمیل یا نام کاربری" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" class="form-control" placeholder="رمز عبور" required>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="form-check text-start mb-3">
+                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">
+                            مرا به خاطر بسپار
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-primary-custom">
+                        <i class="fas fa-sign-in-alt"></i> ورود
+                    </button>
+                </form>
+            </div>
+
+            <div class="auth-options">
+                <h6><i class="fas fa-users"></i> روش‌های احراز هویت</h6>
+                <p class="text-muted mb-3">می‌توانید از طریق شبکه‌های اجتماعی نیز وارد شوید</p>
+                <div class="social-login">
+                    <a href="#" class="social-btn google" title="ورود با Google">
+                        <i class="fab fa-google"></i>
+                    </a>
+                    <a href="#" class="social-btn facebook" title="ورود با Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-btn twitter" title="ورود با Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-btn linkedin" title="ورود با LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="/login" class="btn-primary-custom">
+                    <i class="fas fa-sign-in-alt"></i> صفحه ورود کامل
+                </a>
+                <a href="/register" class="btn-outline-custom">
+                    <i class="fas fa-user-plus"></i> ثبت‌نام
+                </a>
+            </div>
+
+            <div class="suggestions">
+                <div class="suggestion-card" onclick="window.location='/login'">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <h6>ورود</h6>
+                    <p>به حساب کاربری خود وارد شوید</p>
+                </div>
+                <div class="suggestion-card" onclick="window.location='/register'">
+                    <i class="fas fa-user-plus"></i>
+                    <h6>ثبت‌نام</h6>
+                    <p>حساب کاربری جدید ایجاد کنید</p>
+                </div>
+                <div class="suggestion-card" onclick="window.location='/forgot-password'">
+                    <i class="fas fa-key"></i>
+                    <h6>فراموشی رمز</h6>
+                    <p>بازیابی رمز عبور</p>
+                </div>
+                <div class="suggestion-card" onclick="window.location='/'">
+                    <i class="fas fa-home"></i>
+                    <h6>صفحه اصلی</h6>
+                    <p>بازگشت به صفحه اصلی</p>
+                </div>
+            </div>
+
+            <div class="security-warning">
+                <i class="fas fa-shield-alt"></i>
+                <h6>توجه امنیتی</h6>
+                <p>برای حفاظت از حریم خصوصی شما، این صفحه نیاز به احراز هویت دارد. اطلاعات شما کاملاً محفوظ و امن است.</p>
+            </div>
+
+            <div class="help-section">
+                <h6><i class="fas fa-question-circle"></i> راهنمای کمکی</h6>
+                <div class="help-item" onclick="expandHelp(this)">
+                    <i class="fas fa-info-circle"></i>
+                    <span>چگونه وارد شوم؟</span>
+                </div>
+                <div class="help-item" onclick="expandHelp(this)">
+                    <i class="fas fa-user-lock"></i>
+                    <span>رمز عبور خود را فراموش کرده‌ام</span>
+                </div>
+                <div class="help-item" onclick="expandHelp(this)">
+                    <i class="fas fa-envelope"></i>
+                    <span>تماس با پشتیبانی</span>
+                </div>
+                <div class="help-item" onclick="expandHelp(this)">
+                    <i class="fas fa-book"></i>
+                    <span>مشاهده راهنمای کامل</span>
+                </div>
+            </div>
+        </div>
+    </div>
