@@ -19,10 +19,17 @@
   <div class="cart-content">
     <!-- Cart Items Section -->
     <div class="cart-items-section">
-      <h3 class="section-title">
-        <i class="fas fa-list me-2"></i>
-        محصولات سبد خرید (<span id="itemCount">{{basket.items.length}}</span> کالا)
-      </h3>
+      <div class="d-flex justify-content-between align-items-center align-content-center">
+        <h3 class="section-title">
+          <i class="fas fa-list me-2"></i>
+          محصولات سبد خرید (<span id="itemCount">{{basket.items.length}}</span> کالا)
+        </h3>
+        <button class="remove-btn text-nowrap mb-3">
+          <i class="fas fa-trash me-1"></i>
+          حذف کل سبد خرید
+        </button>
+      </div>
+      <div class="col-6"></div>
       <div id="cartItems">
         @for (item of basket.items; track $index) {
         <!-- Cart Item 1 -->
@@ -71,28 +78,28 @@
         خلاصه سفارش
       </h3>
       @if(basketService.basketTotal$ | async;as totalResult){
-        <div class="cart-summary">
-          <div class="summary-row">
-            <span>جمع کالاها (<span id="totalItems">{{basket.items.length}}</span> کالا):</span>
-            <span id="subtotal">${{totalResult.totalItems}}</span>
-          </div>
-          <div class="summary-row">
-            <span>هزینه ارسال:</span>
-            <span id="shipping">{{totalResult.shippingTotal}}</span>
-          </div>
-          <div class="summary-row">
-            <span>تخفیف:</span>
-            <span id="discount" class="text-success">{{totalResult.discount}}</span>
-          </div>
-          <div class="summary-row">
-            <span>مالیات (9%):</span>
-            <span id="tax">{{totalResult.tax}}</span>
-          </div>
-          <div class="summary-row total-row text-nowrap fs-6">
-            <span>مبلغ قابل پرداخت:</span>
-            <span id="total">{{totalResult.totalToPay}}</span>
-          </div>
+      <div class="cart-summary">
+        <div class="summary-row">
+          <span>جمع کالاها (<span id="totalItems">{{basket.items.length}}</span> کالا):</span>
+          <span id="subtotal">${{totalResult.totalItems}}</span>
         </div>
+        <div class="summary-row">
+          <span>هزینه ارسال:</span>
+          <span id="shipping">{{totalResult.shippingTotal}}</span>
+        </div>
+        <div class="summary-row">
+          <span>تخفیف:</span>
+          <span id="discount" class="text-success">{{totalResult.discount}}</span>
+        </div>
+        <div class="summary-row">
+          <span>مالیات (9%):</span>
+          <span id="tax">{{totalResult.tax}}</span>
+        </div>
+        <div class="summary-row total-row text-nowrap fs-6">
+          <span>مبلغ قابل پرداخت:</span>
+          <span id="total">{{totalResult.totalToPay}}</span>
+        </div>
+      </div>
       }
 
       <!-- Shipping Info -->
