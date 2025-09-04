@@ -1,1 +1,84 @@
-<p>server-error works!</p>
+<div class="main-container">
+        <div class="floating-elements">
+            <div class="floating-shape shape1"></div>
+            <div class="floating-shape shape2"></div>
+            <div class="floating-shape shape3"></div>
+        </div>
+
+        <div class="header-section">
+            <div class="error-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="error-code">500</div>
+            <div class="error-title">خطای داخلی سرور</div>
+        </div>
+
+        <div class="error-content">
+            <div class="error-message">
+                متأسفانه مشکلی در سرور رخ داده است. تیم فنی ما در حال بررسی و رفع این مشکل هستند.
+                <br>
+                لطفاً چند دقیقه دیگر مجدداً تلاش کنید.
+            </div>
+
+            <div class="error-details">
+                <h5><i class="fas fa-info-circle"></i> جزئیات خطا</h5>
+                <p>کد خطا: <strong>HTTP 500 - Internal Server Error</strong></p>
+                <p>زمان وقوع: <strong id="error-time"></strong></p>
+                <p>شناسه درخواست: <strong>#REQ-<span id="request-id"></span></strong></p>
+            </div>
+
+            <div class="retry-section">
+                <h6><i class="fas fa-sync-alt"></i> بازآوری خودکار</h6>
+                <p>صفحه به صورت خودکار در <span class="countdown" id="countdown">30</span> ثانیه بازآوری خواهد شد</p>
+                <div style="background: #e9ecef; border-radius: 10px; height: 6px; overflow: hidden;">
+                    <div class="progress-bar" id="progress-bar" style="width: 100%;"></div>
+                </div>
+                <button class="btn-outline-custom" onclick="clearCountdown()">
+                    <i class="fas fa-pause"></i> توقف بازآوری
+                </button>
+            </div>
+
+            <div class="text-center d-flex">
+                <a href="#" class="btn-primary-custom" onclick="location.reload()">
+                    <i class="fas fa-redo-alt"></i> تلاش مجدد
+                </a>
+                <a href="/" class="btn-outline-custom">
+                    <i class="fas fa-home"></i> صفحه اصلی
+                </a>
+            </div>
+
+            <div class="suggestions">
+                <div class="suggestion-card" onclick="location.reload()">
+                    <i class="fas fa-sync-alt"></i>
+                    <h6>بازآوری صفحه</h6>
+                    <p>صفحه را مجدداً بارگذاری کنید</p>
+                </div>
+                <div class="suggestion-card" onclick="history.back()">
+                    <i class="fas fa-arrow-right"></i>
+                    <h6>بازگشت</h6>
+                    <p>به صفحه قبلی برگردید</p>
+                </div>
+                <div class="suggestion-card" onclick="window.location='/'">
+                    <i class="fas fa-home"></i>
+                    <h6>صفحه اصلی</h6>
+                    <p>بازگشت به صفحه اصلی سایت</p>
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <h6><i class="fas fa-headset"></i> پشتیبانی فنی</h6>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>support@example.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>۰۲۱-۱۲۳۴۵۶۷۸</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-telegram"></i>
+                    <span>@support_channel</span>
+                </div>
+            </div>
+        </div>
+    </div>
