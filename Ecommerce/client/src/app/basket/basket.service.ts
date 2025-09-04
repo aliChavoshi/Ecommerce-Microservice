@@ -86,7 +86,7 @@ export class BasketService {
     }
   }
   deleteBasket(userName: string) {
-    this.http.delete<boolean>(`${this.baseUrl}/basket/DeleteBasketByUserName/${userName}`).pipe(
+    return this.http.delete<boolean>(`${this.baseUrl}/basket/DeleteBasketByUserName/${userName}`).pipe(
       tap((response) => {
         if (response) {
           this.basketSource.next(null);

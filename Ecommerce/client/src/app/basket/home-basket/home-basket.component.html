@@ -24,7 +24,7 @@
           <i class="fas fa-list me-2"></i>
           محصولات سبد خرید (<span id="itemCount">{{basket.items.length}}</span> کالا)
         </h3>
-        <button class="remove-btn text-nowrap mb-3">
+        <button class="remove-btn text-nowrap mb-3" (click)="deleteBasket()">
           <i class="fas fa-trash me-1"></i>
           حذف کل سبد خرید
         </button>

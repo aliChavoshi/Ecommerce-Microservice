@@ -11,4 +11,11 @@ import { IProduct } from '../../shared/models/product';
 })
 export class HomeBasketComponent {
   constructor(public basketService: BasketService) {}
+
+  deleteBasket() {
+    const basket = this.basketService.getCurrentBasket();
+    if (basket) this.basketService.deleteBasket(basket.userName).subscribe((res) => {
+      console.log("🚀 ~ HomeBasketComponent ~ deleteBasket ~ res:", res)
+    });
+  }
 }
