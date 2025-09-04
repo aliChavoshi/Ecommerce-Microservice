@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     const loggedUser = localStorage.getItem('basket_username');
     if(loggedUser){
       this.basketService.getBasket(loggedUser).subscribe(res=>{
-      console.log("🚀 ~ AppComponent ~ ngOnInit ~ res:", res)
+      // console.log("🚀 ~ AppComponent ~ ngOnInit ~ res:", res)
       });
     }
   }

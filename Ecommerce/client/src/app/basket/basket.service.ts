@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable, of, tap } from 'rxjs';
 import { IBasket, Basket, IBasketItem, IBasketTotal } from '../shared/models/basket';
 import { APP_CONFIG } from '../core/configs/appConfig.token';
 import { IProduct } from '../shared/models/product';
@@ -20,21 +20,21 @@ export class BasketService {
 
   constructor(private http: HttpClient) {}
 
-  getBasket(userName: string) {
+  getBasket(userName: string): Observable<IBasket> {
     return this.http.get<IBasket>(`${this.baseUrl}/basket/GetBasketByUserName/${userName}`).pipe(
       tap((basket) => {
         this.basketSource.next(basket), this.calculateBasketTotal();
       })
     );
   }
-  setToBasket(basket: IBasket) {
+  setToBasket(basket: IBasket): Observable<IBasket> {
     return this.http.post<IBasket>(`${this.baseUrl}/basket/CreateBasket`, basket).pipe(
       tap((basket) => {
         this.basketSource.next(basket), this.calculateBasketTotal();
       })
     );
   }
-  getCurrentBasket() {
+  getCurrentBasket(): IBasket | null {
     return this.basketSource.getValue();
   }
   addItemToBasket(product: IProduct, quantity: number = 1): Observable<IBasket> {
@@ -43,47 +43,49 @@ export class BasketService {
     basket.items = this.addOrUpdateItemBasket(basket.items, itemToAdd, quantity);
     return this.setToBasket(basket);
   }
-  removeItemFromBasket(productId: string) {
+  removeItemFromBasket(productId: string): Observable<IBasket | boolean> {
     const basket = this.getCurrentBasket();
     if (basket?.items.some((x) => x.productId === productId)) {
       basket.items = basket.items.filter((x) => x.productId !== productId);
       if (basket.items.length > 0) {
         //we have another items in the basket
-        this.setToBasket(basket);
+        return this.setToBasket(basket);
       } else {
         //basket is EMPTY
-        this.deleteBasket(basket.userName);
+        return this.deleteBasket(basket.userName);
       }
     }
+    return EMPTY;
   }
-  increaseItemQuantity(item: IBasketItem) {
+  increaseItemQuantity(item: IBasketItem): Observable<IBasket> {
     const basket = this.getCurrentBasket();
-    if (!basket) return;
+    if (!basket) return EMPTY;
     const index = basket?.items.findIndex((x) => x.productId === item.productId);
     //increase Item
     if (index > 0) {
       basket.items[index].quantity++;
-      this.setToBasket(basket);
+      return this.setToBasket(basket);
     } else {
       //add new Item to the basket
       const product = this.mapItemBasketToProduct(item);
-      this.addItemToBasket(product, 1);
+      return this.addItemToBasket(product, 1);
     }
   }
-  decreaseItemQuantity(item: IBasketItem) {
+  decreaseItemQuantity(item: IBasketItem): Observable<IBasket | boolean> {
     const basket = this.getCurrentBasket();
-    if (!basket) return;
-    const index = basket.items.findIndex((x) => x.productId === item.productId);
-    if (index > 0) {
+    if (!basket) return EMPTY;
+    const index = basket.items.findIndex((x) => x.productId == item?.productId);
+    if (index >= 0) {
       if (basket.items[index]?.quantity >= 2) {
         //decrease
         basket.items[index].quantity--;
-        this.setToBasket(basket);
+        return this.setToBasket(basket);
       } else {
         //removeItemFromBasket
-        this.removeItemFromBasket(basket.items[index].productId);
+        return this.removeItemFromBasket(basket?.items[index]?.productId);
       }
     }
+    return EMPTY;
   }
   deleteBasket(userName: string) {
     return this.http.delete<boolean>(`${this.baseUrl}/basket/DeleteBasketByUserName/${userName}`).pipe(
