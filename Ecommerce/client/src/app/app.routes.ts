@@ -61,6 +61,10 @@ export const routes: Routes = [
     loadComponent: () => import('./core/server-error/server-error.component').then((x) => x.ServerErrorComponent)
   },
   {
+    path: 'no-internet',
+    loadComponent: () => import('./core/no-internet/no-internet.component').then((x) => x.NoInternetComponent)
+  },
+  {
     path: 'unauthorized',
     loadComponent: () => import('./core/unauthorized/unauthorized.component').then((x) => x.UnauthorizedComponent)
   },
