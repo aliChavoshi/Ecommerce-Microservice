@@ -45,6 +45,7 @@ export class BasketService {
   }
   removeItemFromBasket(productId: string): Observable<IBasket | boolean> {
     const basket = this.getCurrentBasket();
+    console.log("🚀 ~ BasketService ~ removeItemFromBasket ~ basket:", basket)
     if (basket?.items.some((x) => x.productId === productId)) {
       basket.items = basket.items.filter((x) => x.productId !== productId);
       if (basket.items.length > 0) {
@@ -119,7 +120,7 @@ export class BasketService {
       totalToPay
     });
   }
-  private mapProductToItemBasket(product: IProduct): IBasketItem {
+  public mapProductToItemBasket(product: IProduct): IBasketItem {
     return {
       imageFile: product.imageFile,
       price: product.price,
@@ -153,8 +154,6 @@ export class BasketService {
     return basket;
   }
   private addOrUpdateItemBasket(items: IBasketItem[], itemToAdd: IBasketItem, quantity: number): IBasketItem[] {
-    console.log('🚀 ~ BasketService ~ addOrUpdateItemBasket ~ itemToAdd:', itemToAdd);
-    console.log('🚀 ~ BasketService ~ addOrUpdateItemBasket ~ items:', items);
     const itemInBasket = items?.find((x) => x.productId == itemToAdd.productId);
     if (itemInBasket) {
       itemInBasket.quantity += quantity;

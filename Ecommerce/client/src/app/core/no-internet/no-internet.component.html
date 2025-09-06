@@ -1,1 +1,147 @@
-<p>no-internet works!</p>
+<div class="floating-elements">
+  <div class="cloud">
+    <i class="fas fa-cloud"></i>
+  </div>
+  <div class="cloud">
+    <i class="fas fa-cloud"></i>
+  </div>
+  <div class="cloud">
+    <i class="fas fa-cloud"></i>
+  </div>
+  <div class="cloud">
+    <i class="fas fa-cloud"></i>
+  </div>
+  <div class="cloud">
+    <i class="fas fa-cloud"></i>
+  </div>
+  <div class="cloud">
+    <i class="fas fa-cloud"></i>
+  </div>
+</div>
+
+<div class="main-container">
+  <div class="offline-container">
+    <div class="wifi-icon">
+      <i class="fas fa-wifi"></i>
+    </div>
+
+    <h1 class="offline-title">No Internet Connection</h1>
+
+    <h2 class="offline-subtitle">You're offline</h2>
+
+    <p class="offline-description">
+      It looks like you're not connected to the internet. Check your connection and try again.
+      Don't worry, we'll help you get back online!
+    </p>
+
+    <div class="connection-status">
+      <div class="status-indicator"></div>
+      <span class="status-text">Connection Status: Offline</span>
+    </div>
+
+    <!-- Network Speed Indicator -->
+    <div class="speed-indicator">
+      <div class="speed-bar"></div>
+      <div class="speed-bar"></div>
+      <div class="speed-bar"></div>
+      <div class="speed-bar"></div>
+      <div class="speed-bar"></div>
+      <span class="ms-3 text-muted">Checking connection...</span>
+    </div>
+
+    <!-- Troubleshooting Section -->
+    <div class="troubleshoot-section">
+      <h3 class="troubleshoot-title">
+        <i class="fas fa-tools me-2"></i>Troubleshooting Steps
+      </h3>
+      <ul class="troubleshoot-steps">
+        <li>
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <div class="step-title">Check Your Connection</div>
+            <p class="step-description">Make sure your WiFi or mobile data is turned on</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <div class="step-title">Restart Your Router</div>
+            <p class="step-description">Unplug your router for 30 seconds, then plug it back in</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <div class="step-title">Check Network Settings</div>
+            <p class="step-description">Verify that airplane mode is off and network settings are correct</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <div class="step-title">Contact Your ISP</div>
+            <p class="step-description">If problems persist, contact your internet service provider</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="btn-primary-custom" onclick="retryConnection()">
+        <i class="fas fa-sync-alt me-2"></i>Try Again
+      </button>
+      <button class="btn-outline-custom" onclick="checkSettings()">
+        <i class="fas fa-cog me-2"></i>Network Settings
+      </button>
+    </div>
+
+    <!-- Offline Dinosaur Game -->
+    <div class="dinosaur-game" onclick="playDinosaurGame()">
+      <div class="dino-icon">🦕</div>
+      <div class="dino-text">Play Offline Game</div>
+      <p class="dino-description">Click to play a simple game while waiting for connection</p>
+    </div>
+
+    <!-- Offline Entertainment -->
+    <div class="offline-games">
+      <h4 class="games-title">Things You Can Do Offline</h4>
+      <div class="game-item" onclick="suggestActivity('read')">
+        <i class="fas fa-book me-2"></i>Read a Book
+      </div>
+      <div class="game-item" onclick="suggestActivity('music')">
+        <i class="fas fa-music me-2"></i>Listen to Downloaded Music
+      </div>
+      <div class="game-item" onclick="suggestActivity('exercise')">
+        <i class="fas fa-running me-2"></i>Do Some Exercise
+      </div>
+      <div class="game-item" onclick="suggestActivity('sketch')">
+        <i class="fas fa-pencil-alt me-2"></i>Draw or Write
+      </div>
+    </div>
+  </div>
+
+  <!-- Help Section -->
+  <div class="help-section">
+    <div class="help-content">
+      <h4 class="help-title">Still Need Help?</h4>
+      <p class="mb-0 opacity-75">
+        Our technical support team is ready to assist you
+      </p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+1 (555) 123-4567</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>support@premiumshopping.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-comments"></i>
+          <span>Live Chat (when online)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

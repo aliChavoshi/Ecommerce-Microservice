@@ -1,5 +1,5 @@
 @if(product){
-  <div class="main-container">
+<div class="main-container">
   <!-- Header Section -->
   <div class="header-section p-5">
     <a [routerLink]="['/store']" class="back-button">
@@ -97,27 +97,29 @@
             </ul>
           </div>
 
+          @if(ExistedInBasket && itemBasket){
           <div class="quantity-section">
             <label class="fw-bold me-3">Quantity:</label>
             <div class="quantity-controls">
-              <button class="quantity-btn" onclick="decreaseQuantity()">
+              <button class="quantity-btn" (click)="decreaseItemQuantity()">
                 <i class="fas fa-minus"></i>
               </button>
-              <input type="number" value="1" min="1" max="10" class="quantity-input" id="quantity">
-              <button class="quantity-btn" onclick="increaseQuantity()">
+              <input type="number" [value]="itemBasket.quantity" min="1" max="10" class="quantity-input" id="quantity">
+              <button class="quantity-btn" (click)="increaseItemQuantity()">
                 <i class="fas fa-plus"></i>
               </button>
             </div>
           </div>
+          }
           @if(!ExistedInBasket){
-            <div class="action-buttons">
-              <button class="btn btn-primary-custom" (click)="addItemToBasket()">
-                <i class="fas fa-shopping-cart me-2"></i>Add to Cart
-              </button>
-              <button class="btn btn-outline-custom" (click)="addItemToBasket()">
-                <i class="fas fa-bolt me-2"></i>Buy Now
-              </button>
-            </div>
+          <div class="action-buttons">
+            <button class="btn btn-primary-custom" (click)="addItemToBasket()">
+              <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+            </button>
+            <button class="btn btn-outline-custom" (click)="addItemToBasket()">
+              <i class="fas fa-bolt me-2"></i>Buy Now
+            </button>
+          </div>
           }
         </div>
       </div>
