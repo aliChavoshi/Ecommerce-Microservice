@@ -28,7 +28,8 @@ internal static class HostingExtensions
                 options.Events.RaiseSuccessEvents = true;
                 options.EmitStaticAudienceClaim = true;
                 // options.IssuerUri = "http://identityserveraspnetidentity:8080"; //aud in jwt token : ocelot
-                options.IssuerUri = "https://id-local.eshopping.com:44344"; //aud in jwt token : nxing
+                // options.IssuerUri = "https://id-local.eshopping.com:44344"; //aud in jwt token : nxing
+                options.IssuerUri = "https://localhost:9009"; //localhost
             })
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)

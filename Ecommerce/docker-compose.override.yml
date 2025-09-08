@@ -187,7 +187,7 @@ services:
       - ASPNETCORE_URLS=http://+:80
       - "ElasticConfiguration__Uri=http://elasticsearch:9200"  
     depends_on:
-      - identityserveraspnetidentity
+      # - identityserveraspnetidentity
       - catalog.api
       - basket.api
       - discount.api
@@ -196,12 +196,12 @@ services:
       - "9010:80"
 
   #IdentityServer 44300:8080
-  identityserveraspnetidentity:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://*:8080      
-    ports:
-      - "44300:8080"
+  # identityserveraspnetidentity:
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_URLS=http://*:8080      
+  #   ports:
+  #     - "44300:8080"
 
   #reverseproxy 44344:44344 ssl https
   reverseproxy:
@@ -210,7 +210,7 @@ services:
     ports:
       - "44344:44344"
     depends_on:
-      - identityserveraspnetidentity
+      # - identityserveraspnetidentity
       - catalog.api
       - basket.api
       - discount.api

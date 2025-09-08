@@ -71,7 +71,8 @@ var authScheme = "EShoppingGatewayAuthScheme";
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(authScheme, options =>
     {
-        options.Authority = "http://identityserveraspnetidentity:8080"; // آدرس سرور احراز هویت
+        // options.Authority = "http://identityserveraspnetidentity:8080"; // آدرس سرور احراز هویت
+        options.Authority = "https://localhost:9009"; //localhost
         options.Audience = "EShoppingGateway"; // نام مخاطب
         options.RequireHttpsMetadata = false;
     });

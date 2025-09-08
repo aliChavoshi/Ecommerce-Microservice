@@ -118,7 +118,7 @@ var httpHandler = new HttpClientHandler
 //             ValidIssuers =
 //             [
 //                 "http://identityserveraspnetidentity:8080", // Ocelot
-//                 // "https://id-local.eshopping.com:44344"               // Nginx
+//                 // "https://id-local.eshopping.com:44344"  // Nginx
 //             ],
 //         };
 //         options.IncludeErrorDetails = true;
