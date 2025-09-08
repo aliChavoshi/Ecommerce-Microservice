@@ -103,31 +103,33 @@ builder.Services.AddMassTransit(configuration =>
 builder.Services.AddMassTransitHostedService();
 
 // Authentication & Authorization with IdentityServer
-// var authorizationPolicy = new AuthorizationPolicyBuilder()
-//     .RequireAuthenticatedUser()
-//     .Build();
-//
-// builder.Services.AddControllers(config =>
-// {
-//     config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); // Apply global authorization policy
-// });
-//
-// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//     .AddJwtBearer(options =>
-//     {
-//         options.Authority = "http://identityserveraspnetidentity:8080"; // IdentityServer URL for token validation
-//         // options.Authority = "https://id-local.eshopping.com:44344";  // For Nginx deployment (commented)
-//         options.Audience = "Basket"; // API Resource name
-//         options.RequireHttpsMetadata = false; // Allow non-HTTPS for development/testing
-//         options.TokenValidationParameters = new TokenValidationParameters
-//         {
-//             ValidateIssuer = true,
-//             ValidateIssuerSigningKey = true,
-//             ValidateAudience = true,
-//             ValidIssuer = "http://identityserveraspnetidentity:8080",
-//             // ValidIssuer = "https://id-local.eshopping.com:44344",    // For Nginx deployment (commented)
-//         };
-//     });
+var authorizationPolicy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+
+builder.Services.AddControllers(config =>
+{
+    config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); // Apply global authorization policy
+});
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        // options.Authority = "http://identityserveraspnetidentity:8080"; // IdentityServer URL for token validation
+        // options.Authority = "https://id-local.eshopping.com:44344";  // For Nginx deployment (commented)
+        options.Authority = "https://localhost:9009";
+        options.Audience = "Basket"; // API Resource name
+        options.RequireHttpsMetadata = false; // Allow non-HTTPS for development/testing
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateIssuerSigningKey = true,
+            ValidateAudience = true,
+            ValidIssuer = "https://localhost:9009",
+            // ValidIssuer = "http://identityserveraspnetidentity:8080",
+            // ValidIssuer = "https://id-local.eshopping.com:44344",    // For Nginx deployment (commented)
+        };
+    });
 
 // -----------------------------
 // Build the Application

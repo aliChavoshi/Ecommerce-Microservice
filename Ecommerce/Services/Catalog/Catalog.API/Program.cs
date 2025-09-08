@@ -100,49 +100,51 @@ var httpHandler = new HttpClientHandler
         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
 };
 
-// Configure JWT Bearer Authentication
-// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//     .AddJwtBearer(options =>
-//     {
-//         options.Authority = "http://identityserveraspnetidentity:8080"; // IdentityServer endpoint (Docker/Ocelot)
-//         // options.Authority = "https://id-local.eshopping.com:44344";   // For Nginx deployment (commented)
-//
-//         options.Audience = "Catalog"; // API resource name
-//         options.RequireHttpsMetadata = false; // Disable HTTPS requirement
-//         options.BackchannelHttpHandler = httpHandler; // Accept all certs
-//         options.TokenValidationParameters = new TokenValidationParameters
-//         {
-//             ValidateIssuer = true,
-//             ValidateIssuerSigningKey = true,
-//             ValidateAudience = true,
-//             ValidIssuers =
-//             [
-//                 "http://identityserveraspnetidentity:8080", // Ocelot
-//                 // "https://id-local.eshopping.com:44344"  // Nginx
-//             ],
-//         };
-//         options.IncludeErrorDetails = true;
-//         options.Events = new JwtBearerEvents
-//         {
-//             OnAuthenticationFailed = context =>
-//             {
-//                 Console.WriteLine($"Auth failed: {context.Exception.Message}");
-//                 return Task.CompletedTask;
-//             },
-//             OnTokenValidated = context =>
-//             {
-//                 Console.WriteLine("Token validated successfully.");
-//                 return Task.CompletedTask;
-//             }
-//         };
-//     });
+//Configure JWT Bearer Authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        // options.Authority = "http://identityserveraspnetidentity:8080"; // IdentityServer endpoint (Docker/Ocelot)
+        // options.Authority = "https://id-local.eshopping.com:44344";   // For Nginx deployment (commented)
+        options.Authority = "https://localhost:9009";
+
+        options.Audience = "Catalog"; // API resource name
+        options.RequireHttpsMetadata = false; // Disable HTTPS requirement
+        options.BackchannelHttpHandler = httpHandler; // Accept all certs
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateIssuerSigningKey = true,
+            ValidateAudience = true,
+            ValidIssuers =
+            [
+                "https://localhost:9009"
+                // "http://identityserveraspnetidentity:8080", // Ocelot
+                // "https://id-local.eshopping.com:44344"  // Nginx
+            ],
+        };
+        options.IncludeErrorDetails = true;
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                Console.WriteLine($"Auth failed: {context.Exception.Message}");
+                return Task.CompletedTask;
+            },
+            OnTokenValidated = context =>
+            {
+                Console.WriteLine("Token validated successfully.");
+                return Task.CompletedTask;
+            }
+        };
+    });
 
 // Custom authorization policies
-// builder.Services.AddAuthorization(options =>
-// {
-//     options.AddPolicy("CanRead", policy => policy.RequireClaim("scope", "catalogapi.read"));
-//     options.AddPolicy("CanWrite", policy => policy.RequireClaim("scope", "catalogapi.write"));
-// });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("CanRead", policy => policy.RequireClaim("scope", "catalogapi.read"));
+    options.AddPolicy("CanWrite", policy => policy.RequireClaim("scope", "catalogapi.write"));
+});
 
 // -----------------------------
 // Build and Configure the Application

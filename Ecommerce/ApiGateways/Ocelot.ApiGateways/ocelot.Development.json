@@ -12,11 +12,10 @@
             ],
             "UpstreamPathTemplate": "/Catalog",
             "UpstreamHttpMethod": ["GET", "POST", "PUT"],
-            //"AuthenticationOptions": {
-            //    "AuthenticationProviderKey": "EShoppingGatewayAuthScheme",
-            //    "AllowedScopes": []
-
-            //},
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "EShoppingGatewayAuthScheme",
+                "AllowedScopes": []
+            },
             //important
             "DelegatingHandlers": ["CorrelationDelegatingHandler"]
         },
@@ -137,9 +136,9 @@
             ],
             "UpstreamPathTemplate": "/Basket/CreateBasket",
             "UpstreamHttpMethod": ["POST"],
-            //"AuthenticationOptions": {
-            //    "AuthenticationProviderKey": "EShoppingGatewayAuthScheme"
-            //},
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "EShoppingGatewayAuthScheme"
+            },
             "DelegatingHandlers": ["CorrelationDelegatingHandler"]
         },
         // Checkout Basket
