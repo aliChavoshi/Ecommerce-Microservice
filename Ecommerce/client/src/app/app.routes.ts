@@ -49,6 +49,14 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'login',
+    loadComponent: () => import('./account/login/login.component').then((x) => x.LoginComponent)
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./account/register/register.component').then((x) => x.RegisterComponent)
+  },
+  {
     path: 'contact-us',
     loadComponent: () => import('./core/contact-us/contact-us.component').then((x) => x.ContactUsComponent)
   },
