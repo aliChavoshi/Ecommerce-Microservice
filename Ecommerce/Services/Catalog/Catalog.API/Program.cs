@@ -86,12 +86,12 @@ builder.Services.AddScoped<IBrandRepository, ProductRepository>();
 // -----------------------------
 // IdentityServer Authentication & Authorization
 // -----------------------------
-// var authorizationPolicy = new AuthorizationPolicyBuilder()
-//     .RequireAuthenticatedUser()
-//     .Build();
-//
-// // Global authorization filter
-// builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); });
+var authorizationPolicy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+
+// Global authorization filter
+builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); });
 
 // Accept any server certificate (for dev or self-signed certs)
 var httpHandler = new HttpClientHandler
