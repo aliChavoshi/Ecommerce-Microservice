@@ -20,6 +20,16 @@ internal static class HostingExtensions
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
+        // builder.WebHost.ConfigureKestrel(options =>
+        // {
+        //     // اجازه بده روی همه IPها گوش بده (نه فقط localhost)
+        //     options.ListenAnyIP(9011);
+        //     options.ListenAnyIP(9009, listenOptions =>
+        //     {
+        //         listenOptions.UseHttps(); // اگر https می‌خوای
+        //     });
+        // });
+
         builder.Services.AddIdentityServer(options =>
             {
                 options.Events.RaiseErrorEvents = true;
@@ -27,9 +37,9 @@ internal static class HostingExtensions
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
                 options.EmitStaticAudienceClaim = true;
-                // options.IssuerUri = "http://identityserveraspnetidentity:8080"; //aud in jwt token : ocelot
+                options.IssuerUri = "http://identityserveraspnetidentity:8080"; //aud in jwt token : ocelot
                 // options.IssuerUri = "https://id-local.eshopping.com:44344"; //aud in jwt token : nxing
-                options.IssuerUri = "https://localhost:9009"; //localhost
+                // options.IssuerUri = "http://host.docker.internal:9011"; //localhost
             })
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)

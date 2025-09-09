@@ -75,12 +75,12 @@ services:
      context: .
      dockerfile: ApiGateways\Ocelot.ApiGateways\Dockerfile
 
-  #identityserver
-  # identityserveraspnetidentity:
-  #   image: ${DOCKER_REGISTRY-}identityserveraspnetidentity
-  #   build:
-  #     context: .
-  #     dockerfile: Infrastructure/IdentityServerAspNetIdentity/Dockerfile
+  # identityserver
+  identityserveraspnetidentity:
+    image: ${DOCKER_REGISTRY-}identityserveraspnetidentity
+    build:
+      context: .
+      dockerfile: Infrastructure/IdentityServerAspNetIdentity/Dockerfile
 
   #reverseproxy
   reverseproxy:

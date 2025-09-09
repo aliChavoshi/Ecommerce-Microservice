@@ -104,9 +104,9 @@ var httpHandler = new HttpClientHandler
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        // options.Authority = "http://identityserveraspnetidentity:8080"; // IdentityServer endpoint (Docker/Ocelot)
+        options.Authority = "http://identityserveraspnetidentity:8080"; // IdentityServer endpoint (Docker/Ocelot)
         // options.Authority = "https://id-local.eshopping.com:44344";   // For Nginx deployment (commented)
-        options.Authority = "https://localhost:9009";
+        // options.Authority = "http://host.docker.internal:9011";
 
         options.Audience = "Catalog"; // API resource name
         options.RequireHttpsMetadata = false; // Disable HTTPS requirement
@@ -118,8 +118,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidIssuers =
             [
-                "https://localhost:9009"
-                // "http://identityserveraspnetidentity:8080", // Ocelot
+                // "http://host.docker.internal:9011"
+                "http://identityserveraspnetidentity:8080", // Ocelot
                 // "https://id-local.eshopping.com:44344"  // Nginx
             ],
         };
