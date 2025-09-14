@@ -18,6 +18,7 @@ export class SigninRedirectCallbackComponent implements OnInit {
       this.returnUrl = res['returnUrl'] ?? '';
     });
     this.accountService.finishLogin().then((x) => {
+      //TODO : check this
       this.router.navigate(['/checkout', { replaceUrl: true }]);
     });
   }

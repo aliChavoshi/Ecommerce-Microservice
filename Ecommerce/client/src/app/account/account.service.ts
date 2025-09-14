@@ -10,7 +10,7 @@ import { APP_CONFIG } from '../core/configs/appConfig.token';
 })
 export class AccountService {
   private config = inject(APP_CONFIG);
-  private currentUserSource = new ReplaySubject<unknown>(1);
+  private currentUserSource = new ReplaySubject<boolean | null>(1);
   currentUser$ = this.currentUserSource.asObservable();
   //
   private manager = new UserManager(getClientSettings());
@@ -20,10 +20,7 @@ export class AccountService {
   access_token = '';
 
   constructor(private http: HttpClient, private router: Router) {
-    this.manager.getUser().then((user) => {
-      this.user = user;
-      this.currentUserSource.next(this.isAuthenticated());
-    });
+    this.getUser();
   }
 
   isAuthenticated() {
@@ -33,6 +30,7 @@ export class AccountService {
     return this.manager.signinRedirect();
   }
   async signout() {
+    //TODO why async?
     await this.manager.signoutRedirect();
   }
   logout() {
@@ -47,24 +45,33 @@ export class AccountService {
     return `${this.token} ${this.access_token}`;
   }
 
-  public finishLogin = (): Promise<User> => {
-    return this.manager.signinRedirectCallback().then((user) => {
-      this.currentUserSource.next(this.checkUser(user));
-      this.token = user.token_type;
-      this.access_token = user.access_token;
-      return user;
-    });
+  /* This `finishLogin` method in the `AccountService` class is an asynchronous arrow function that
+handles the completion of the login process. Here's a breakdown of what it does: */
+  public finishLogin = async (): Promise<User> => {
+    const user = await this.manager.signinRedirectCallback();
+    this.currentUserSource.next(this.checkUser(user));
+    this.token = user.token_type;
+    this.access_token = user.access_token;
+    return user;
   };
 
   public finishLogout = () => {
     this.user = null;
     return this.manager.signoutRedirectCallback();
   };
+
   private checkUser = (user: User): boolean => {
     console.log('inside check user');
     console.log(user);
     return !!user && !user.expired;
   };
+
+  private getUser() {
+    this.manager.getUser().then((user) => {
+      this.user = user;
+      this.currentUserSource.next(this.isAuthenticated());
+    });
+  }
 }
 export function getClientSettings(): UserManagerSettings {
   const config = inject(APP_CONFIG);
