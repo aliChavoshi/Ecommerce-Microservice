@@ -86,7 +86,7 @@ public static class Config
             // لیست آدرس‌هایی که بعد از Login موفق کاربر به آنها ریدایرکت می‌شود
             RedirectUris = new List<string>
             {
-                "http://localhost:4200/signin-callback",
+                "http://localhost:4200/account/signin-callback",
                 "http://localhost:4200/assets/silent-callback.html",
                 "https://localhost:9009/signin-oidc"
             },
@@ -94,7 +94,7 @@ public static class Config
             // لیست آدرس‌هایی که بعد از Logout موفق کاربر به آنها ریدایرکت می‌شود
             PostLogoutRedirectUris = new List<string>
             {
-                "http://localhost:4200/signout-callback",
+                "http://localhost:4200/account/signout-callback",
                 "https://localhost:9009/signout-callback-oidc"
             },
 

@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/guard/auth.guard';
 
 export const routes: Routes = [
   {
@@ -49,12 +50,35 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'login',
-    loadComponent: () => import('./account/login/login.component').then((x) => x.LoginComponent)
+    path: 'account',
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./account/account.component').then((x) => x.AccountComponent)
+      },
+      {
+        path: 'login',
+        loadComponent: () => import('./account/login/login.component').then((x) => x.LoginComponent)
+      },
+      {
+        path: 'register',
+        loadComponent: () => import('./account/register/register.component').then((x) => x.RegisterComponent)
+      },
+      {
+        path: 'signin-callback',
+        loadComponent: () => import('./account/signin-redirect-callback/signin-redirect-callback.component').then((x) => x.SigninRedirectCallbackComponent)
+      },
+      {
+        path: 'signout-callback',
+        loadComponent: () => import('./account/signout-redirect-callback/signout-redirect-callback.component').then((x) => x.SignoutRedirectCallbackComponent)
+      }
+    ]
   },
+
   {
-    path: 'register',
-    loadComponent: () => import('./account/register/register.component').then((x) => x.RegisterComponent)
+    path: 'checkout',
+    canActivate: [authGuard],
+    loadComponent: () => import('./checkout/checkout.component').then((x) => x.CheckoutComponent)
   },
   {
     path: 'contact-us',
