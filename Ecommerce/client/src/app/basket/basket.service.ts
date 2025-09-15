@@ -1,14 +1,18 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, EMPTY, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, EMPTY, map, Observable, of, tap } from 'rxjs';
 import { IBasket, Basket, IBasketItem, IBasketTotal } from '../shared/models/basket';
 import { APP_CONFIG } from '../core/configs/appConfig.token';
 import { IProduct } from '../shared/models/product';
+import { AccountService } from '../account/account.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasketService {
+  private accountService = inject(AccountService);
+  private router = inject(Router);
   private cfg = inject(APP_CONFIG);
   private baseUrl = this.cfg.baseUrl;
   private basketSource = new BehaviorSubject<IBasket | null>(null);
@@ -45,7 +49,7 @@ export class BasketService {
   }
   removeItemFromBasket(productId: string): Observable<IBasket | boolean> {
     const basket = this.getCurrentBasket();
-    console.log("🚀 ~ BasketService ~ removeItemFromBasket ~ basket:", basket)
+    console.log('🚀 ~ BasketService ~ removeItemFromBasket ~ basket:', basket);
     if (basket?.items.some((x) => x.productId === productId)) {
       basket.items = basket.items.filter((x) => x.productId !== productId);
       if (basket.items.length > 0) {
@@ -96,6 +100,20 @@ export class BasketService {
           this.basketTotalSource.next(null);
           localStorage.removeItem(this.cfg.basketUsername);
         }
+      })
+    );
+  }
+  checkoutBasket(body: IBasket) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: this.accountService.authorizationHeaderValue
+      })
+    };
+    return this.http.post<IBasket>(this.baseUrl + '/Basket/CheckoutV2', body, httpOptions).pipe(
+      map((_) => {
+        this.basketSource.next(null);
+        this.router.navigateByUrl('/');
       })
     );
   }
