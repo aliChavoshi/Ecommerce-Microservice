@@ -74,7 +74,7 @@ export function getClientSettings(config: AppConfig): UserManagerSettings {
   return {
     includeIdTokenInSilentRenew: true,
     automaticSilentRenew: true,
-    silent_redirect_uri: `${config.clientRoot}/assets/silent-callback.html`,
+    silent_redirect_uri: `${config.clientRoot}/public/silent-callback.html`,
     authority: config.idpAuthority,
     client_id: config.clientId,
     redirect_uri: `${config.clientRoot}/account/signin-callback`,

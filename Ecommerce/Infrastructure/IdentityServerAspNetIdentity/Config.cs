@@ -87,7 +87,7 @@ public static class Config
             RedirectUris = new List<string>
             {
                 "http://localhost:4200/account/signin-callback",
-                "http://localhost:4200/assets/silent-callback.html",
+                "http://localhost:4200/public/silent-callback.html",
                 "https://localhost:9009/signin-oidc"
             },
 
