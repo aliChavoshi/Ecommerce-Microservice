@@ -16,6 +16,7 @@ import { BasketService } from './basket/basket.service';
 export class AppComponent implements OnInit {
   constructor(private basketService : BasketService) {}
   ngOnInit(): void {
+    //TODO : unauthorized user will check
     const loggedUser = localStorage.getItem('basket_username');
     if(loggedUser){
       this.basketService.getBasket(loggedUser).subscribe(res=>{

@@ -103,14 +103,14 @@ builder.Services.AddMassTransit(configuration =>
 builder.Services.AddMassTransitHostedService();
 
 // Authentication & Authorization with IdentityServer
-var authorizationPolicy = new AuthorizationPolicyBuilder()
-    .RequireAuthenticatedUser()
-    .Build();
+//var authorizationPolicy = new AuthorizationPolicyBuilder()
+//    .RequireAuthenticatedUser()
+//    .Build();
 
-builder.Services.AddControllers(config =>
-{
-    config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); // Apply global authorization policy
-});
+//builder.Services.AddControllers(config =>
+//{
+//    config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); // Apply global authorization policy
+//});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

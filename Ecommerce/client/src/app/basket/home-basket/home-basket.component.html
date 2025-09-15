@@ -65,7 +65,7 @@
         }
       </div>
       <div class="text-center mt-4">
-        <a href="#" class="continue-shopping">
+        <a routerLink="/checkout" class="continue-shopping">
           <i class="fas fa-arrow-right me-2"></i>
           ادامه خرید
         </a>
@@ -93,7 +93,7 @@
         </div>
         <div class="summary-row">
           <span>مالیات (9%):</span>
-          <span id="tax">{{totalResult.tax}}</span>
+          <span id="tax">{{totalResult.tax | number}}</span>
         </div>
         <div class="summary-row total-row text-nowrap fs-6">
           <span>مبلغ قابل پرداخت:</span>
@@ -120,7 +120,7 @@
       </div>
 
       <!-- Checkout Button -->
-      <button class="checkout-btn" onclick="proceedToCheckout()">
+      <button class="checkout-btn" routerLink="/checkout">
         <i class="fas fa-credit-card me-2"></i>
         تکمیل خرید
       </button>

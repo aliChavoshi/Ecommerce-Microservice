@@ -77,7 +77,7 @@ export const routes: Routes = [
 
   {
     path: 'checkout',
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
     loadComponent: () => import('./checkout/checkout.component').then((x) => x.CheckoutComponent)
   },
   {

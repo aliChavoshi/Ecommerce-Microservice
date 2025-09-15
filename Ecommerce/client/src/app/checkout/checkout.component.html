@@ -1,1 +1,156 @@
-<p>checkout works!</p>
+@if(basketService.basket$ | async; as basket){
+
+<div class="main-container">
+  <!-- Header Section -->
+  <div class="header-section" [routerLink]="'/basket'">
+    <a class="back-to-cart d-none d-md-block">
+      <i class="fas fa-arrow-left me-2"></i>Basket
+    </a>
+
+    <div class="header-content">
+      <h1 class="checkout-title">
+        <i class="fas fa-credit-card me-3"></i>Checkout
+      </h1>
+      <p class="checkout-subtitle mb-0">Review your order and complete payment</p>
+    </div>
+  </div>
+
+  <div class="checkout-content">
+    <!-- Mobile Back Button -->
+    <div class="d-md-none mb-3">
+      <a class="back-to-cart" [routerLink]="'/basket'">
+        <i class="fas fa-arrow-left me-2"></i>Back to Cart
+      </a>
+    </div>
+
+    <!-- Order Number -->
+    <!-- <div class="order-number">
+      <div class="order-number-label">Order Number</div>
+      <div class="order-number-value" id="orderNumber">ORD-2025-001234</div>
+    </div> -->
+
+    <!-- Order Summary -->
+    <div class="order-summary-card">
+      <h3 class="section-title">
+        <i class="fas fa-shopping-bag"></i>Order Summary
+      </h3>
+
+      <div class="products-list">
+        @for (item of basket.items; track $index) {
+        <!-- Product 1 -->
+        <div class="product-item">
+          <div class="product-image">
+            <img class="img-thumbnail" [src]="item.imageFile">
+          </div>
+          <div class="product-details">
+            <div class="product-name">{{item.productName}}</div>
+            <!-- <div class="product-brand">$ {{item.price | number}}</div> -->
+            <div class="product-quantity">Qty: {{item.quantity}}</div>
+          </div>
+          <div class="product-price">
+            <div class="price-value">$ {{item.price | number}}</div>
+            <div class="price-label">Each</div>
+          </div>
+        </div>
+        }
+      </div>
+
+      <!-- Shipping Info -->
+      <div class="shipping-info">
+        <i class="fas fa-truck shipping-icon"></i>
+        <p class="shipping-text">Free shipping on orders over $100</p>
+      </div>
+    </div>
+
+    <!-- Cost Breakdown -->
+    @if(basketService.basketTotal$ | async;as totalResult){
+
+    <div class="cost-breakdown">
+      <h3 class="section-title">
+        <i class="fas fa-calculator"></i>Cost Breakdown
+      </h3>
+
+      <div class="cost-row">
+        <span class="cost-label">Subtotal ({{basketService.getSubItems()}} items)</span>
+        <span class="cost-value">$ {{totalResult.totalItems}}</span>
+      </div>
+
+      <div class="cost-row">
+        <span class="cost-label">Shipping</span>
+        <span class="cost-value">Free</span>
+      </div>
+
+      <div class="cost-row">
+        <span class="cost-label">Tax (9%)</span>
+        <span class="cost-value">$ {{totalResult.tax | number}}</span>
+      </div>
+
+      <div class="cost-row">
+        <span class="cost-label">Discount (Premium Member)</span>
+        <span class="cost-value" style="color: #28a745;">0</span>
+      </div>
+
+      <div class="cost-row total-row">
+        <span class="cost-label">Total Amount</span>
+        <span class="cost-value">$ {{totalResult.totalToPay}}</span>
+      </div>
+    </div>
+
+    <!-- Payment Section -->
+    <div class="payment-section">
+      <h3 class="section-title">
+        <i class="fas fa-credit-card"></i>Complete Payment
+      </h3>
+
+      <div class="payment-methods">
+        <div class="payment-method">
+          <i class="fab fa-cc-visa"></i>
+        </div>
+        <div class="payment-method">
+          <i class="fab fa-cc-mastercard"></i>
+        </div>
+        <div class="payment-method">
+          <i class="fab fa-cc-paypal"></i>
+        </div>
+        <div class="payment-method">
+          <i class="fab fa-cc-apple-pay"></i>
+        </div>
+        <div class="payment-method">
+          <i class="fab fa-google-pay"></i>
+        </div>
+      </div>
+
+      <button class="payment-button" (click)="order(basket)" id="paymentBtn">
+        <i class="fas fa-lock me-2"></i>
+        <span id="paymentText">Secure Payment - $ {{totalResult.totalToPay}}</span>
+      </button>
+
+      <div class="security-notice">
+        <div class="security-title">
+          <i class="fas fa-shield-alt me-2"></i>Your transaction is secured
+        </div>
+        <div class="security-features">
+          <div class="security-feature">
+            <i class="fas fa-check"></i>
+            <span>256-bit SSL encryption</span>
+          </div>
+          <div class="security-feature">
+            <i class="fas fa-check"></i>
+            <span>PCI DSS compliant</span>
+          </div>
+          <div class="security-feature">
+            <i class="fas fa-check"></i>
+            <span>Fraud protection</span>
+          </div>
+          <div class="security-feature">
+            <i class="fas fa-check"></i>
+            <span>Money-back guarantee</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+
+  </div>
+</div>
+}

@@ -117,6 +117,12 @@ export class BasketService {
       })
     );
   }
+  getSubItems() {
+    const basket = this.getCurrentBasket();
+    return basket?.items.reduce((pre, cur) => {
+      return pre + cur.quantity;
+    }, 0);
+  }
   //#region PrivateMethods
   private calculateBasketTotal() {
     const basket = this.getCurrentBasket();
@@ -166,7 +172,7 @@ export class BasketService {
     };
   }
   private createBasket(): Basket {
-    let loginUser = 'Ali Chavoshi';
+    let loginUser = 'Ali Chavoshi'; //TODO
     const basket = new Basket(loginUser);
     localStorage.setItem(this.cfg.basketUsername, loginUser);
     return basket;

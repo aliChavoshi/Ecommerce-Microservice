@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { BasketService } from '../basket.service';
 import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { IBasketItem } from '../../shared/models/basket';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home-basket',
-  imports: [AsyncPipe, DecimalPipe],
+  imports: [AsyncPipe, DecimalPipe, RouterLink],
   templateUrl: './home-basket.component.html',
   styleUrl: './home-basket.component.css'
 })
