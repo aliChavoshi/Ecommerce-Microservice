@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User, UserManager, UserManagerSettings } from 'oidc-client';
 import { APP_CONFIG } from '../core/configs/appConfig.token';
+import { AppConfig } from '../core/configs/appConfig.models';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<boolean | null>(1);
   currentUser$ = this.currentUserSource.asObservable();
   //
-  private manager = new UserManager(getClientSettings());
+  private manager = new UserManager(getClientSettings(this.config));
   private user?: User | null;
   //
   token = '';
@@ -35,46 +36,41 @@ export class AccountService {
   }
   logout() {
     localStorage.removeItem(this.config.tokenLocalStorage);
-    this.currentUserSource.next(null);
+    this.setUser(null);
     this.router.navigateByUrl('/');
   }
   public get authorizationHeaderValue(): string {
     console.log('🚀 ~ AccountService ~ token :', this.token);
     console.log('🚀 ~ AccountService ~ access_token:', this.access_token);
-
-    return `${this.token} ${this.access_token}`;
+    return this.access_token ? `Bearer ${this.access_token}` : '';
   }
 
   /* This `finishLogin` method in the `AccountService` class is an asynchronous arrow function that
 handles the completion of the login process. Here's a breakdown of what it does: */
   public finishLogin = async (): Promise<User> => {
     const user = await this.manager.signinRedirectCallback();
-    this.currentUserSource.next(this.checkUser(user));
+    this.setUser(user);
     this.token = user.token_type;
     this.access_token = user.access_token;
     return user;
   };
 
   public finishLogout = () => {
-    this.user = null;
+    this.setUser(null);
     return this.manager.signoutRedirectCallback();
-  };
-
-  private checkUser = (user: User): boolean => {
-    console.log('inside check user');
-    console.log(user);
-    return !!user && !user.expired;
   };
 
   private getUser() {
     this.manager.getUser().then((user) => {
-      this.user = user;
-      this.currentUserSource.next(this.isAuthenticated());
+      this.setUser(user);
     });
   }
+  private setUser(user: User | null) {
+    this.user = user;
+    this.currentUserSource.next(user ? !user.expired : null);
+  }
 }
-export function getClientSettings(): UserManagerSettings {
-  const config = inject(APP_CONFIG);
+export function getClientSettings(config: AppConfig): UserManagerSettings {
   return {
     includeIdTokenInSilentRenew: true,
     automaticSilentRenew: true,
