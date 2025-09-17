@@ -176,7 +176,9 @@
             "UpstreamHttpMethod": ["POST"],
             "AuthenticationOptions": {
                 "AuthenticationProviderKey": "BasketAuthScheme",
-                "AllowedScopes": [ "basketapi" ]
+                "AllowedScopes": [ "basketapi" ],
+                "Authority": "https://host.docker.internal:9009",
+                "RequireHttpsMetadata": false
             },
             "DelegatingHandlers": ["CorrelationDelegatingHandler"]
         },

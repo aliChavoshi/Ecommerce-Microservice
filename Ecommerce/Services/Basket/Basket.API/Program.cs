@@ -112,20 +112,45 @@ builder.Services.AddControllers(config =>
     config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); // Apply global authorization policy
 });
 
+// Configure JWT Bearer Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        // options.Authority = "http://identityserveraspnetidentity:8080"; // IdentityServer URL for token validation
-        options.Authority = "https://localhost:9009";
-        options.Audience = "Basket"; // API Resource name
-        options.RequireHttpsMetadata = false; // Allow non-HTTPS for development/testing
+        // IdentityServer URL برای Docker
+        options.Authority = "https://host.docker.internal:9009";
+        options.Audience = "Basket";
+        options.RequireHttpsMetadata = false;
+        options.BackchannelHttpHandler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        };
+
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
-            ValidateIssuerSigningKey = true,
             ValidateAudience = true,
-            ValidIssuer = "https://localhost:9009",
-            // ValidIssuer = "http://identityserveraspnetidentity:8080",
+            // ValidAudiences =
+            // [
+            //     "Catalog", "EShoppingGateway", "Basket", "eshoppingAngular"
+            // ],
+            ValidAudiences = ["Basket"],
+            ValidIssuers = ["https://host.docker.internal:9009"]
+        };
+
+        options.IncludeErrorDetails = true;
+
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                Console.WriteLine($"Auth failed: {context.Exception.Message}");
+                return Task.CompletedTask;
+            },
+            OnTokenValidated = context =>
+            {
+                Console.WriteLine("Token validated successfully.");
+                return Task.CompletedTask;
+            }
         };
     });
 

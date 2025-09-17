@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, EMPTY, map, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, EMPTY, map, Observable, of, switchMap, tap } from 'rxjs';
 import { IBasket, Basket, IBasketItem, IBasketTotal } from '../shared/models/basket';
 import { APP_CONFIG } from '../core/configs/appConfig.token';
 import { IProduct } from '../shared/models/product';
@@ -43,13 +43,16 @@ export class BasketService {
   }
   addItemToBasket(product: IProduct, quantity: number = 1): Observable<IBasket> {
     const itemToAdd = this.mapProductToItemBasket(product);
-    const basket = this.getCurrentBasket() ?? this.createBasket();
-    basket.items = this.addOrUpdateItemBasket(basket.items, itemToAdd, quantity);
-    return this.setToBasket(basket);
+
+    return this.getCurrentBasketAsync().pipe(
+      switchMap((basket) => {
+        basket.items = this.addOrUpdateItemBasket(basket.items, itemToAdd, quantity);
+        return this.setToBasket(basket);
+      })
+    );
   }
   removeItemFromBasket(productId: string): Observable<IBasket | boolean> {
     const basket = this.getCurrentBasket();
-    console.log('🚀 ~ BasketService ~ removeItemFromBasket ~ basket:', basket);
     if (basket?.items.some((x) => x.productId === productId)) {
       basket.items = basket.items.filter((x) => x.productId !== productId);
       if (basket.items.length > 0) {
@@ -171,11 +174,23 @@ export class BasketService {
       }
     };
   }
-  private createBasket(): Basket {
-    let loginUser = 'Ali Chavoshi'; //TODO
-    const basket = new Basket(loginUser);
-    localStorage.setItem(this.cfg.basketUsername, loginUser);
-    return basket;
+  private createBasket(): Observable<Basket> {
+    return this.accountService.currentUser$.pipe(
+      map((res) => {
+        if (res && res.profile?.given_name) {
+          const userName = res.profile.given_name;
+          localStorage.setItem(this.cfg.basketUsername, userName);
+          return new Basket(userName);
+        }
+        return new Basket(''); // fallback
+      })
+    );
+  }
+  // یک تابع async برای گرفتن basket
+  private getCurrentBasketAsync(): Observable<Basket> {
+    const basket = this.getCurrentBasket();
+    if (basket) return of(basket); // موجود بود، sync
+    return this.createBasket(); // اگر نبود، async بساز
   }
   private addOrUpdateItemBasket(items: IBasketItem[], itemToAdd: IBasketItem, quantity: number): IBasketItem[] {
     const itemInBasket = items?.find((x) => x.productId == itemToAdd.productId);

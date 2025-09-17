@@ -21,12 +21,12 @@ export class NavbarComponent {
 
   logout() {
     this.accountService.signout().then((res) => {
-      console.log('🚀 ~ NavbarComponent ~ logout ~ res:', res);
+      // console.log('🚀 ~ NavbarComponent ~ logout ~ res:', res);
     });
   }
   login() {
     this.accountService.login().then((res) => {
-      console.log('🚀 ~ NavbarComponent ~ login ~ res:', res);
+      // console.log('🚀 ~ NavbarComponent ~ login ~ res:', res);
     });
   }
 }

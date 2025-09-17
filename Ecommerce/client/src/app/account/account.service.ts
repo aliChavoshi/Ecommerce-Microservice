@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User, UserManager, UserManagerSettings } from 'oidc-client';
@@ -11,7 +11,7 @@ import { AppConfig } from '../core/configs/appConfig.models';
 })
 export class AccountService {
   private config = inject(APP_CONFIG);
-  private currentUserSource = new ReplaySubject<boolean | null>(1);
+  private currentUserSource = new ReplaySubject<User | null>(1);
   currentUser$ = this.currentUserSource.asObservable();
   //
   private manager = new UserManager(getClientSettings(this.config));
@@ -31,21 +31,20 @@ export class AccountService {
     return await this.manager.signinRedirect();
   }
   async signout() {
-    //TODO why async?
     this.setUser(null);
     await this.manager.signoutRedirect();
   }
   logout() {
     localStorage.removeItem(this.config.tokenLocalStorage);
+    localStorage.removeItem(this.config.basketUsername);
     this.setUser(null);
     this.router.navigateByUrl('/');
   }
   public get authorizationHeaderValue(): string {
-    console.log('🚀 ~ AccountService ~ token :', this.token);
-    console.log('🚀 ~ AccountService ~ access_token:', this.access_token);
+    // console.log('🚀 ~ AccountService ~ token :', this.token);
+    // console.log('🚀 ~ AccountService ~ access_token:', this.access_token);
     return this.access_token ? `Bearer ${this.access_token}` : '';
   }
-
   /* This `finishLogin` method in the `AccountService` class is an asynchronous arrow function that
 handles the completion of the login process. Here's a breakdown of what it does: */
   public finishLogin = async (): Promise<User> => {
@@ -55,22 +54,49 @@ handles the completion of the login process. Here's a breakdown of what it does:
     this.access_token = user.access_token;
     return user;
   };
-
   public finishLogout = () => {
     this.setUser(null);
     return this.manager.signoutRedirectCallback();
   };
-
+  public loadUserFromStorage() {
+    const userJson = localStorage.getItem(this.config.tokenLocalStorage);
+    if (userJson) {
+      const user: User = JSON.parse(userJson);
+      this.user = user;
+      this.access_token = user.access_token;
+      this.token = user.token_type;
+      this.currentUserSource.next(user);
+    } else {
+      this.currentUserSource.next(null);
+    }
+  }
   private getUser() {
-    this.manager.getUser().then((user) => {
-      this.setUser(user);
-    });
+    const userStr = localStorage.getItem(this.config.tokenLocalStorage);
+    if (userStr) {
+      const userObj = JSON.parse(userStr) as User;
+      this.setUser(userObj);
+    } else {
+      // fallback: از UserManager بگیرید
+      this.manager.getUser().then((user) => {
+        this.setUser(user);
+      });
+    }
   }
   private setUser(user: User | null) {
     this.user = user;
-    this.currentUserSource.next(user ? !user.expired : null);
+    if (user) {
+      localStorage.setItem(this.config.tokenLocalStorage, JSON.stringify(user));
+      this.token = user.token_type;
+      this.access_token = user.access_token;
+    } else {
+      localStorage.removeItem(this.config.tokenLocalStorage);
+      this.token = '';
+      this.access_token = '';
+    }
+    this.currentUserSource.next(user ?? null);
   }
 }
+
 export function getClientSettings(config: AppConfig): UserManagerSettings {
   return {
     includeIdTokenInSilentRenew: true,

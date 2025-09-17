@@ -106,13 +106,13 @@ var authorizationPolicy = new AuthorizationPolicyBuilder()
 
 // Global authorization filter
 builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); });
-
-// Accept any server certificate (for dev or self-signed certs)
-var httpHandler = new HttpClientHandler
-{
-    ServerCertificateCustomValidationCallback =
-        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-};
+//
+// // Accept any server certificate (for dev or self-signed certs)
+// var httpHandler = new HttpClientHandler
+// {
+//     ServerCertificateCustomValidationCallback =
+//         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+// };
 
 // Configure JWT Bearer Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -133,11 +133,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             ValidateIssuer = true,
             ValidateAudience = true,
-            // ValidAudiences =
-            // [
-            //     "Catalog", "EShoppingGateway", "Basket", "eshoppingAngular"
-            // ],
-            ValidAudiences = ["Catalog"],
+            ValidAudiences =
+            [
+                "Catalog", "EShoppingGateway", "Basket", "eshoppingAngular"
+            ],
+            // ValidAudiences = ["Catalog"],
             ValidIssuers = ["https://host.docker.internal:9009"]
         };
 

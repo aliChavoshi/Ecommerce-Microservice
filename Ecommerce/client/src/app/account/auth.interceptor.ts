@@ -4,15 +4,12 @@ import { AccountService } from './account.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const accountService = inject(AccountService);
+
+  const headers: Record<string, string> = {};
   if (accountService.isAuthenticated()) {
-    const request = req.clone({
-      setHeaders: {
-        Authorization: `${accountService.authorizationHeaderValue}`
-      }
-    });
-    console.log("🚀 ~ authInterceptor ~ request:", request)
-    return next(request);
-  } else {
-    return next(req);
+    headers['Authorization'] = accountService.authorizationHeaderValue;
   }
+
+  const request = req.clone({ setHeaders: headers });
+  return next(request);
 };

@@ -65,17 +65,6 @@ builder.Services
 // -----------------------------
 // احراز هویت JWT با IdentityServer
 // // -----------------------------
-// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//     .AddJwtBearer("EShoppingGatewayAuthScheme", options =>
-//     {
-//         options.Authority = "https://localhost:9009";
-//         options.TokenValidationParameters = new TokenValidationParameters
-//         {
-//             ValidateAudience = true,
-//             ValidAudiences = new[] { "Catalog", "Basket", "EShoppingGateway" }
-//         };
-//         options.RequireHttpsMetadata = false;
-//     });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer("CatalogAuthScheme", options =>

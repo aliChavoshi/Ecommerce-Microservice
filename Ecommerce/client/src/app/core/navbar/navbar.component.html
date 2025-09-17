@@ -51,15 +51,15 @@
         </a>
         }
         @if(accountService.isAuthenticated()){
-        <a (click)="logout()" class="text-white fs-5">
+        <button (click)="logout()" class="btn text-white fs-5">
           logout
           <i class="fa-solid fa-right-from-bracket"></i>
-        </a>
+        </button>
         }@else{
-          <a (click)="login()" class="text-white fs-5">
+          <button (click)="login()" class="btn text-white fs-5">
             login
             <i class="fa-solid fa-right-to-bracket"></i>
-          </a>
+          </button>
           <!-- <a (click)="register()" class="text-white fs-5">
             Register
             <i class="fa-solid fa-user"></i>
