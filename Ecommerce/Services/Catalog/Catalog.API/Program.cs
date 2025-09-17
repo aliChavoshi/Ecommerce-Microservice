@@ -62,6 +62,20 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services
     .AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfigOptions>(); // Versioned Swagger options
 
+//CORS
+var corsPolicyName = "AllowAngular";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(corsPolicyName, policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:4200")
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
+
 // Logging & Correlation Middleware
 builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
 builder.Services.AddHttpContextAccessor();
@@ -92,11 +106,56 @@ var authorizationPolicy = new AuthorizationPolicyBuilder()
 
 // Global authorization filter
 builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); });
+
+// Accept any server certificate (for dev or self-signed certs)
+var httpHandler = new HttpClientHandler
+{
+    ServerCertificateCustomValidationCallback =
+        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+};
+
+// Configure JWT Bearer Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://localhost:9009";
+        // IdentityServer URL برای Docker
+        options.Authority = "https://host.docker.internal:9009";
+        // options.Authority = "https://localhost:9009"; // For localhost
         options.Audience = "Catalog";
+        options.RequireHttpsMetadata = false;
+
+        options.BackchannelHttpHandler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        };
+
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            // ValidAudiences =
+            // [
+            //     "Catalog", "EShoppingGateway", "Basket", "eshoppingAngular"
+            // ],
+            ValidAudiences = ["Catalog"],
+            ValidIssuers = ["https://host.docker.internal:9009"]
+        };
+
+        options.IncludeErrorDetails = true;
+
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                Console.WriteLine($"Auth failed: {context.Exception.Message}");
+                return Task.CompletedTask;
+            },
+            OnTokenValidated = context =>
+            {
+                Console.WriteLine("Token validated successfully.");
+                return Task.CompletedTask;
+            }
+        };
     });
 
 // Custom authorization policies
@@ -105,52 +164,6 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("CanRead", policy => policy.RequireClaim("scope", "catalogapi.read"));
     options.AddPolicy("CanWrite", policy => policy.RequireClaim("scope", "catalogapi.write"));
 });
-
-//
-// // Accept any server certificate (for dev or self-signed certs)
-// var httpHandler = new HttpClientHandler
-// {
-//     ServerCertificateCustomValidationCallback =
-//         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-// };
-
-//Configure JWT Bearer Authentication
-// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//     .AddJwtBearer(options =>
-//     {
-//         // options.Authority = "http://identityserveraspnetidentity:8080"; // IdentityServer endpoint (Docker/Ocelot)
-//         options.Authority = "https://localhost:9009";   // For localhost
-//
-//         options.Audience = "Catalog"; // API resource name
-//         options.RequireHttpsMetadata = false; // Disable HTTPS requirement
-//         options.BackchannelHttpHandler = httpHandler; // Accept all certs
-//         options.TokenValidationParameters = new TokenValidationParameters
-//         {
-//             ValidateIssuer = true,
-//             ValidateIssuerSigningKey = true,
-//             ValidateAudience = true,
-//             ValidIssuers =
-//             [
-//                 // "http://identityserveraspnetidentity:8080", // Ocelot
-//                 "https://localhost:9009"  // Nginx
-//             ],
-//         };
-//         options.IncludeErrorDetails = true;
-//         options.Events = new JwtBearerEvents
-//         {
-//             OnAuthenticationFailed = context =>
-//             {
-//                 Console.WriteLine($"Auth failed: {context.Exception.Message}");
-//                 return Task.CompletedTask;
-//             },
-//             OnTokenValidated = context =>
-//             {
-//                 Console.WriteLine("Token validated successfully.");
-//                 return Task.CompletedTask;
-//             }
-//         };
-//     });
-
 // -----------------------------
 // Build and Configure the Application
 // -----------------------------
@@ -194,6 +207,7 @@ if (app.Environment.IsDevelopment())
         }
     });
 }
+app.UseCors("AllowAngular");
 
 // -----------------------------
 // Debug Middleware: Log Request Headers
@@ -213,8 +227,8 @@ app.Use(async (ctx, next) =>
 // -----------------------------
 // Final Middleware Pipeline
 // -----------------------------
-// app.UseAuthentication(); // Authenticate incoming requests
-// app.UseAuthorization(); // Authorize requests based on policy
+app.UseAuthentication(); // Authenticate incoming requests
+app.UseAuthorization(); // Authorize requests based on policy
 app.MapControllers(); // Map controller routes
 
 // -----------------------------

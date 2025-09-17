@@ -1,6 +1,7 @@
 ﻿using Common.Logging;
 using Common.Logging.Correlations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Ocelot.ApiGateways.Handlers;
 using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
@@ -63,18 +64,89 @@ builder.Services
 
 // -----------------------------
 // احراز هویت JWT با IdentityServer
-// -----------------------------
-// اگر قصد داشته باشی بعضی مسیرها (مثل Catalog) بدون احراز هویت باشن
-// این بخش همچنان لازم هست برای مسیرهای محافظت‌شده دیگر.
-// اما روت‌های خاص را می‌تونی در ocelot.json از Authentication حذف کنی.
-var authScheme = "EShoppingGatewayAuthScheme";
+// // -----------------------------
+// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//     .AddJwtBearer("EShoppingGatewayAuthScheme", options =>
+//     {
+//         options.Authority = "https://localhost:9009";
+//         options.TokenValidationParameters = new TokenValidationParameters
+//         {
+//             ValidateAudience = true,
+//             ValidAudiences = new[] { "Catalog", "Basket", "EShoppingGateway" }
+//         };
+//         options.RequireHttpsMetadata = false;
+//     });
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(authScheme, options =>
+    .AddJwtBearer("CatalogAuthScheme", options =>
     {
-        // options.Authority = "http://identityserveraspnetidentity:8080"; // آدرس سرور احراز هویت
-        options.Authority = "https://localhost:9009"; //localhost
-        options.Audience = "EShoppingGateway"; // نام مخاطب
+        // options.Authority = "https://localhost:9009";
+        options.Authority = "https://host.docker.internal:9009";
+        options.Audience = "Catalog";
+        options.RequireHttpsMetadata = false; //dev
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = "https://host.docker.internal:9009"
+        };
+        options.BackchannelHttpHandler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        };
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = ctx =>
+            {
+                Log.Error(ctx.Exception, "JWT Authentication failed for CatalogAuthScheme");
+                return Task.CompletedTask;
+            },
+            OnChallenge = ctx =>
+            {
+                Log.Warning("JWT Challenge triggered for CatalogAuthScheme. Error: {Error}, Description: {ErrorDescription}",
+                    ctx.Error, ctx.ErrorDescription);
+                return Task.CompletedTask;
+            },
+            OnForbidden = ctx =>
+            {
+                Log.Warning("JWT Forbidden for CatalogAuthScheme. User: {User}", ctx.HttpContext.User?.Identity?.Name);
+                return Task.CompletedTask;
+            }
+        };
+    })
+    .AddJwtBearer("BasketAuthScheme", options =>
+    {
+        //options.Authority = "https://localhost:9009";
+        options.Authority = "https://host.docker.internal:9009";
+        options.Audience = "Basket";
         options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = "https://host.docker.internal:9009"
+        };
+        options.BackchannelHttpHandler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        };
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = ctx =>
+            {
+                Log.Error(ctx.Exception, "JWT Authentication failed for BasketAuthScheme");
+                return Task.CompletedTask;
+            },
+            OnChallenge = ctx =>
+            {
+                Log.Warning("JWT Challenge triggered for BasketAuthScheme. Error: {Error}, Description: {ErrorDescription}",
+                    ctx.Error, ctx.ErrorDescription);
+                return Task.CompletedTask;
+            },
+            OnForbidden = ctx =>
+            {
+                Log.Warning("JWT Forbidden for BasketAuthScheme. User: {User}", ctx.HttpContext.User?.Identity?.Name);
+                return Task.CompletedTask;
+            }
+        };
     });
 
 // -----------------------------
@@ -84,24 +156,19 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseRouting();
 // فعال‌سازی CORS
 app.UseCors(corsPolicyName);
-
-// Middleware برای افزودن CorrelationId
-app.AddCorrelationIdMiddleware();
-
-app.UseRouting();
-
 // فعال‌سازی احراز هویت و مجوز
 app.UseAuthentication();
 app.UseAuthorization();
-
+// Middleware برای افزودن CorrelationId
+app.AddCorrelationIdMiddleware();
 app.MapControllers();
-
 // فقط برای تست لاگ
 app.MapGet("/", () => "Hello Ocelot");
 
@@ -111,7 +178,15 @@ app.Use(async (context, next) =>
     var correlationId = correlation.Get();
     Log.Information("Middleware CorrelationId In Ocelot: {correlationId}", correlationId);
 
-    await next();
+    try
+    {
+        await next();
+    }
+    catch (Exception ex)
+    {
+        Log.Error(ex, "Unhandled exception in Ocelot");
+        throw;
+    }
 });
 
 // اجرای Ocelot به عنوان API Gateway

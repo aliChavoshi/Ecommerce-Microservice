@@ -79,7 +79,7 @@ export function getClientSettings(config: AppConfig): UserManagerSettings {
     authority: config.idpAuthority,
     client_id: config.clientId,
     redirect_uri: `${config.clientRoot}/account/signin-callback`,
-    scope: 'openid profile eshoppinggateway',
+    scope: 'openid profile eshoppinggateway catalogapi.read catalogapi.write basketapi',
     response_type: 'code',
     post_logout_redirect_uri: `${config.clientRoot}/account/signout-callback`
   };

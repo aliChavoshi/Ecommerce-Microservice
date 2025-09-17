@@ -42,6 +42,10 @@ public static class Config
         new ApiResource("EShoppingGateway", "EShopping Gateway")
         {
             Scopes = { EShoppingGateway }
+        },
+        new ApiResource("eshoppingAngular", "EShopping Angular")
+        {
+            Scopes = { EShoppingGateway, CatalogApiReadScope, CatalogApiWriteScope, BasketApiScope }
         }
     ];
 
@@ -113,6 +117,9 @@ public static class Config
             // محدوده دسترسی‌هایی که کلاینت می‌تواند دریافت کند (Scopes)
             AllowedScopes =
             {
+                CatalogApiReadScope,
+                CatalogApiWriteScope,
+                BasketApiScope,
                 IdentityServerConstants.StandardScopes.OpenId, // برای OpenID Connect الزامی است
                 IdentityServerConstants.StandardScopes.Profile, // دسترسی به پروفایل کاربر
                 EShoppingGateway // یک Scope اختصاصی برای API شما

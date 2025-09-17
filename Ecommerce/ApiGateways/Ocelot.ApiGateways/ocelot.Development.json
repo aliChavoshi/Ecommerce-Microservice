@@ -11,13 +11,16 @@
                 }
             ],
             "UpstreamPathTemplate": "/Catalog",
-            "UpstreamHttpMethod": ["GET", "POST", "PUT"],
+            "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+            //Authentication
             "AuthenticationOptions": {
-                "AuthenticationProviderKey": "EShoppingGatewayAuthScheme"
-                //"AllowedScopes": []
+                "AuthenticationProviderKey": "CatalogAuthScheme",
+                "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
+                "Authority": "https://host.docker.internal:9009",
+                "RequireHttpsMetadata": false
             },
             //important
-            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
+            "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
         },
         // /Catalog/GetAllProducts to GetAllProducts
         {
@@ -30,9 +33,16 @@
                 }
             ],
             "UpstreamPathTemplate": "/Catalog/GetAllProducts",
-            "UpstreamHttpMethod": ["GET", "DELETE"],
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            //Authentication
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "CatalogAuthScheme",
+                "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
+                "Authority": "https://host.docker.internal:9009",
+                "RequireHttpsMetadata": false
+            },
             //important
-            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
+            "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
         },
         // Get Product by Id
         {
@@ -45,9 +55,16 @@
                 }
             ],
             "UpstreamPathTemplate": "/Catalog/GetProductById/{id}",
-            "UpstreamHttpMethod": ["GET", "DELETE"],
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            //Authentication
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "CatalogAuthScheme",
+                "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
+                "Authority": "https://host.docker.internal:9009",
+                "RequireHttpsMetadata": false
+            },
             //important
-            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
+            "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
         },
         // GetAllBrands
         {
@@ -60,9 +77,16 @@
                 }
             ],
             "UpstreamPathTemplate": "/Catalog/GetAllBrands",
-            "UpstreamHttpMethod": ["GET", "DELETE"],
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            //Authentication
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "CatalogAuthScheme",
+                "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
+                "Authority": "https://host.docker.internal:9009",
+                "RequireHttpsMetadata": false
+            },
             //important
-            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
+            "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
         },
         // GetAllTypes
         {
@@ -75,9 +99,16 @@
                 }
             ],
             "UpstreamPathTemplate": "/Catalog/GetAllTypes",
-            "UpstreamHttpMethod": ["GET", "DELETE"],
+            "UpstreamHttpMethod": [ "GET", "DELETE" ],
+            //Authentication
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "CatalogAuthScheme",
+                "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
+                "Authority": "https://host.docker.internal:9009",
+                "RequireHttpsMetadata": false
+            },
             //important
-            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
+            "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
         },
         // GetProductsByName
         {
@@ -90,9 +121,16 @@
                 }
             ],
             "UpstreamPathTemplate": "/Catalog/GetProductsByBrandName/{brand}",
-            "UpstreamHttpMethod": ["GET"],
+            "UpstreamHttpMethod": [ "GET" ],
+            //Authentication
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "CatalogAuthScheme",
+                "AllowedScopes": [ "catalogapi.read", "catalogapi.write" ],
+                "Authority": "https://host.docker.internal:9009",
+                "RequireHttpsMetadata": false
+            },
             //important
-            "DelegatingHandlers": ["CorrelationDelegatingHandler"]
+            "DelegatingHandlers": [ "CorrelationDelegatingHandler" ]
         },
         // GetBasket
         {
@@ -136,9 +174,10 @@
             ],
             "UpstreamPathTemplate": "/Basket/CreateBasket",
             "UpstreamHttpMethod": ["POST"],
-            //"AuthenticationOptions": {
-            //    "AuthenticationProviderKey": "EShoppingGatewayAuthScheme"
-            //},
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "BasketAuthScheme",
+                "AllowedScopes": [ "basketapi" ]
+            },
             "DelegatingHandlers": ["CorrelationDelegatingHandler"]
         },
         // Checkout Basket

@@ -4,11 +4,14 @@ using Catalog.Application.Responses;
 using Catalog.Core.Specs;
 using Common.Logging.Correlations;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.API.Controllers;
 
 [ApiVersion("1.0")]
+[Authorize(Policy = "CanWrite")]
+[Authorize(Policy = "CanRead")]
 public class CatalogController : ApiController
 {
     private readonly IMediator _mediator;
