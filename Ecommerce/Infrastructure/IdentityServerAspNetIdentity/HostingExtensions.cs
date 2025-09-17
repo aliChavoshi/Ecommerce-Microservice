@@ -37,8 +37,8 @@ internal static class HostingExtensions
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
                 options.EmitStaticAudienceClaim = true;
-                options.IssuerUri = "http://identityserveraspnetidentity:8080"; //aud in jwt token : ocelot
-                // options.IssuerUri = "https://id-local.eshopping.com:44344"; //aud in jwt token : nxing
+                // options.IssuerUri = "http://identityserveraspnetidentity:8080"; //aud in jwt token : ocelot
+                options.IssuerUri = "https://localhost:9009"; //aud in jwt token : nxing
                 // options.IssuerUri = "http://host.docker.internal:9011"; //localhost
             })
             .AddInMemoryIdentityResources(Config.IdentityResources)

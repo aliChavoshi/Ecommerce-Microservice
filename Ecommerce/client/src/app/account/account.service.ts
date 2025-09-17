@@ -27,11 +27,12 @@ export class AccountService {
   isAuthenticated() {
     return this.user != null && !this.user.expired;
   }
-  login() {
-    return this.manager.signinRedirect();
+  async login() {
+    return await this.manager.signinRedirect();
   }
   async signout() {
     //TODO why async?
+    this.setUser(null);
     await this.manager.signoutRedirect();
   }
   logout() {

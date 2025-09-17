@@ -88,14 +88,14 @@ public static class Config
             {
                 "http://localhost:4200/account/signin-callback",
                 "http://localhost:4200/public/silent-callback.html",
-                "https://localhost:9009/signin-oidc"
+                "https://localhost:9009/signin-oidc" //Identity
             },
 
             // لیست آدرس‌هایی که بعد از Logout موفق کاربر به آنها ریدایرکت می‌شود
             PostLogoutRedirectUris = new List<string>
             {
                 "http://localhost:4200/account/signout-callback",
-                "https://localhost:9009/signout-callback-oidc"
+                "https://localhost:9009/signout-callback-oidc" //Identity
             },
 
             // فعال‌سازی PKCE (برای امنیت بیشتر در SPAها)

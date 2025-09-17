@@ -12,10 +12,10 @@
             ],
             "UpstreamPathTemplate": "/Catalog",
             "UpstreamHttpMethod": ["GET", "POST", "PUT"],
-            //"AuthenticationOptions": {
-            //    "AuthenticationProviderKey": "EShoppingGatewayAuthScheme"
-            //    //"AllowedScopes": []
-            //},
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "EShoppingGatewayAuthScheme"
+                //"AllowedScopes": []
+            },
             //important
             "DelegatingHandlers": ["CorrelationDelegatingHandler"]
         },

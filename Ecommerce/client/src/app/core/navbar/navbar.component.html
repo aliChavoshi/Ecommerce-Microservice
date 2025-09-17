@@ -50,15 +50,21 @@
           </span>
         </a>
         }
-        <a routerLink="/account/login" class="text-white fs-5">
-          <i class="fa-solid fa-right-to-bracket"></i>
-        </a>
-        <a routerLink="/account/register" class="text-white fs-5">
-          <i class="fa-solid fa-user"></i>
-        </a>
-        <a routerLink="/logout" class="text-white fs-5">
+        @if(accountService.isAuthenticated()){
+        <a (click)="logout()" class="text-white fs-5">
+          logout
           <i class="fa-solid fa-right-from-bracket"></i>
         </a>
+        }@else{
+          <a (click)="login()" class="text-white fs-5">
+            login
+            <i class="fa-solid fa-right-to-bracket"></i>
+          </a>
+          <!-- <a (click)="register()" class="text-white fs-5">
+            Register
+            <i class="fa-solid fa-user"></i>
+          </a> -->
+        }
       </div>
     </div>
   </div>
