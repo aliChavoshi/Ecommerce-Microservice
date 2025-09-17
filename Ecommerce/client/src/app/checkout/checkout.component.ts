@@ -12,8 +12,12 @@ import { IBasket } from '../shared/models/basket';
 })
 export class CheckoutComponent {
   public basketService = inject(BasketService);
-  
-  order(basket:IBasket) {
-    this.basketService.checkoutBasket(basket);
+
+  order(basket: IBasket) {
+    this.basketService.checkoutBasket(basket).subscribe({
+      error: (res) => {
+        console.log('🚀 ~ CheckoutComponent ~ order ~ res:', res);
+      }
+    });
   }
 }

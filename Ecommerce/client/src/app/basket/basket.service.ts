@@ -107,16 +107,18 @@ export class BasketService {
     );
   }
   checkoutBasket(body: IBasket) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: this.accountService.authorizationHeaderValue
-      })
-    };
-    return this.http.post<IBasket>(this.baseUrl + '/Basket/CheckoutV2', body, httpOptions).pipe(
+    console.log("🚀 ~ BasketService ~ checkoutBasket ~ body:", body)
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type': 'application/json',
+    //     Authorization: this.accountService.authorizationHeaderValue
+    //   })
+    // };
+    return this.http.post<IBasket>(this.baseUrl + '/Basket/CheckoutV2', body).pipe(
       map((_) => {
         this.basketSource.next(null);
         this.router.navigateByUrl('/');
+        this.deleteBasket(body.userName);
       })
     );
   }
