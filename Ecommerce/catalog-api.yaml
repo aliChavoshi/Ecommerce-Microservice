@@ -1,0 +1,83 @@
+﻿apiVersion: apps/v1                  # نوع API برای این منبع (Deployment از گروه apps/v1)
+kind: Deployment                     # نوع آبجکت: Deployment برای مدیریت ReplicaSet و پادها
+metadata:
+  name: catalog-api-deployment       # نام یکتا برای این Deployment
+  labels:
+    app: catalog-api                 # لیبل عمومی برای شناسایی (برای Service و selector)
+spec:
+  replicas: 2                        # تعداد پادهای همزمان (اگر یکی خراب شد، دیگری هست)
+  selector:
+    matchLabels:
+      app: catalog-api               # تعیین می‌کند کدام پادها متعلق به این Deployment هستند
+  template:
+    metadata:
+      labels:
+        app: catalog-api             # لیبلی که به پادهای ایجادشده می‌خورد (باید با selector مطابقت داشته باشد)
+    spec:
+      containers:
+        - name: catalog-api          # نام کانتینر داخل پاد
+          image: catalogapi:latest   # ایمیج داکر که کانتینر از آن ساخته می‌شود : TODO
+          imagePullPolicy: IfNotPresent # اگر ایمیج لوکال موجود است از آن استفاده کن
+          ports:
+            - containerPort: 8080    # پورتی که اپ داخل کانتینر به آن گوش می‌دهد
+          env:
+            - name: ASPNETCORE_ENVIRONMENT  # متغیر محیطی: محیط اجرا
+              value: Development
+            - name: DatabaseSettings__ConnectionString   # متغیر اتصال DB (از ConfigMap گرفته می‌شود)
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-configmap      # اسم ConfigMap منبع
+                  key: connection_string    # کلید داخل ConfigMap
+            - name: DatabaseSettings__DatabaseName      # نام دیتابیس (از ConfigMap)
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-configmap
+                  key: DatabaseName
+            - name: DatabaseSettings__CollectionName    # نام کالکشن (از ConfigMap)
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-configmap
+                  key: CollectionName
+            - name: DatabaseSettings__BrandsCollection  # نام کالکشن برندها (از ConfigMap)
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-configmap
+                  key: BrandsCollection
+            - name: DatabaseSettings__TypesCollection   # نام کالکشن تایپ‌ها (از ConfigMap)
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-configmap
+                  key: TypesCollection
+          resources:
+            requests:
+              memory: "64Mi"   #64 MB Ram
+              cpu: "250m" #0.25 CPU of a core == 1000 = 1 core
+            limits:
+              memory: "128Mi"  # 128MB Ram
+              cpu: "500m" #0.5 of 1 core
+          readinessProbe:                 # probe برای اعلام اینکه اپ آماده دریافت ترافیک هست
+            httpGet:
+              path: /health               # آدرس سلامت (endpoint را در اپ پیاده کن)
+              port: 8080
+            initialDelaySeconds: 5       # کمی صبر کن قبل از اولین چک
+            periodSeconds: 10            # فاصله بین چک‌ها
+          livenessProbe:                  # probe برای تشخیص پادهای معیوب و راه‌اندازی مجدد
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
+---
+apiVersion: v1                        # API version برای سرویس‌های پایه (Service)
+kind: Service                         # نوع آبجکت: Service برای دسترسی به پادها
+metadata:
+  name: catalog-api-service           # نام سرویس
+spec:
+  type: NodePort                       # نوع سرویس: NodePort برای دسترسی از بیرون نود (dev)
+  selector:
+    app: catalog-api                   # پادهایی که این سرویس ترافیک را به آنها می‌فرستد
+  ports:
+    - protocol: TCP
+      port: 9000                        # پورت سرویس داخل کلاستر (دیگر سرویس‌ها از این پورت استفاده می‌کنند)
+      targetPort: 8080                  # پورتی در پاد (مطابق containerPort) که ترافیک به آن فوروارد می‌شود
+      nodePort: 31000                   # پورت روی نود میزبان؛ دسترسی بیرونی: <NODE_IP>:31000 -> service -> pod
