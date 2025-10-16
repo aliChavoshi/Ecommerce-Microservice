@@ -33,7 +33,7 @@
   },
   {
     "Id": "63ca5d4bc3a8a58f47299f9f",
-    "Name": "BedsIde Tables"
+    "Name": "Bedside Tables"
   },
   {
     "Id": "63ca5d4bc3a8a58f47299fa0",
@@ -82,5 +82,77 @@
   {
     "Id": "63ca5d4bc3a8a58f47299fab",
     "Name": "Beverages"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fac",
+    "Name": "Fruits"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fad",
+    "Name": "Health Supplements"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fae",
+    "Name": "Grains"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299faf",
+    "Name": "Household Essentials"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb0",
+    "Name": "Home Decor"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb1",
+    "Name": "Photo Frames"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb2",
+    "Name": "Artificial Plants"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb3",
+    "Name": "Plant Accessories"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb4",
+    "Name": "Lighting"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb5",
+    "Name": "Kitchen Tools"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb6",
+    "Name": "Drinkware"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb7",
+    "Name": "Kitchen Appliances"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb8",
+    "Name": "Cookware"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fb9",
+    "Name": "Cutting Boards"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fba",
+    "Name": "Juicers"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fbb",
+    "Name": "Slicers"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fbc",
+    "Name": "Strainers"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fbd",
+    "Name": "Graters"
   }
 ]

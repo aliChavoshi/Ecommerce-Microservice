@@ -478,5 +478,485 @@
       "Id": "63ca5e40e0aa3968b549af6f",
       "Name": "Tropical Farms"
     }
+  },
+  {
+    "Id": "66b6a101000000000000001f",
+    "Name": "Lemon",
+    "Description": "Zesty and tangy lemons, versatile for cooking, baking, or making refreshing beverages.",
+    "Price": 0.79,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/lemon/1.webp",
+    "Summary": "Zesty and tangy lemons for cooking and beverages",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fac",
+      "Name": "Fruits"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af70",
+      "Name": "Fresh Farm"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000020",
+    "Name": "Milk",
+    "Description": "Fresh and nutritious milk, a staple for various recipes and daily consumption.",
+    "Price": 3.49,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/milk/1.webp",
+    "Summary": "Fresh nutritious milk for daily consumption",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa7",
+      "Name": "Dairy"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af71",
+      "Name": "Dairy Fresh"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000021",
+    "Name": "Mulberry",
+    "Description": "Sweet and juicy mulberries, perfect for snacking or adding to desserts and cereals.",
+    "Price": 4.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/mulberry/1.webp",
+    "Summary": "Sweet juicy mulberries for snacking",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fac",
+      "Name": "Fruits"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af72",
+      "Name": "Berry Fields"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000022",
+    "Name": "Nescafe Coffee",
+    "Description": "Quality coffee from Nescafe, available in various blends for a rich and satisfying cup.",
+    "Price": 7.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/nescafe-coffee/1.webp",
+    "Summary": "Quality Nescafe coffee in various blends",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fac",
+      "Name": "Beverages"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af73",
+      "Name": "Nescafe"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000023",
+    "Name": "Potatoes",
+    "Description": "Versatile and starchy potatoes, great for roasting, mashing, or as a side dish.",
+    "Price": 2.29,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/potatoes/1.webp",
+    "Summary": "Versatile starchy potatoes for cooking",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa6",
+      "Name": "Vegetables"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af74",
+      "Name": "Root Harvest"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000024",
+    "Name": "Protein Powder",
+    "Description": "Nutrient-packed protein powder, ideal for supplementing your diet with essential proteins.",
+    "Price": 19.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/protein-powder/1.webp",
+    "Summary": "Nutrient-packed protein powder supplement",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fad",
+      "Name": "Health Supplements"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af75",
+      "Name": "Fit Nutrition"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000025",
+    "Name": "Red Onions",
+    "Description": "Flavorful and aromatic red onions, perfect for adding depth to your savory dishes.",
+    "Price": 1.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/red-onions/1.webp",
+    "Summary": "Flavorful aromatic red onions",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa6",
+      "Name": "Vegetables"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af76",
+      "Name": "Garden Fresh"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000026",
+    "Name": "Rice",
+    "Description": "High-quality rice, a staple for various cuisines and a versatile base for many dishes.",
+    "Price": 5.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/rice/1.webp",
+    "Summary": "High-quality rice for various cuisines",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fae",
+      "Name": "Grains"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af77",
+      "Name": "Golden Grain"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000027",
+    "Name": "Soft Drinks",
+    "Description": "Assorted soft drinks in various flavors, perfect for refreshing beverages.",
+    "Price": 1.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/soft-drinks/1.webp",
+    "Summary": "Assorted soft drinks in various flavors",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fac",
+      "Name": "Beverages"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af78",
+      "Name": "Fizz Drinks"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000028",
+    "Name": "Strawberry",
+    "Description": "Sweet and succulent strawberries, great for snacking, desserts, or blending into smoothies.",
+    "Price": 3.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/strawberry/1.webp",
+    "Summary": "Sweet succulent strawberries for snacking",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fac",
+      "Name": "Fruits"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af79",
+      "Name": "Berry Fields"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000029",
+    "Name": "Tissue Paper Box",
+    "Description": "Convenient tissue paper box for everyday use, providing soft and absorbent tissues.",
+    "Price": 2.49,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/tissue-paper-box/1.webp",
+    "Summary": "Convenient soft tissue paper box",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299faf",
+      "Name": "Household Essentials"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af7a",
+      "Name": "Home Essentials"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000002a",
+    "Name": "Water",
+    "Description": "Pure and refreshing bottled water, essential for staying hydrated throughout the day.",
+    "Price": 0.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/water/1.webp",
+    "Summary": "Pure refreshing bottled water",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fac",
+      "Name": "Beverages"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af7b",
+      "Name": "Pure Springs"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000002b",
+    "Name": "Decoration Swing",
+    "Description": "The Decoration Swing is a charming addition to your home decor. Crafted with intricate details, it adds a touch of elegance and whimsy to any room.",
+    "Price": 59.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/home-decoration/decoration-swing/1.webp",
+    "Summary": "Charming decorative swing for home",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fb0",
+      "Name": "Home Decor"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af7c",
+      "Name": "Decor Haven"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000002c",
+    "Name": "Family Tree Photo Frame",
+    "Description": "The Family Tree Photo Frame is a sentimental and stylish way to display your cherished family memories. With multiple photo slots, it tells the story of your loved ones.",
+    "Price": 29.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/home-decoration/family-tree-photo-frame/1.webp",
+    "Summary": "Sentimental family tree photo frame",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fb1",
+      "Name": "Photo Frames"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af7d",
+      "Name": "Memory Keeps"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000002d",
+    "Name": "House Showpiece Plant",
+    "Description": "The House Showpiece Plant is an artificial plant that brings a touch of nature to your home without the need for maintenance. It adds greenery and style to any space.",
+    "Price": 39.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/home-decoration/house-showpiece-plant/1.webp",
+    "Summary": "Artificial house showpiece plant",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fb2",
+      "Name": "Artificial Plants"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af7e",
+      "Name": "Green Decor"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000002e",
+    "Name": "Plant Pot",
+    "Description": "The Plant Pot is a stylish container for your favorite plants. With a sleek design, it complements your indoor or outdoor garden, adding a modern touch to your plant display.",
+    "Price": 14.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/home-decoration/plant-pot/1.webp",
+    "Summary": "Stylish plant pot for indoor/outdoor",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fb3",
+      "Name": "Plant Accessories"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af7f",
+      "Name": "Pottery Works"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000002f",
+    "Name": "Table Lamp",
+    "Description": "The Table Lamp is a functional and decorative lighting solution for your living space. With a modern design, it provides both ambient and task lighting, enhancing the atmosphere.",
+    "Price": 49.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/home-decoration/table-lamp/1.webp",
+    "Summary": "Modern functional table lamp",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fb4",
+      "Name": "Lighting"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af80",
+      "Name": "Light & Style"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000030",
+    "Name": "Bamboo Spatula",
+    "Description": "The Bamboo Spatula is a versatile kitchen tool made from eco-friendly bamboo. Ideal for flipping, stirring, and serving various dishes.",
+    "Price": 7.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/kitchen-accessories/bamboo-spatula/1.webp",
+    "Summary": "Eco-friendly bamboo spatula",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fb5",
+      "Name": "Kitchen Tools"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af81",
+      "Name": "Eco Kitchen"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000031",
+    "Name": "Black Aluminium Cup",
+    "Description": "The Black Aluminium Cup is a stylish and durable cup suitable for both hot and cold beverages. Its sleek black design adds a modern touch to your drinkware collection.",
+    "Price": 5.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/kitchen-accessories/black-aluminium-cup/1.webp",
+    "Summary": "Stylish black aluminium cup",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fb6",
+      "Name": "Drinkware"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af82",
+      "Name": "Modern Cups"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000032",
+    "Name": "Black Whisk",
+    "Description": "The Black Whisk is a kitchen essential for whisking and beating ingredients. Its ergonomic handle and sleek design make it a practical and stylish tool.",
+    "Price": 9.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/kitchen-accessories/black-whisk/1.webp",
+    "Summary": "Ergonomic black whisk for baking",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fb5",
+      "Name": "Kitchen Tools"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af83",
+      "Name": "Bake Essentials"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000033",
+    "Name": "Boxed Blender",
+    "Description": "The Boxed Blender is a powerful and compact blender perfect for smoothies, shakes, and more. Its convenient design and multiple functions make it a versatile kitchen appliance.",
+    "Price": 39.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/kitchen-accessories/boxed-blender/1.webp",
+    "Summary": "Powerful compact boxed blender",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fb7",
+      "Name": "Kitchen Appliances"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af84",
+      "Name": "BlendMaster"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000034",
+    "Name": "Carbon Steel Wok",
+    "Description": "The Carbon Steel Wok is a versatile cooking pan suitable for stir-frying, sautéing, and deep frying. Its sturdy construction ensures even heat distribution for delicious meals.",
+    "Price": 29.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/kitchen-accessories/carbon-steel-wok/1.webp",
+    "Summary": "Versatile carbon steel wok",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fb8",
+      "Name": "Cookware"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af85",
+      "Name": "StirPro"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000035",
+    "Name": "Chopping Board",
+    "Description": "The Chopping Board is an essential kitchen accessory for food preparation. Made from durable material, it provides a safe and hygienic surface for cutting and chopping.",
+    "Price": 12.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/kitchen-accessories/chopping-board/1.webp",
+    "Summary": "Durable chopping board for prep",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fb9",
+      "Name": "Cutting Boards"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af86",
+      "Name": "PrepMaster"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000036",
+    "Name": "Citrus Squeezer Yellow",
+    "Description": "The Citrus Squeezer in Yellow is a handy tool for extracting juice from citrus fruits. Its vibrant color adds a cheerful touch to your kitchen gadgets.",
+    "Price": 8.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/kitchen-accessories/citrus-squeezer-yellow/1.webp",
+    "Summary": "Vibrant yellow citrus squeezer",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fba",
+      "Name": "Juicers"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af87",
+      "Name": "JuiceJoy"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000037",
+    "Name": "Egg Slicer",
+    "Description": "The Egg Slicer is a convenient tool for slicing boiled eggs evenly. It's perfect for salads, sandwiches, and other dishes where sliced eggs are desired.",
+    "Price": 6.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/kitchen-accessories/egg-slicer/1.webp",
+    "Summary": "Convenient egg slicer for salads",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fbb",
+      "Name": "Slicers"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af88",
+      "Name": "SliceEasy"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000038",
+    "Name": "Electric Stove",
+    "Description": "The Electric Stove provides a portable and efficient cooking solution. Ideal for small kitchens or as an additional cooking surface for various culinary needs.",
+    "Price": 49.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/kitchen-accessories/electric-stove/1.webp",
+    "Summary": "Portable efficient electric stove",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fb7",
+      "Name": "Kitchen Appliances"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af89",
+      "Name": "CookEasy"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000039",
+    "Name": "Fine Mesh Strainer",
+    "Description": "The Fine Mesh Strainer is a versatile tool for straining liquids and sifting dry ingredients. Its fine mesh ensures efficient filtering for smooth cooking and baking.",
+    "Price": 9.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/kitchen-accessories/fine-mesh-strainer/1.webp",
+    "Summary": "Versatile fine mesh strainer",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fbc",
+      "Name": "Strainers"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af8a",
+      "Name": "FilterPro"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000003a",
+    "Name": "Fork",
+    "Description": "The Fork is a classic utensil for various dining and serving purposes. Its durable and ergonomic design makes it a reliable choice for everyday use.",
+    "Price": 3.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/kitchen-accessories/fork/1.webp",
+    "Summary": "Classic durable dining fork",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fb5",
+      "Name": "Kitchen Tools"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af8b",
+      "Name": "Tableware Co."
+    }
+  },
+  {
+    "Id": "66b6a101000000000000003b",
+    "Name": "Glass",
+    "Description": "The Glass is a versatile and elegant drinking vessel suitable for a variety of beverages. Its clear design allows you to enjoy the colors and textures of your drinks.",
+    "Price": 4.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/kitchen-accessories/glass/1.webp",
+    "Summary": "Elegant versatile drinking glass",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fb6",
+      "Name": "Drinkware"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af8c",
+      "Name": "Crystal Glass"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000003c",
+    "Name": "Grater Black",
+    "Description": "The Grater in Black is a handy kitchen tool for grating cheese, vegetables, and more. Its sleek design and sharp blades make food preparation efficient and easy.",
+    "Price": 10.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/kitchen-accessories/grater-black/1.webp",
+    "Summary": "Sleek black cheese/vegetable grater",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fbd",
+      "Name": "Graters"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af8d",
+      "Name": "GrateMaster"
+    }
   }
 ]
