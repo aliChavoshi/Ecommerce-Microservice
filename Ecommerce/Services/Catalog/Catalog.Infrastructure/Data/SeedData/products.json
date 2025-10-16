@@ -1,674 +1,482 @@
 [
-    {
-        "Id": "66b6a1010000000000000000",
-        "Name": "Adidas Shoes Shoe 1",
-        "Description": "High quality Adidas shoes designed for performance.",
-        "Price": 3050,
-        "ImageFile": "images/products/adidas_shoe-1.png",
-        "Summary": "Adidas Shoes for professionals.",
-        "Types": {
-            "Id": "63ca5d4bc3a8a58f47299f97",
-            "Name": "Shoes"
-        },
-        "Brands": {
-            "Id": "63ca5e40e0aa3968b549af53",
-            "Name": "Adidas"
-        }
+  {
+    "Id": "66b6a1010000000000000001",
+    "Name": "Essence Mascara Lash Princess",
+    "Description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
+    "Price": 9.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp",
+    "Summary": "Volumizing and lengthening mascara with cruelty-free formula",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299f97",
+      "Name": "Mascara"
     },
-    {
-        "Id": "66b6a1020000000000000000",
-        "Name": "Adidas Football Football 1",
-        "Description": "High quality Adidas football ideal for matches.",
-        "Price": 1250,
-        "ImageFile": "images/products/adidas_football-1.png",
-        "Summary": "Adidas Football for professionals.",
-        "Types": {
-            "Id": "63ca5d7d380402dce7f06ebc",
-            "Name": "Football"
-        },
-        "Brands": {
-            "Id": "63ca5e40e0aa3968b549af53",
-            "Name": "Adidas"
-        }
-    },
-    {
-        "Id": "66b6a1030000000000000000",
-        "Name": "Adidas Shoes Shoe 2",
-        "Description": "High quality Adidas shoes designed for performance.",
-        "Price": 3100,
-        "ImageFile": "images/products/adidas_shoe-2.png",
-        "Summary": "Adidas Shoes for professionals.",
-        "Types": {
-            "Id": "63ca5d4bc3a8a58f47299f97",
-            "Name": "Shoes"
-        },
-        "Brands": {
-            "Id": "63ca5e40e0aa3968b549af53",
-            "Name": "Adidas"
-        }
-    },
-    {
-        "Id": "66b6a1040000000000000000",
-        "Name": "Adidas Football Football 2",
-        "Description": "High quality Adidas football ideal for matches.",
-        "Price": 1300,
-        "ImageFile": "images/products/adidas_football-2.png",
-        "Summary": "Adidas Football for professionals.",
-        "Types": {
-            "Id": "63ca5d7d380402dce7f06ebc",
-            "Name": "Football"
-        },
-        "Brands": {
-            "Id": "63ca5e40e0aa3968b549af53",
-            "Name": "Adidas"
-        }
-    },
-    {
-        "Id": "66b6a1050000000000000000",
-        "Name": "Adidas Shoes Shoe 3",
-        "Description": "High quality Adidas shoes designed for performance.",
-        "Price": 3150,
-        "ImageFile": "images/products/adidas_shoe-3.png",
-        "Summary": "Adidas Shoes for professionals.",
-        "Types": {
-            "Id": "63ca5d4bc3a8a58f47299f97",
-            "Name": "Shoes"
-        },
-        "Brands": {
-            "Id": "63ca5e40e0aa3968b549af53",
-            "Name": "Adidas"
-        }
-    },
-    {
-        "Id": "66b6a1060000000000000000",
-        "Name": "Adidas Football Football 3",
-        "Description": "High quality Adidas football ideal for matches.",
-        "Price": 1350,
-        "ImageFile": "images/products/adidas_football-3.png",
-        "Summary": "Adidas Football for professionals.",
-        "Types": {
-            "Id": "63ca5d7d380402dce7f06ebc",
-            "Name": "Football"
-        },
-        "Brands": {
-            "Id": "63ca5e40e0aa3968b549af53",
-            "Name": "Adidas"
-        }
-    },
-    {
-        "Id": "66b6a1070000000000000000",
-        "Name": "ASICS Shoes Shoe 1",
-        "Description": "High quality ASICS shoes built for comfort.",
-        "Price": 2860,
-        "ImageFile": "images/products/asics_shoe-1.png",
-        "Summary": "ASICS Shoes for professionals.",
-        "Types": {
-            "Id": "63ca5d4bc3a8a58f47299f97",
-            "Name": "Shoes"
-        },
-        "Brands": {
-            "Id": "63ca5e4c455900b990b43bc1",
-            "Name": "ASICS"
-        }
-    },
-    {
-        "Id": "66b6a1080000000000000000",
-        "Name": "ASICS Shoes Shoe 2",
-        "Description": "High quality ASICS shoes lightweight and durable.",
-        "Price": 2915,
-        "ImageFile": "images/products/asics_shoe-2.png",
-        "Summary": "ASICS Shoes for professionals.",
-        "Types": {
-            "Id": "63ca5d4bc3a8a58f47299f97",
-            "Name": "Shoes"
-        },
-        "Brands": {
-            "Id": "63ca5e4c455900b990b43bc1",
-            "Name": "ASICS"
-        }
-    },
-    {
-        "Id": "66b6a1090000000000000000",
-        "Name": "ASICS Rackets Racket 1",
-        "Description": "High quality ASICS rackets for powerful shots.",
-        "Price": 1540,
-        "ImageFile": "images/products/yonex-badminton-1.png",
-        "Summary": "ASICS Rackets for professionals.",
-        "Types": {
-            "Id": "63ca5d6d958e43ee1cd375fe",
-            "Name": "Rackets"
-        },
-        "Brands": {
-            "Id": "63ca5e4c455900b990b43bc1",
-            "Name": "ASICS"
-        }
-    },
-    {
-        "Id": "66b6a1100000000000000000",
-        "Name": "ASICS Rackets Racket 2",
-        "Description": "High quality ASICS rackets for precision play.",
-        "Price": 1595,
-        "ImageFile": "images/products/yonex-badminton-2.png",
-        "Summary": "ASICS Rackets for professionals.",
-        "Types": {
-            "Id": "63ca5d6d958e43ee1cd375fe",
-            "Name": "Rackets"
-        },
-        "Brands": {
-            "Id": "63ca5e4c455900b990b43bc1",
-            "Name": "ASICS"
-        }
-    },
-    {
-        "Id": "66b6a1110000000000000000",
-        "Name": "ASICS Kit Bags Kit Bag 1",
-        "Description": "High quality ASICS kit bags spacious and stylish.",
-        "Price": 930,
-        "ImageFile": "images/products/yonex-kitback-1.png",
-        "Summary": "ASICS Kit Bags for professionals.",
-        "Types": {
-            "Id": "63ca5d8849bc19321b8be5f1",
-            "Name": "Kit Bags"
-        },
-        "Brands": {
-            "Id": "63ca5e4c455900b990b43bc1",
-            "Name": "ASICS"
-        }
-    },
-    {
-        "Id": "66b6a1120000000000000000",
-        "Name": "ASICS Kit Bags Kit Bag 2",
-        "Description": "High quality ASICS kit bags durable material.",
-        "Price": 985,
-        "ImageFile": "images/products/babolat-kitback-3.png",
-        "Summary": "ASICS Kit Bags for professionals.",
-        "Types": {
-            "Id": "63ca5d8849bc19321b8be5f1",
-            "Name": "Kit Bags"
-        },
-        "Brands": {
-            "Id": "63ca5e4c455900b990b43bc1",
-            "Name": "ASICS"
-        }
-    },
-    {
-        "Id": "66b6a1130000000000000000",
-        "Name": "Victor Shoes Shoe 2",
-        "Description": "High quality Victor shoes built for comfort.",
-        "Price": 2920,
-        "ImageFile": "images/products/victor_shoe-2.png",
-        "Summary": "Victor Shoes for professionals.",
-        "Types": {
-            "Id": "63ca5d4bc3a8a58f47299f97",
-            "Name": "Shoes"
-        },
-        "Brands": {
-            "Id": "63ca5e59065163c16451bd73",
-            "Name": "Victor"
-        }
-    },
-    {
-        "Id": "66b6a1140000000000000000",
-        "Name": "Victor Shoes Shoe 3",
-        "Description": "High quality Victor shoes lightweight and durable.",
-        "Price": 2980,
-        "ImageFile": "images/products/victor_shoe-1.png",
-        "Summary": "Victor Shoes for professionals.",
-        "Types": {
-            "Id": "63ca5d4bc3a8a58f47299f97",
-            "Name": "Shoes"
-        },
-        "Brands": {
-            "Id": "63ca5e59065163c16451bd73",
-            "Name": "Victor"
-        }
-    },
-    {
-        "Id": "66b6a1150000000000000000",
-        "Name": "Victor Rackets Racket 2",
-        "Description": "High quality Victor rackets for powerful shots.",
-        "Price": 1580,
-        "ImageFile": "images/products/victor-racket-2.png",
-        "Summary": "Victor Rackets for professionals.",
-        "Types": {
-            "Id": "63ca5d6d958e43ee1cd375fe",
-            "Name": "Rackets"
-        },
-        "Brands": {
-            "Id": "63ca5e59065163c16451bd73",
-            "Name": "Victor"
-        }
-    },
-    {
-        "Id": "66b6a1160000000000000000",
-        "Name": "Victor Rackets Racket 3",
-        "Description": "High quality Victor rackets for precision play.",
-        "Price": 1640,
-        "ImageFile": "images/products/victor-racket-3.png",
-        "Summary": "Victor Rackets for professionals.",
-        "Types": {
-            "Id": "63ca5d6d958e43ee1cd375fe",
-            "Name": "Rackets"
-        },
-        "Brands": {
-            "Id": "63ca5e59065163c16451bd73",
-            "Name": "Victor"
-        }
-    },
-    {
-        "Id": "66b6a1170000000000000000",
-        "Name": "Victor Kit Bags Kit Bag 2",
-        "Description": "High quality Victor kit bags spacious and stylish.",
-        "Price": 960,
-        "ImageFile": "images/products/babolat-kitback-2.png",
-        "Summary": "Victor Kit Bags for professionals.",
-        "Types": {
-            "Id": "63ca5d8849bc19321b8be5f1",
-            "Name": "Kit Bags"
-        },
-        "Brands": {
-            "Id": "63ca5e59065163c16451bd73",
-            "Name": "Victor"
-        }
-    },
-    {
-        "Id": "66b6a1180000000000000000",
-        "Name": "Victor Kit Bags Kit Bag 3",
-        "Description": "High quality Victor kit bags durable material.",
-        "Price": 1020,
-        "ImageFile": "images/products/yonex-kitback-2.png",
-        "Summary": "Victor Kit Bags for professionals.",
-        "Types": {
-            "Id": "63ca5d8849bc19321b8be5f1",
-            "Name": "Kit Bags"
-        },
-        "Brands": {
-            "Id": "63ca5e59065163c16451bd73",
-            "Name": "Victor"
-        }
-    },
-    {
-        "Id": "66b6a1190000000000000000",
-        "Name": "Yonex Shoes Shoe 3",
-        "Description": "High quality Yonex shoes built for comfort.",
-        "Price": 2980,
-        "ImageFile": "images/products/yonex_shoe-3.png",
-        "Summary": "Yonex Shoes for professionals.",
-        "Types": {
-            "Id": "63ca5d4bc3a8a58f47299f97",
-            "Name": "Shoes"
-        },
-        "Brands": {
-            "Id": "63ca5e655ec1fdc49bd9327d",
-            "Name": "Yonex"
-        }
-    },
-    {
-        "Id": "66b6a1200000000000000000",
-        "Name": "Yonex Shoes Shoe 4",
-        "Description": "High quality Yonex shoes lightweight and durable.",
-        "Price": 3045,
-        "ImageFile": "images/products/yonex_shoe-1.png",
-        "Summary": "Yonex Shoes for professionals.",
-        "Types": {
-            "Id": "63ca5d4bc3a8a58f47299f97",
-            "Name": "Shoes"
-        },
-        "Brands": {
-            "Id": "63ca5e655ec1fdc49bd9327d",
-            "Name": "Yonex"
-        }
-    },
-    {
-        "Id": "66b6a1210000000000000000",
-        "Name": "Yonex Rackets Racket 3",
-        "Description": "High quality Yonex rackets for powerful shots.",
-        "Price": 1620,
-        "ImageFile": "images/products/yonex-racket-3.png",
-        "Summary": "Yonex Rackets for professionals.",
-        "Types": {
-            "Id": "63ca5d6d958e43ee1cd375fe",
-            "Name": "Rackets"
-        },
-        "Brands": {
-            "Id": "63ca5e655ec1fdc49bd9327d",
-            "Name": "Yonex"
-        }
-    },
-    {
-        "Id": "66b6a1220000000000000000",
-        "Name": "Yonex Rackets Racket 4",
-        "Description": "High quality Yonex rackets for precision play.",
-        "Price": 1685,
-        "ImageFile": "images/products/yonex-racket-1.png",
-        "Summary": "Yonex Rackets for professionals.",
-        "Types": {
-            "Id": "63ca5d6d958e43ee1cd375fe",
-            "Name": "Rackets"
-        },
-        "Brands": {
-            "Id": "63ca5e655ec1fdc49bd9327d",
-            "Name": "Yonex"
-        }
-    },
-    {
-        "Id": "66b6a1230000000000000000",
-        "Name": "Yonex Kit Bags Kit Bag 3",
-        "Description": "High quality Yonex kit bags spacious and stylish.",
-        "Price": 990,
-        "ImageFile": "images/products/yonex-kitback-3.png",
-        "Summary": "Yonex Kit Bags for professionals.",
-        "Types": {
-            "Id": "63ca5d8849bc19321b8be5f1",
-            "Name": "Kit Bags"
-        },
-        "Brands": {
-            "Id": "63ca5e655ec1fdc49bd9327d",
-            "Name": "Yonex"
-        }
-    },
-    {
-        "Id": "66b6a1240000000000000000",
-        "Name": "Yonex Kit Bags Kit Bag 4",
-        "Description": "High quality Yonex kit bags durable material.",
-        "Price": 1055,
-        "ImageFile": "images/products/yonex-kitback-1.png",
-        "Summary": "Yonex Kit Bags for professionals.",
-        "Types": {
-            "Id": "63ca5d8849bc19321b8be5f1",
-            "Name": "Kit Bags"
-        },
-        "Brands": {
-            "Id": "63ca5e655ec1fdc49bd9327d",
-            "Name": "Yonex"
-        }
-    },
-    {
-        "Id": "66b6a1250000000000000000",
-        "Name": "Puma Shoes Shoe 4",
-        "Description": "High quality Puma shoes built for comfort.",
-        "Price": 3040,
-        "ImageFile": "images/products/puma_shoe-1.png",
-        "Summary": "Puma Shoes for professionals.",
-        "Types": {
-            "Id": "63ca5d4bc3a8a58f47299f97",
-            "Name": "Shoes"
-        },
-        "Brands": {
-            "Id": "63ca5e728c4cff9708ada2a6",
-            "Name": "Puma"
-        }
-    },
-    {
-        "Id": "66b6a1260000000000000000",
-        "Name": "Puma Shoes Shoe 5",
-        "Description": "High quality Puma shoes lightweight and durable.",
-        "Price": 3110,
-        "ImageFile": "images/products/puma_shoe-2.png",
-        "Summary": "Puma Shoes for professionals.",
-        "Types": {
-            "Id": "63ca5d4bc3a8a58f47299f97",
-            "Name": "Shoes"
-        },
-        "Brands": {
-            "Id": "63ca5e728c4cff9708ada2a6",
-            "Name": "Puma"
-        }
-    },
-    {
-        "Id": "66b6a1270000000000000000",
-        "Name": "Puma Rackets Racket 4",
-        "Description": "High quality Puma rackets for powerful shots.",
-        "Price": 1660,
-        "ImageFile": "images/products/babolat-racket-1.png",
-        "Summary": "Puma Rackets for professionals.",
-        "Types": {
-            "Id": "63ca5d6d958e43ee1cd375fe",
-            "Name": "Rackets"
-        },
-        "Brands": {
-            "Id": "63ca5e728c4cff9708ada2a6",
-            "Name": "Puma"
-        }
-    },
-    {
-        "Id": "66b6a1280000000000000000",
-        "Name": "Puma Rackets Racket 5",
-        "Description": "High quality Puma rackets for precision play.",
-        "Price": 1730,
-        "ImageFile": "images/products/babolat-racket-2.png",
-        "Summary": "Puma Rackets for professionals.",
-        "Types": {
-            "Id": "63ca5d6d958e43ee1cd375fe",
-            "Name": "Rackets"
-        },
-        "Brands": {
-            "Id": "63ca5e728c4cff9708ada2a6",
-            "Name": "Puma"
-        }
-    },
-    {
-        "Id": "66b6a1290000000000000000",
-        "Name": "Puma Kit Bags Kit Bag 4",
-        "Description": "High quality Puma kit bags spacious and stylish.",
-        "Price": 1020,
-        "ImageFile": "images/products/yonex-kitback-1.png",
-        "Summary": "Puma Kit Bags for professionals.",
-        "Types": {
-            "Id": "63ca5d8849bc19321b8be5f1",
-            "Name": "Kit Bags"
-        },
-        "Brands": {
-            "Id": "63ca5e728c4cff9708ada2a6",
-            "Name": "Puma"
-        }
-    },
-    {
-        "Id": "66b6a1300000000000000000",
-        "Name": "Puma Kit Bags Kit Bag 5",
-        "Description": "High quality Puma kit bags durable material.",
-        "Price": 1090,
-        "ImageFile": "images/products/babolat-kitback-3.png",
-        "Summary": "Puma Kit Bags for professionals.",
-        "Types": {
-            "Id": "63ca5d8849bc19321b8be5f1",
-            "Name": "Kit Bags"
-        },
-        "Brands": {
-            "Id": "63ca5e728c4cff9708ada2a6",
-            "Name": "Puma"
-        }
-    },
-    {
-        "Id": "66b6a1310000000000000000",
-        "Name": "Nike Shoes Shoe 5",
-        "Description": "High quality Nike shoes built for comfort.",
-        "Price": 3100,
-        "ImageFile": "images/products/nike_shoe-5.png",
-        "Summary": "Nike Shoes for professionals.",
-        "Types": {
-            "Id": "63ca5d4bc3a8a58f47299f97",
-            "Name": "Shoes"
-        },
-        "Brands": {
-            "Id": "63ca5e7ec90ff5c8f44d5ac8",
-            "Name": "Nike"
-        }
-    },
-    {
-        "Id": "66b6a1320000000000000000",
-        "Name": "Nike Shoes Shoe 6",
-        "Description": "High quality Nike shoes lightweight and durable.",
-        "Price": 3175,
-        "ImageFile": "images/products/adidas_shoe-1.png",
-        "Summary": "Nike Shoes for professionals.",
-        "Types": {
-            "Id": "63ca5d4bc3a8a58f47299f97",
-            "Name": "Shoes"
-        },
-        "Brands": {
-            "Id": "63ca5e7ec90ff5c8f44d5ac8",
-            "Name": "Nike"
-        }
-    },
-    {
-        "Id": "66b6a1330000000000000000",
-        "Name": "Nike Rackets Racket 5",
-        "Description": "High quality Nike rackets for powerful shots.",
-        "Price": 1700,
-        "ImageFile": "images/products/babolat-racket-3.png",
-        "Summary": "Nike Rackets for professionals.",
-        "Types": {
-            "Id": "63ca5d6d958e43ee1cd375fe",
-            "Name": "Rackets"
-        },
-        "Brands": {
-            "Id": "63ca5e7ec90ff5c8f44d5ac8",
-            "Name": "Nike"
-        }
-    },
-    {
-        "Id": "66b6a1340000000000000000",
-        "Name": "Nike Rackets Racket 6",
-        "Description": "High quality Nike rackets for precision play.",
-        "Price": 1775,
-        "ImageFile": "images/products/babolat-racket-1.png",
-        "Summary": "Nike Rackets for professionals.",
-        "Types": {
-            "Id": "63ca5d6d958e43ee1cd375fe",
-            "Name": "Rackets"
-        },
-        "Brands": {
-            "Id": "63ca5e7ec90ff5c8f44d5ac8",
-            "Name": "Nike"
-        }
-    },
-    {
-        "Id": "66b6a1350000000000000000",
-        "Name": "Nike Kit Bags Kit Bag 5",
-        "Description": "High quality Nike kit bags spacious and stylish.",
-        "Price": 1050,
-        "ImageFile": "images/products/yonex-kitback-3.png",
-        "Summary": "Nike Kit Bags for professionals.",
-        "Types": {
-            "Id": "63ca5d8849bc19321b8be5f1",
-            "Name": "Kit Bags"
-        },
-        "Brands": {
-            "Id": "63ca5e7ec90ff5c8f44d5ac8",
-            "Name": "Nike"
-        }
-    },
-    {
-        "Id": "66b6a1360000000000000000",
-        "Name": "Nike Kit Bags Kit Bag 6",
-        "Description": "High quality Nike kit bags durable material.",
-        "Price": 1125,
-        "ImageFile": "images/products/yonex-kitback-3.png",
-        "Summary": "Nike Kit Bags for professionals.",
-        "Types": {
-            "Id": "63ca5d8849bc19321b8be5f1",
-            "Name": "Kit Bags"
-        },
-        "Brands": {
-            "Id": "63ca5e7ec90ff5c8f44d5ac8",
-            "Name": "Nike"
-        }
-    },
-    {
-        "Id": "66b6a1370000000000000000",
-        "Name": "Babolat Shoes Shoe 6",
-        "Description": "High quality Babolat shoes built for comfort.",
-        "Price": 3160,
-        "ImageFile": "images/products/babolat_shoe-1.png",
-        "Summary": "Babolat Shoes for professionals.",
-        "Types": {
-            "Id": "63ca5d4bc3a8a58f47299f97",
-            "Name": "Shoes"
-        },
-        "Brands": {
-            "Id": "63ca5e8d6110a9c56ee7dc48",
-            "Name": "Babolat"
-        }
-    },
-    {
-        "Id": "66b6a1380000000000000000",
-        "Name": "Babolat Shoes Shoe 7",
-        "Description": "High quality Babolat shoes lightweight and durable.",
-        "Price": 3240,
-        "ImageFile": "images/products/babolat_shoe-2.png",
-        "Summary": "Babolat Shoes for professionals.",
-        "Types": {
-            "Id": "63ca5d4bc3a8a58f47299f97",
-            "Name": "Shoes"
-        },
-        "Brands": {
-            "Id": "63ca5e8d6110a9c56ee7dc48",
-            "Name": "Babolat"
-        }
-    },
-    {
-        "Id": "66b6a1390000000000000000",
-        "Name": "Babolat Rackets Racket 6",
-        "Description": "High quality Babolat rackets for powerful shots.",
-        "Price": 1740,
-        "ImageFile": "images/products/babolat-racket-1.png",
-        "Summary": "Babolat Rackets for professionals.",
-        "Types": {
-            "Id": "63ca5d6d958e43ee1cd375fe",
-            "Name": "Rackets"
-        },
-        "Brands": {
-            "Id": "63ca5e8d6110a9c56ee7dc48",
-            "Name": "Babolat"
-        }
-    },
-    {
-        "Id": "66b6a1400000000000000000",
-        "Name": "Babolat Rackets Racket 7",
-        "Description": "High quality Babolat rackets for precision play.",
-        "Price": 1820,
-        "ImageFile": "images/products/babolat-racket-2.png",
-        "Summary": "Babolat Rackets for professionals.",
-        "Types": {
-            "Id": "63ca5d6d958e43ee1cd375fe",
-            "Name": "Rackets"
-        },
-        "Brands": {
-            "Id": "63ca5e8d6110a9c56ee7dc48",
-            "Name": "Babolat"
-        }
-    },
-    {
-        "Id": "66b6a1410000000000000000",
-        "Name": "Babolat Kit Bags Kit Bag 6",
-        "Description": "High quality Babolat kit bags spacious and stylish.",
-        "Price": 1080,
-        "ImageFile": "images/products/babolat-kitback-1.png",
-        "Summary": "Babolat Kit Bags for professionals.",
-        "Types": {
-            "Id": "63ca5d8849bc19321b8be5f1",
-            "Name": "Kit Bags"
-        },
-        "Brands": {
-            "Id": "63ca5e8d6110a9c56ee7dc48",
-            "Name": "Babolat"
-        }
-    },
-    {
-        "Id": "66b6a1420000000000000000",
-        "Name": "Babolat Kit Bags Kit Bag 7",
-        "Description": "High quality Babolat kit bags durable material.",
-        "Price": 1160,
-        "ImageFile": "images/products/babolat-kitback-2.png",
-        "Summary": "Babolat Kit Bags for professionals.",
-        "Types": {
-            "Id": "63ca5d8849bc19321b8be5f1",
-            "Name": "Kit Bags"
-        },
-        "Brands": {
-            "Id": "63ca5e8d6110a9c56ee7dc48",
-            "Name": "Babolat"
-        }
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af53",
+      "Name": "Essence"
     }
+  },
+  {
+    "Id": "66b6a1010000000000000002",
+    "Name": "Eyeshadow Palette with Mirror",
+    "Description": "The Eyeshadow Palette with Mirror offers a versatile range of eyeshadow shades for creating stunning eye looks. With a built-in mirror, it's convenient for on-the-go makeup application.",
+    "Price": 19.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/1.webp",
+    "Summary": "Versatile eyeshadow palette with built-in mirror",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299f98",
+      "Name": "Eyeshadow"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af54",
+      "Name": "Glamour Beauty"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000003",
+    "Name": "Powder Canister",
+    "Description": "The Powder Canister is a finely milled setting powder designed to set makeup and control shine. With a lightweight and translucent formula, it provIdes a smooth and matte finish.",
+    "Price": 14.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/beauty/powder-canister/1.webp",
+    "Summary": "Lightweight setting powder for matte finish",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299f99",
+      "Name": "Face Powder"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af55",
+      "Name": "Velvet Touch"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000004",
+    "Name": "Red Lipstick",
+    "Description": "The Red Lipstick is a classic and bold choice for adding a pop of color to your lips. With a creamy and pigmented formula, it provIdes a vibrant and long-lasting finish.",
+    "Price": 12.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/1.webp",
+    "Summary": "Classic bold red lipstick with creamy formula",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299f9a",
+      "Name": "Lipstick"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af56",
+      "Name": "Chic Cosmetics"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000005",
+    "Name": "Red Nail Polish",
+    "Description": "The Red Nail Polish offers a rich and glossy red hue for vibrant and polished nails. With a quick-drying formula, it provIdes a salon-quality finish at home.",
+    "Price": 8.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/beauty/red-nail-polish/1.webp",
+    "Summary": "Rich glossy red nail polish with quick-drying formula",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299f9b",
+      "Name": "Nail Polish"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af57",
+      "Name": "Nail Couture"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000006",
+    "Name": "Calvin Klein CK One",
+    "Description": "CK One by Calvin Klein is a classic unisex fragrance, known for its fresh and clean scent. It's a versatile fragrance suitable for everyday wear.",
+    "Price": 49.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/1.webp",
+    "Summary": "Classic unisex fragrance with fresh scent",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299f9c",
+      "Name": "Perfumes"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af58",
+      "Name": "Calvin Klein"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000007",
+    "Name": "Chanel Coco Noir Eau De",
+    "Description": "Coco Noir by Chanel is an elegant and mysterious fragrance, featuring notes of grapefruit, rose, and sandalwood. Perfect for evening occasions.",
+    "Price": 129.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/1.webp",
+    "Summary": "Elegant fragrance with grapefruit and rose notes",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299f9c",
+      "Name": "Perfumes"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af59",
+      "Name": "Chanel"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000008",
+    "Name": "Dior J'adore",
+    "Description": "J'adore by Dior is a luxurious and floral fragrance, known for its blend of ylang-ylang, rose, and jasmine. It embodies femininity and sophistication.",
+    "Price": 89.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/fragrances/dior-j'adore/1.webp",
+    "Summary": "Luxurious floral fragrance with ylang-ylang notes",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299f9c",
+      "Name": "Perfumes"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af5a",
+      "Name": "Dior"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000009",
+    "Name": "Dolce Shine Eau de",
+    "Description": "Dolce Shine by Dolce & Gabbana is a vibrant and fruity fragrance, featuring notes of mango, jasmine, and blonde woods. It's a joyful and youthful scent.",
+    "Price": 69.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/fragrances/dolce-shine-eau-de/1.webp",
+    "Summary": "Vibrant fruity fragrance with mango notes",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299f9c",
+      "Name": "Perfumes"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af5b",
+      "Name": "Dolce & Gabbana"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000000a",
+    "Name": "Gucci Bloom Eau de",
+    "Description": "Gucci Bloom by Gucci is a floral and captivating fragrance, with notes of tuberose, jasmine, and Rangoon creeper. It's a modern and romantic scent.",
+    "Price": 79.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/fragrances/gucci-bloom-eau-de/1.webp",
+    "Summary": "Floral fragrance with tuberose and jasmine notes",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299f9c",
+      "Name": "Perfumes"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af5c",
+      "Name": "Gucci"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000000b",
+    "Name": "Annibale Colombo Bed",
+    "Description": "The Annibale Colombo Bed is a luxurious and elegant bed frame, crafted with high-quality materials for a comfortable and stylish bedroom.",
+    "Price": 1899.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/1.webp",
+    "Summary": "Luxurious bed frame with high-quality materials",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299f9d",
+      "Name": "Beds"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af5d",
+      "Name": "Annibale Colombo"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000000c",
+    "Name": "Annibale Colombo Sofa",
+    "Description": "The Annibale Colombo Sofa is a sophisticated and comfortable seating option, featuring exquisite design and premium upholstery for your living room.",
+    "Price": 2499.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/1.webp",
+    "Summary": "Sophisticated sofa with premium upholstery",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299f9e",
+      "Name": "Sofas"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af5d",
+      "Name": "Annibale Colombo"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000000d",
+    "Name": "BedsIde Table African Cherry",
+    "Description": "The BedsIde Table in African Cherry is a stylish and functional addition to your bedroom, provIding convenient storage space and a touch of elegance.",
+    "Price": 299.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/furniture/bedsIde-table-african-cherry/1.webp",
+    "Summary": "Stylish bedsIde table with storage space",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299f9f",
+      "Name": "BedsIde Tables"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af5e",
+      "Name": "Furniture Co."
+    }
+  },
+  {
+    "Id": "66b6a101000000000000000e",
+    "Name": "Knoll Saarinen Executive Conference Chair",
+    "Description": "The Knoll Saarinen Executive Conference Chair is a modern and ergonomic chair, perfect for your office or conference room with its timeless design.",
+    "Price": 499.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/furniture/knoll-saarinen-executive-conference-chair/1.webp",
+    "Summary": "Modern ergonomic executive conference chair",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa0",
+      "Name": "Office Chairs"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af5f",
+      "Name": "Knoll"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000000f",
+    "Name": "Wooden Bathroom Sink With Mirror",
+    "Description": "The Wooden Bathroom Sink with Mirror is a unique and stylish addition to your bathroom, featuring a wooden sink countertop and a matching mirror.",
+    "Price": 799.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/furniture/wooden-bathroom-sink-with-mirror/1.webp",
+    "Summary": "Unique wooden bathroom sink with matching mirror",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa1",
+      "Name": "Bathroom"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af60",
+      "Name": "Bath Trends"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000010",
+    "Name": "Apple",
+    "Description": "Fresh and crisp apples, perfect for snacking or incorporating into various recipes.",
+    "Price": 1.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/apple/1.webp",
+    "Summary": "Fresh and crisp apples for snacking",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa2",
+      "Name": "Fruits"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af61",
+      "Name": "Fresh Farm"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000011",
+    "Name": "Beef Steak",
+    "Description": "High-quality beef steak, great for grilling or cooking to your preferred level of doneness.",
+    "Price": 12.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/beef-steak/1.webp",
+    "Summary": "High-quality beef steak for grilling",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa3",
+      "Name": "Meat"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af62",
+      "Name": "Premium Meat Co."
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000012",
+    "Name": "Cat Food",
+    "Description": "Nutritious cat food formulated to meet the dietary needs of your feline friend.",
+    "Price": 8.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/cat-food/1.webp",
+    "Summary": "Nutritious cat food for feline dietary needs",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa4",
+      "Name": "Pet Supplies"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af63",
+      "Name": "Pet Nutrition"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000013",
+    "Name": "Chicken Meat",
+    "Description": "Fresh and tender chicken meat, suitable for various culinary preparations.",
+    "Price": 9.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/chicken-meat/1.webp",
+    "Summary": "Fresh chicken meat for cooking",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa3",
+      "Name": "Meat"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af64",
+      "Name": "Fresh Poultry"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000014",
+    "Name": "Cooking Oil",
+    "Description": "Versatile cooking oil suitable for frying, sautéing, and various culinary applications.",
+    "Price": 4.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/cooking-oil/1.webp",
+    "Summary": "Versatile cooking oil for various applications",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa5",
+      "Name": "Cooking Essentials"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af65",
+      "Name": "Chef's Choice"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000015",
+    "Name": "Cucumber",
+    "Description": "Crisp and hydrating cucumbers, Ideal for salads, snacks, or as a refreshing sIde.",
+    "Price": 1.49,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/cucumber/1.webp",
+    "Summary": "Crisp and hydrating cucumbers for salads",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa6",
+      "Name": "Vegetables"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af66",
+      "Name": "Fresh Produce"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000016",
+    "Name": "Dog Food",
+    "Description": "Specially formulated dog food designed to provIde essential nutrients for your canine companion.",
+    "Price": 10.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/dog-food/1.webp",
+    "Summary": "Nutritious dog food for canine health",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa4",
+      "Name": "Pet Supplies"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af67",
+      "Name": "Canine Care"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000017",
+    "Name": "Eggs",
+    "Description": "Fresh eggs, a versatile ingredient for baking, cooking, or breakfast.",
+    "Price": 2.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/eggs/1.webp",
+    "Summary": "Fresh eggs for baking and cooking",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa7",
+      "Name": "Dairy"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af68",
+      "Name": "Farm Fresh"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000018",
+    "Name": "Fish Steak",
+    "Description": "Quality fish steak, suitable for grilling, baking, or pan-searing.",
+    "Price": 14.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/fish-steak/1.webp",
+    "Summary": "Quality fish steak for grilling",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa8",
+      "Name": "Seafood"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af69",
+      "Name": "Ocean Fresh"
+    }
+  },
+  {
+    "Id": "66b6a1010000000000000019",
+    "Name": "Green Bell Pepper",
+    "Description": "Fresh and vibrant green bell pepper, perfect for adding color and flavor to your dishes.",
+    "Price": 1.29,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/green-bell-pepper/1.webp",
+    "Summary": "Fresh green bell pepper for cooking",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa6",
+      "Name": "Vegetables"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af6a",
+      "Name": "Garden Fresh"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000001a",
+    "Name": "Green Chili Pepper",
+    "Description": "Spicy green chili pepper, Ideal for adding heat to your favorite recipes.",
+    "Price": 0.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/green-chili-pepper/1.webp",
+    "Summary": "Spicy green chili pepper for heat",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa6",
+      "Name": "Vegetables"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af6b",
+      "Name": "Spice Garden"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000001b",
+    "Name": "Honey Jar",
+    "Description": "Pure and natural honey in a convenient jar, perfect for sweetening beverages or drizzling over food.",
+    "Price": 6.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/honey-jar/1.webp",
+    "Summary": "Pure natural honey in a jar",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa9",
+      "Name": "Condiments"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af6c",
+      "Name": "Nature's Sweet"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000001c",
+    "Name": "Ice Cream",
+    "Description": "Creamy and delicious ice cream, available in various flavors for a delightful treat.",
+    "Price": 5.49,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/ice-cream/1.webp",
+    "Summary": "Creamy ice cream in various flavors",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299faa",
+      "Name": "Desserts"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af6d",
+      "Name": "Frosty Delights"
+    }
+  },
+  {
+    "Id": "66b6a101000000000000001d",
+    "Name": "Juice",
+    "Description": "Refreshing fruit juice, packed with vitamins and great for staying hydrated.",
+    "Price": 3.99,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/juice/1.webp",
+    "Summary": "Refreshing fruit juice with vitamins",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fab",
+      "Name": "Beverages"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af6e",
+      "Name": "Pure Juice Co."
+    }
+  },
+  {
+    "Id": "66b6a101000000000000001e",
+    "Name": "Kiwi",
+    "Description": "Nutrient-rich kiwi, perfect for snacking or adding a tropical twist to your dishes.",
+    "Price": 2.49,
+    "ImageFile": "https://cdn.dummyjson.com/product-images/groceries/kiwi/1.webp",
+    "Summary": "Nutrient-rich kiwi for snacking",
+    "Types": {
+      "Id": "63ca5d4bc3a8a58f47299fa2",
+      "Name": "Fruits"
+    },
+    "Brands": {
+      "Id": "63ca5e40e0aa3968b549af6f",
+      "Name": "Tropical Farms"
+    }
+  }
 ]

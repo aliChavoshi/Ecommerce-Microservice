@@ -13,7 +13,10 @@ public static class ProductSeedData
         if (exist) return;
         // Read the json file
         var stringData = File.ReadAllText(pathJson);
-        var products = JsonSerializer.Deserialize<List<Product>>(stringData);
+        var products = JsonSerializer.Deserialize<List<Product>>(stringData, new JsonSerializerOptions()
+        {
+            PropertyNameCaseInsensitive = false
+        });
         if (products != null) productCollection.InsertManyAsync(products);
     }
 }

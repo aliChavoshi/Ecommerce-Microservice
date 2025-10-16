@@ -13,7 +13,10 @@ public static class TypeSeedData
         if (checkTypes) return;
         // Read the json file
         var typesData = File.ReadAllText(pathJson);
-        var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
+        var types = JsonSerializer.Deserialize<List<ProductType>>(typesData, new JsonSerializerOptions()
+        {
+            PropertyNameCaseInsensitive = false
+        });
         if (types != null) typeCollection.InsertManyAsync(types);
     }
 }

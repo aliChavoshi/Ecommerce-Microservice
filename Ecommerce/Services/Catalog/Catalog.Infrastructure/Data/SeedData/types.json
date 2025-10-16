@@ -1,18 +1,86 @@
 [
   {
     "Id": "63ca5d4bc3a8a58f47299f97",
-    "Name": "Shoes"
+    "Name": "Mascara"
   },
   {
-    "Id": "63ca5d6d958e43ee1cd375fe",
-    "Name": "Rackets"
+    "Id": "63ca5d4bc3a8a58f47299f98",
+    "Name": "Eyeshadow"
   },
   {
-    "Id": "63ca5d7d380402dce7f06ebc",
-    "Name": "Football"
+    "Id": "63ca5d4bc3a8a58f47299f99",
+    "Name": "Face Powder"
   },
   {
-    "Id": "63ca5d8849bc19321b8be5f1",
-    "Name": "Kit Bags"
+    "Id": "63ca5d4bc3a8a58f47299f9a",
+    "Name": "Lipstick"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299f9b",
+    "Name": "Nail Polish"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299f9c",
+    "Name": "Perfumes"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299f9d",
+    "Name": "Beds"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299f9e",
+    "Name": "Sofas"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299f9f",
+    "Name": "BedsIde Tables"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa0",
+    "Name": "Office Chairs"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa1",
+    "Name": "Bathroom"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa2",
+    "Name": "Fruits"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa3",
+    "Name": "Meat"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa4",
+    "Name": "Pet Supplies"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa5",
+    "Name": "Cooking Essentials"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa6",
+    "Name": "Vegetables"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa7",
+    "Name": "Dairy"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa8",
+    "Name": "Seafood"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fa9",
+    "Name": "Condiments"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299faa",
+    "Name": "Desserts"
+  },
+  {
+    "Id": "63ca5d4bc3a8a58f47299fab",
+    "Name": "Beverages"
   }
 ]

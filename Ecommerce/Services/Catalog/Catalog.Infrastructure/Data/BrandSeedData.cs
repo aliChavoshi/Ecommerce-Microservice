@@ -16,8 +16,12 @@ public static class BrandSeedData
         {
             throw new FileNotFoundException($"The seed data file was not found at path: {pathJson}");
         }
+
         var brandData = File.ReadAllText(pathJson);
-        var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandData);
+        var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandData, new JsonSerializerOptions()
+        {
+            PropertyNameCaseInsensitive = false
+        });
         if (brands != null) brandCollection.InsertManyAsync(brands);
     }
 }

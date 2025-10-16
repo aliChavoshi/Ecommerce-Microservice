@@ -1,30 +1,118 @@
 [
   {
     "Id": "63ca5e40e0aa3968b549af53",
-    "Name": "Adidas"
+    "Name": "Essence"
   },
   {
-    "Id": "63ca5e4c455900b990b43bc1",
-    "Name": "ASICS"
+    "Id": "63ca5e40e0aa3968b549af54",
+    "Name": "Glamour Beauty"
   },
   {
-    "Id": "63ca5e59065163c16451bd73",
-    "Name": "Victor"
+    "Id": "63ca5e40e0aa3968b549af55",
+    "Name": "Velvet Touch"
   },
   {
-    "Id": "63ca5e655ec1fdc49bd9327d",
-    "Name": "Yonex"
+    "Id": "63ca5e40e0aa3968b549af56",
+    "Name": "Chic Cosmetics"
   },
   {
-    "Id": "63ca5e728c4cff9708ada2a6",
-    "Name": "Puma"
+    "Id": "63ca5e40e0aa3968b549af57",
+    "Name": "Nail Couture"
   },
   {
-    "Id": "63ca5e7ec90ff5c8f44d5ac8",
-    "Name": "Nike"
+    "Id": "63ca5e40e0aa3968b549af58",
+    "Name": "Calvin Klein"
   },
   {
-    "Id": "63ca5e8d6110a9c56ee7dc48",
-    "Name": "Babolat"
+    "Id": "63ca5e40e0aa3968b549af59",
+    "Name": "Chanel"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af5a",
+    "Name": "Dior"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af5b",
+    "Name": "Dolce & Gabbana"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af5c",
+    "Name": "Gucci"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af5d",
+    "Name": "Annibale Colombo"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af5e",
+    "Name": "Furniture Co."
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af5f",
+    "Name": "Knoll"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af60",
+    "Name": "Bath Trends"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af61",
+    "Name": "Fresh Farm"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af62",
+    "Name": "Premium Meat Co."
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af63",
+    "Name": "Pet Nutrition"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af64",
+    "Name": "Fresh Poultry"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af65",
+    "Name": "Chef's Choice"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af66",
+    "Name": "Fresh Produce"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af67",
+    "Name": "Canine Care"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af68",
+    "Name": "Farm Fresh"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af69",
+    "Name": "Ocean Fresh"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af6a",
+    "Name": "Garden Fresh"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af6b",
+    "Name": "Spice Garden"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af6c",
+    "Name": "Nature's Sweet"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af6d",
+    "Name": "Frosty Delights"
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af6e",
+    "Name": "Pure Juice Co."
+  },
+  {
+    "Id": "63ca5e40e0aa3968b549af6f",
+    "Name": "Tropical Farms"
   }
 ]
