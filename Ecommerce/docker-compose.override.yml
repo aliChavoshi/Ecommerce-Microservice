@@ -205,14 +205,14 @@ services:
       - "44301:8080"
 
   #reverseproxy 44344:44344 ssl https
-  reverseproxy:
-    container_name: nginxgateway
-    restart: always
-    ports:
-      - "44344:44344"
-    depends_on:
-      - identityserveraspnetidentity
-      - catalog.api
-      - basket.api
-      - discount.api
-      - ordering.api
+  # reverseproxy:
+  #   container_name: nginxgateway
+  #   restart: always
+  #   ports:
+  #     - "44344:44344"
+  #   depends_on:
+  #     - identityserveraspnetidentity
+  #     - catalog.api
+  #     - basket.api
+  #     - discount.api
+  #     - ordering.api
