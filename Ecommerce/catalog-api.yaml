@@ -15,7 +15,7 @@ spec:
         app: catalog-api             # لیبلی که به پادهای ایجادشده می‌خورد (باید با selector مطابقت داشته باشد)
     spec:
       containers:
-        - name: catalog-api          # نام کانتینر داخل پاد
+        - name: catalog-api          # نام کانتینر داخل پاد TODO
           image: catalogapi:latest   # ایمیج داکر که کانتینر از آن ساخته می‌شود : TODO
           imagePullPolicy: IfNotPresent # اگر ایمیج لوکال موجود است از آن استفاده کن
           ports:
