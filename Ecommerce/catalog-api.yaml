@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: catalog-api          # نام کانتینر داخل پاد TODO
-          image: catalogapi:latest   # ایمیج داکر که کانتینر از آن ساخته می‌شود : TODO
+          image: catalogapi:dev   # ایمیج داکر که کانتینر از آن ساخته می‌شود : TODO
           imagePullPolicy: IfNotPresent # اگر ایمیج لوکال موجود است از آن استفاده کن
           ports:
             - containerPort: 8080    # پورتی که اپ داخل کانتینر به آن گوش می‌دهد
