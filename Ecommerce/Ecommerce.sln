@@ -109,8 +109,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalog-api", "catalog-api"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalog-db", "catalog-db", "{3523F1FB-FA20-4C1F-9072-792173E81191}"
 	ProjectSection(SolutionItems) = preProject
-		Deployments\k8s\catalog\catalog-db\catalog-db.yml = Deployments\k8s\catalog\catalog-db\catalog-db.yml
 		Deployments\k8s\catalog\catalog-db\mongo-configmap.yaml = Deployments\k8s\catalog\catalog-db\mongo-configmap.yaml
+		Deployments\k8s\catalog\catalog-db\catalog-db.yaml = Deployments\k8s\catalog\catalog-db\catalog-db.yaml
 		Deployments\k8s\catalog\catalog-db\mongo-secret.yaml = Deployments\k8s\catalog\catalog-db\mongo-secret.yaml
 	EndProjectSection
 EndProject
