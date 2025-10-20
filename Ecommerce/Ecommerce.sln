@@ -108,6 +108,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalog-api", "catalog-api"
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalog-db", "catalog-db", "{3523F1FB-FA20-4C1F-9072-792173E81191}"
+	ProjectSection(SolutionItems) = preProject
+		catalog-db.yml = catalog-db.yml
+		mongo-configmap.yaml = mongo-configmap.yaml
+		mongo-secret.yaml = mongo-secret.yaml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "basket", "basket", "{EFD8041D-AD0C-4F78-8D00-C1628F47197C}"
 EndProject
