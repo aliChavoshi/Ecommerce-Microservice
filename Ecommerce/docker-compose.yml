@@ -83,10 +83,10 @@ services:
       dockerfile: Infrastructure/IdentityServerAspNetIdentity/Dockerfile
 
   #reverseproxy
-  reverseproxy:
-    build:
-      context: .
-      dockerfile: ApiGateways/nginx/nginx.Dockerfile
+  # reverseproxy:
+  #   build:
+  #     context: .
+  #     dockerfile: ApiGateways/nginx/nginx.Dockerfile
 
 #volumes
 volumes:
