@@ -155,18 +155,6 @@ docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
 **فناوری‌های استفاده‌شده:**  
 ![فناوری‌های استفاده‌شده](https://user-images.githubusercontent.com/3886381/234681214-9891c443-f0f1-4066-baca-effdee7f183d.png)
 
-**Workflow (جریان کاری):**  
-![جریان کاری](https://github.com/user-attachments/assets/7c3814a8-8b98-427e-b679-fa5972e89420)  
-![جریان کاری](https://github.com/user-attachments/assets/e7aeba0e-0597-4156-abbf-08cbf1474014)  
-![جریان کاری](https://github.com/user-attachments/assets/ba637c58-55c2-463c-8905-89a456c2f5f1)  
-![جریان کاری](https://github.com/user-attachments/assets/ad979e15-0688-4a53-827a-d77cda4c2e8e)  
-![جریان کاری](https://github.com/user-attachments/assets/f4358855-90a0-4e6f-8668-152f7eebca29)  
-![جریان کاری](https://github.com/user-attachments/assets/0a13491b-e79e-4fb4-9462-19e8bd7a9e39)  
-![جریان کاری](https://github.com/user-attachments/assets/afe67ae3-efbc-406a-a6d5-3a9d326dbe3d)  
-![جریان کاری](https://github.com/user-attachments/assets/13da03f3-384a-4c7f-b170-37ddae856608)
-
----
-
 ## الگوهای ارتباطی و مدیریت
 
 **الگوی Pub/Sub:**  
