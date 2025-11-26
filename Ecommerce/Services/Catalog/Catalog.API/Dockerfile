@@ -19,8 +19,8 @@ COPY ["Services/Catalog/Catalog.Infrastructure/Catalog.Infrastructure.csproj", "
 COPY ["Infrastructure/Common.Logging/Common.Logging.csproj", "Infrastructure/Common.Logging/"]
 
 # اضافه‌کردن گواهی برای مرحله build nginx
-COPY id-local.eshopping.com.crt /usr/local/share/ca-certificates/
-RUN update-ca-certificates
+#COPY id-local.eshopping.com.crt /usr/local/share/ca-certificates/
+#RUN update-ca-certificates
 
 # بازیابی وابستگی‌ها
 RUN dotnet restore "./Services/Catalog/Catalog.API/Catalog.API.csproj"
@@ -42,8 +42,8 @@ FROM base AS final
 WORKDIR /app
 
 # اضافه‌کردن گواهی برای مرحله نهایی nginx
-COPY id-local.eshopping.com.crt /usr/local/share/ca-certificates/
-RUN update-ca-certificates
+#COPY id-local.eshopping.com.crt /usr/local/share/ca-certificates/
+#RUN update-ca-certificates
 
 # کپی خروجی منتشر شده
 COPY --from=publish /app/publish .

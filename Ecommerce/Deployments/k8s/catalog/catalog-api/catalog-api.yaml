@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: catalog-api          # نام کانتینر داخل پاد TODO
-          image: alichavoshi/catalogapi:latest   # ایمیج داکر که کانتینر از آن ساخته می‌شود : TODO
+          image: catalogapi:dev   # ایمیج داکر که کانتینر از آن ساخته می‌شود : TODO
           imagePullPolicy: IfNotPresent # اگر ایمیج لوکال موجود است از آن استفاده کن
           ports:
             - containerPort: 8080    # پورتی که اپ داخل کانتینر به آن گوش می‌دهد
@@ -55,18 +55,20 @@ spec:
             limits:
               memory: "128Mi"  # 128MB Ram
               cpu: "500m" #0.5 of 1 core
-          readinessProbe:                 # probe برای اعلام اینکه اپ آماده دریافت ترافیک هست
-            httpGet:
-              path: /health               # آدرس سلامت (endpoint را در اپ پیاده کن)
-              port: 8080
-            initialDelaySeconds: 5       # کمی صبر کن قبل از اولین چک
-            periodSeconds: 10            # فاصله بین چک‌ها
-          livenessProbe:                  # probe برای تشخیص پادهای معیوب و راه‌اندازی مجدد
-            httpGet:
-              path: /health
-              port: 8080
-            initialDelaySeconds: 15
-            periodSeconds: 20
+            # livenessProbe:
+            #     httpGet:
+            #       path: /health
+            #       port: 8080
+            #     initialDelaySeconds: 30   # افزایش زمان تاخیر
+            #     periodSeconds: 20
+            #     failureThreshold: 3
+            # readinessProbe:
+            #     httpGet:
+            #       path: /health
+            #       port: 8080
+            #     initialDelaySeconds: 15
+            #     periodSeconds: 10
+            #     failureThreshold: 3
 ---
 apiVersion: v1                        # API version برای سرویس‌های پایه (Service)
 kind: Service                         # نوع آبجکت: Service برای دسترسی به پادها

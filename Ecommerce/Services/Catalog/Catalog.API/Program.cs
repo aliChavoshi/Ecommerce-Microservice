@@ -19,6 +19,8 @@ using Asp.Versioning;
 using Catalog.API.SwaggerConfig;
 using Common.Logging;
 using ServiceDefaults;
+using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
@@ -75,7 +77,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-
 // Logging & Correlation Middleware
 builder.Services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
 builder.Services.AddHttpContextAccessor();
@@ -96,7 +97,8 @@ builder.Services.AddScoped<ICatalogContext, CatalogContext>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ITypeRepository, ProductRepository>();
 builder.Services.AddScoped<IBrandRepository, ProductRepository>();
-
+builder.Services.AddHealthChecks()
+    .AddMongoDb(_ => new MongoClient(builder.Configuration["DatabaseSettings:ConnectionString"]));
 // -----------------------------
 // IdentityServer Authentication & Authorization
 // -----------------------------
@@ -164,6 +166,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("CanRead", policy => policy.RequireClaim("scope", "catalogapi.read"));
     options.AddPolicy("CanWrite", policy => policy.RequireClaim("scope", "catalogapi.write"));
 });
+
 // -----------------------------
 // Build and Configure the Application
 // -----------------------------
@@ -185,7 +188,7 @@ forwardedHeaderOptions.KnownNetworks.Clear(); // Clear default trusted networks
 forwardedHeaderOptions.KnownProxies.Clear(); // Clear default trusted proxies
 // forwardedHeaderOptions.KnownProxies.Add(IPAddress.Parse("172.18.0.16")); // Docker internal IP (if needed)
 app.UseForwardedHeaders(forwardedHeaderOptions);
-
+app.UseHealthChecks("/health");
 // -----------------------------
 // Dev Environment Configuration
 // -----------------------------
@@ -207,6 +210,7 @@ if (app.Environment.IsDevelopment())
         }
     });
 }
+
 app.UseCors("AllowAngular");
 
 // -----------------------------
