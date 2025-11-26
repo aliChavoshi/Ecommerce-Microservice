@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: catalog-api
-          image: catalogapi:dev
+          image: catalogapi:dev #Tag image name
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
