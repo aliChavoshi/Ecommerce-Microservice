@@ -10,8 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Catalog.API.Controllers;
 
 [ApiVersion("1.0")]
-[Authorize(Policy = "CanWrite")]
-[Authorize(Policy = "CanRead")]
 public class CatalogController : ApiController
 {
     private readonly IMediator _mediator;

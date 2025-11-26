@@ -1,85 +1,71 @@
-﻿apiVersion: apps/v1                  # نوع API برای این منبع (Deployment از گروه apps/v1)
-kind: Deployment                     # نوع آبجکت: Deployment برای مدیریت ReplicaSet و پادها
+﻿apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: catalog-api-deployment       # نام یکتا برای این Deployment
+  name: catalog-api-deployment
   labels:
-    app: catalog-api                 # لیبل عمومی برای شناسایی (برای Service و selector)
+    app: catalog-api
 spec:
-  replicas: 2                        # تعداد پادهای همزمان (اگر یکی خراب شد، دیگری هست)
+  replicas: 1
   selector:
     matchLabels:
-      app: catalog-api               # تعیین می‌کند کدام پادها متعلق به این Deployment هستند
+      app: catalog-api
   template:
     metadata:
       labels:
-        app: catalog-api             # لیبلی که به پادهای ایجادشده می‌خورد (باید با selector مطابقت داشته باشد)
+        app: catalog-api
     spec:
       containers:
-        - name: catalog-api          # نام کانتینر داخل پاد TODO
-          image: catalogapi:dev   # ایمیج داکر که کانتینر از آن ساخته می‌شود : TODO
-          imagePullPolicy: IfNotPresent # اگر ایمیج لوکال موجود است از آن استفاده کن
+        - name: catalog-api
+          image: catalogapi:dev
+          imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8080    # پورتی که اپ داخل کانتینر به آن گوش می‌دهد
+            - containerPort: 8080
           env:
-            - name: ASPNETCORE_ENVIRONMENT  # متغیر محیطی: محیط اجرا
+            - name: ASPNETCORE_ENVIRONMENT
               value: Development
-            - name: DatabaseSettings__ConnectionString   # متغیر اتصال DB (از ConfigMap گرفته می‌شود)
+            - name: DatabaseSettings__ConnectionString
               valueFrom:
-                configMapKeyRef:
-                  name: mongo-configmap      # اسم ConfigMap منبع
-                  key: connection_string    # کلید داخل ConfigMap
-            - name: DatabaseSettings__DatabaseName      # نام دیتابیس (از ConfigMap)
+                  configMapKeyRef:
+                    name: mongo-configmap
+                    key: connection_string
+            - name: DatabaseSettings__DatabaseName
               valueFrom:
-                configMapKeyRef:
-                  name: mongo-configmap
-                  key: DatabaseName
-            - name: DatabaseSettings__CollectionName    # نام کالکشن (از ConfigMap)
+                  configMapKeyRef:
+                    name: mongo-configmap
+                    key: DatabaseName
+            - name: DatabaseSettings__CollectionName
               valueFrom:
-                configMapKeyRef:
-                  name: mongo-configmap
-                  key: CollectionName
-            - name: DatabaseSettings__BrandsCollection  # نام کالکشن برندها (از ConfigMap)
+                  configMapKeyRef:
+                    name: mongo-configmap
+                    key: CollectionName
+            - name: DatabaseSettings__BrandsCollection
               valueFrom:
-                configMapKeyRef:
-                  name: mongo-configmap
-                  key: BrandsCollection
-            - name: DatabaseSettings__TypesCollection   # نام کالکشن تایپ‌ها (از ConfigMap)
+                  configMapKeyRef:
+                    name: mongo-configmap
+                    key: BrandsCollection
+            - name: DatabaseSettings__TypesCollection
               valueFrom:
-                configMapKeyRef:
-                  name: mongo-configmap
-                  key: TypesCollection
+                  configMapKeyRef:
+                    name: mongo-configmap
+                    key: TypesCollection            
           resources:
             requests:
-              memory: "64Mi"   #64 MB Ram
-              cpu: "250m" #0.25 CPU of a core == 1000 = 1 core
+              memory: "64Mi"
+              cpu: "250m"
             limits:
-              memory: "128Mi"  # 128MB Ram
-              cpu: "500m" #0.5 of 1 core
-            # livenessProbe:
-            #     httpGet:
-            #       path: /health
-            #       port: 8080
-            #     initialDelaySeconds: 30   # افزایش زمان تاخیر
-            #     periodSeconds: 20
-            #     failureThreshold: 3
-            # readinessProbe:
-            #     httpGet:
-            #       path: /health
-            #       port: 8080
-            #     initialDelaySeconds: 15
-            #     periodSeconds: 10
-            #     failureThreshold: 3
+              memory: "128Mi"
+              cpu: "500m"
 ---
-apiVersion: v1                        # API version برای سرویس‌های پایه (Service)
-kind: Service                         # نوع آبجکت: Service برای دسترسی به پادها
+apiVersion: v1
+kind: Service
 metadata:
-  name: catalog-api-service           # نام سرویس
+  name: catalog-api-service
 spec:
-  type: NodePort                       # نوع سرویس: NodePort برای دسترسی از بیرون نود (dev)
+  type: NodePort
   selector:
-    app: catalog-api                   # پادهایی که این سرویس ترافیک را به آنها می‌فرستد
+    app: catalog-api
   ports:
     - protocol: TCP
-      port: 9000                        # پورت سرویس داخل کلاستر (دیگر سرویس‌ها از این پورت استفاده می‌کنند)
-      targetPort: 8080                  # پورتی در پاد (مطابق containerPort) که ترافیک به آن فوروارد می‌شود
-      nodePort: 31000                   # پورت روی نود میزبان؛ دسترسی بیرونی: <NODE_IP>:31000 -> service -> pod
+      port: 9000
+      targetPort: 8080
+      nodePort: 31000
