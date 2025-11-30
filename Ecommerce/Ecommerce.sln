@@ -99,6 +99,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployments", "Deployments", "{FF7A2F53-7462-4F7F-ACA4-68D02844CCC7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{720F491F-13E3-4D99-AB27-138B3D2D8EAB}"
+	ProjectSection(SolutionItems) = preProject
+		Deployments\k8s\dashboard-adminuser.yaml = Deployments\k8s\dashboard-adminuser.yaml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalog", "catalog", "{539447C2-BFB1-499F-B117-0A4DFD820FE0}"
 EndProject
@@ -109,8 +112,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalog-api", "catalog-api"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalog-db", "catalog-db", "{3523F1FB-FA20-4C1F-9072-792173E81191}"
 	ProjectSection(SolutionItems) = preProject
-		Deployments\k8s\catalog\catalog-db\mongo-configmap.yaml = Deployments\k8s\catalog\catalog-db\mongo-configmap.yaml
 		Deployments\k8s\catalog\catalog-db\catalog-db.yaml = Deployments\k8s\catalog\catalog-db\catalog-db.yaml
+		Deployments\k8s\catalog\catalog-db\mongo-configmap.yaml = Deployments\k8s\catalog\catalog-db\mongo-configmap.yaml
 		Deployments\k8s\catalog\catalog-db\mongo-secret.yaml = Deployments\k8s\catalog\catalog-db\mongo-secret.yaml
 	EndProjectSection
 EndProject
