@@ -119,27 +119,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalog-db", "catalog-db", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "basket", "basket", "{EFD8041D-AD0C-4F78-8D00-C1628F47197C}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "helm", "..\..\eShopping\Deployments\helm\", "{C63C3D09-CF3A-44DD-945D-D639F56D3CBD}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_51479"
-		Debug.AspNetCompiler.PhysicalPath = "..\..\eShopping\Deployments\helm\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51479\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_51479"
-		Release.AspNetCompiler.PhysicalPath = "..\..\eShopping\Deployments\helm\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51479\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "51479"
-		SlnRelativePath = "..\..\eShopping\Deployments\helm\"
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -242,10 +221,6 @@ Global
 		{EE83A0FF-ADB3-4E5A-8E1F-80B34D18899A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE83A0FF-ADB3-4E5A-8E1F-80B34D18899A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE83A0FF-ADB3-4E5A-8E1F-80B34D18899A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C63C3D09-CF3A-44DD-945D-D639F56D3CBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C63C3D09-CF3A-44DD-945D-D639F56D3CBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C63C3D09-CF3A-44DD-945D-D639F56D3CBD}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{C63C3D09-CF3A-44DD-945D-D639F56D3CBD}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -283,7 +258,6 @@ Global
 		{84FD85D4-A550-47F4-83E6-C80BCE121377} = {539447C2-BFB1-499F-B117-0A4DFD820FE0}
 		{3523F1FB-FA20-4C1F-9072-792173E81191} = {539447C2-BFB1-499F-B117-0A4DFD820FE0}
 		{EFD8041D-AD0C-4F78-8D00-C1628F47197C} = {720F491F-13E3-4D99-AB27-138B3D2D8EAB}
-		{C63C3D09-CF3A-44DD-945D-D639F56D3CBD} = {FF7A2F53-7462-4F7F-ACA4-68D02844CCC7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2B3E2DF-2001-4576-91A8-E30B7973D6D1}
