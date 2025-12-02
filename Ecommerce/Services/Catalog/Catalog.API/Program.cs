@@ -102,70 +102,70 @@ builder.Services.AddHealthChecks()
 // -----------------------------
 // IdentityServer Authentication & Authorization
 // -----------------------------
-var authorizationPolicy = new AuthorizationPolicyBuilder()
-    .RequireAuthenticatedUser()
-    .Build();
-
-// Global authorization filter
-builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); });
+// var authorizationPolicy = new AuthorizationPolicyBuilder()
+//     .RequireAuthenticatedUser()
+//     .Build();
 //
-// // Accept any server certificate (for dev or self-signed certs)
-// var httpHandler = new HttpClientHandler
+// // Global authorization filter
+// builder.Services.AddControllers(config => { config.Filters.Add(new AuthorizeFilter(authorizationPolicy)); });
+// //
+// // // Accept any server certificate (for dev or self-signed certs)
+// // var httpHandler = new HttpClientHandler
+// // {
+// //     ServerCertificateCustomValidationCallback =
+// //         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+// // };
+//
+// // Configure JWT Bearer Authentication
+// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//     .AddJwtBearer(options =>
+//     {
+//         // IdentityServer URL برای Docker
+//         options.Authority = "https://host.docker.internal:9009";
+//         // options.Authority = "https://localhost:9009"; // For localhost
+//         options.Audience = "Catalog";
+//         options.RequireHttpsMetadata = false;
+//
+//         options.BackchannelHttpHandler = new HttpClientHandler
+//         {
+//             ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+//         };
+//
+//         options.TokenValidationParameters = new TokenValidationParameters
+//         {
+//             ValidateIssuer = true,
+//             ValidateAudience = true,
+//             ValidAudiences =
+//             [
+//                 "Catalog", "EShoppingGateway", "Basket", "eshoppingAngular"
+//             ],
+//             // ValidAudiences = ["Catalog"],
+//             ValidIssuers = ["https://host.docker.internal:9009"]
+//         };
+//
+//         options.IncludeErrorDetails = true;
+//
+//         options.Events = new JwtBearerEvents
+//         {
+//             OnAuthenticationFailed = context =>
+//             {
+//                 Console.WriteLine($"Auth failed: {context.Exception.Message}");
+//                 return Task.CompletedTask;
+//             },
+//             OnTokenValidated = context =>
+//             {
+//                 Console.WriteLine("Token validated successfully.");
+//                 return Task.CompletedTask;
+//             }
+//         };
+//     });
+//
+// // Custom authorization policies
+// builder.Services.AddAuthorization(options =>
 // {
-//     ServerCertificateCustomValidationCallback =
-//         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-// };
-
-// Configure JWT Bearer Authentication
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        // IdentityServer URL برای Docker
-        options.Authority = "https://host.docker.internal:9009";
-        // options.Authority = "https://localhost:9009"; // For localhost
-        options.Audience = "Catalog";
-        options.RequireHttpsMetadata = false;
-
-        options.BackchannelHttpHandler = new HttpClientHandler
-        {
-            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-        };
-
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidAudiences =
-            [
-                "Catalog", "EShoppingGateway", "Basket", "eshoppingAngular"
-            ],
-            // ValidAudiences = ["Catalog"],
-            ValidIssuers = ["https://host.docker.internal:9009"]
-        };
-
-        options.IncludeErrorDetails = true;
-
-        options.Events = new JwtBearerEvents
-        {
-            OnAuthenticationFailed = context =>
-            {
-                Console.WriteLine($"Auth failed: {context.Exception.Message}");
-                return Task.CompletedTask;
-            },
-            OnTokenValidated = context =>
-            {
-                Console.WriteLine("Token validated successfully.");
-                return Task.CompletedTask;
-            }
-        };
-    });
-
-// Custom authorization policies
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("CanRead", policy => policy.RequireClaim("scope", "catalogapi.read"));
-    options.AddPolicy("CanWrite", policy => policy.RequireClaim("scope", "catalogapi.write"));
-});
+//     options.AddPolicy("CanRead", policy => policy.RequireClaim("scope", "catalogapi.read"));
+//     options.AddPolicy("CanWrite", policy => policy.RequireClaim("scope", "catalogapi.write"));
+// });
 
 // -----------------------------
 // Build and Configure the Application
